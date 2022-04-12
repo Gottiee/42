@@ -1,65 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 13:38:43 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/12 15:55:20 by eedy             ###   ########.fr       */
+/*   Created: 2022/04/12 15:56:04 by eedy              #+#    #+#             */
+/*   Updated: 2022/04/12 16:44:03 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	ft_bzero(void *s, size_t n)
 {
 	size_t			i;
 	unsigned char	*tmp;
 
 	i = 0;
-	tmp = (unsigned char *)b;
-	while (i < len)
+	tmp = (unsigned char *)s;
+	while (i < n)
 	{
-		tmp[i] = c;
+		tmp[i] = 0;
 		i ++;
 	}
-	return (b);
 }
 
 /*#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
 	int i = 0;
-	char *str = (char *)malloc(sizeof(char) * 10);
+	char *str;
+	str = (char *)malloc(sizeof(char) * 10);
 	str[0] = 'a';
 	str[1] = 'b';
+	str[6]  = 'g';
 
-	str = ft_memset(str, 97, 6);
-	
-	while (str[i])
+	ft_bzero(str, 5);
+
+	while (i < 10)
 	{
 		printf("%c", str[i]);
 		i ++;
 	}
-	printf("\n");
-	
-	i = 0;
-	char *s = (char *)malloc(sizeof(char) * 10);
-	s[0] = 'a';
-	s[1] = 'b';
-
-	s = memset(s, 97, 6);
-	
-	while (s[i])
-	{
-		printf("%c", s[i]);
-		i ++;
-	}	
-	printf("\n");
 }*/
