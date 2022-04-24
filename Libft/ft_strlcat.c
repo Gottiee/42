@@ -1,9 +1,11 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 static size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
+	i = 0;
 	while (str[i])
 		i ++;	
 	return (i);
@@ -13,13 +15,17 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 	size_t	j;
+
+	i = 0;
 	j = ft_strlen(dst);
-	while(src[i] && size > i)
+	while(src[i] && size  - 1 > i)
 	{
 		dst[j] = src[i];
 		i ++;
 		j ++;
 	}
+	dst[size - ft_strlen(dst) - 1] = '\0';
+	return (ft_strlen(dst) + ft_strlen((char *)src));
 }
 
 #include <stdio.h>
