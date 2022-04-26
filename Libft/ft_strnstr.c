@@ -1,20 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 13:52:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/26 13:57:03 by eedy             ###   ########.fr       */
+/*   Created: 2022/04/26 16:47:57 by eedy              #+#    #+#             */
+/*   Updated: 2022/04/26 17:31:54 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include <stdlib.h>
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	if (c >= 97 && c <= 122)
-		c -= 32;
-	return (c);
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (needle[i] == '\0')
+		return ((char *)haystack);
+	while (haystack[i])
+	{
+		j = 0;
+		while (haystack[i] == needle[j])
+		{
+			if (!needle[j] || j == len - 1)
+				return ((char *)&haystack[i - j]);
+			j ++;
+			i ++;
+		}
+		i -= j;
+		i ++;
+	}
+	return (NULL);
 }
 
 /*#include <stdio.h>
@@ -24,9 +43,5 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	argv [1][0] = ft_toupper(argv[1][0]);
-	//int c = 'G';
-	//c = ft_toupper(c);
-	//printf("la lettre est %c\n", c);
-	printf("la lettre est %c\n", argv[1][0]);
+	printf("%s\n", ft_strnstr("salut", "", 4));
 }*/

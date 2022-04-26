@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 13:52:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/26 13:57:03 by eedy             ###   ########.fr       */
+/*   Created: 2022/04/26 15:18:10 by eedy              #+#    #+#             */
+/*   Updated: 2022/04/26 15:52:18 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include <stdlib.h>
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (c >= 97 && c <= 122)
-		c -= 32;
-	return (c);
+	size_t	i;	
+
+	i = 0;
+	while (s1[i] && s2[i] && i < n)
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i ++;
+	}
+	return (0);
 }
 
 /*#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	argv [1][0] = ft_toupper(argv[1][0]);
-	//int c = 'G';
-	//c = ft_toupper(c);
-	//printf("la lettre est %c\n", c);
-	printf("la lettre est %c\n", argv[1][0]);
+	//printf("%d\n", ft_strncmp(argv[1], argv[2], argv[3][0]));
+	printf("%d\n", ft_strncmp("helloa", "hellob", 6));
+	printf("%d\n", strncmp("helloa", "hellob", 6));
 }*/

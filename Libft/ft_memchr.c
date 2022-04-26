@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 13:52:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/26 13:57:03 by eedy             ###   ########.fr       */
+/*   Created: 2022/04/26 15:54:44 by eedy              #+#    #+#             */
+/*   Updated: 2022/04/26 16:10:54 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include <stdlib.h>
+
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if (c >= 97 && c <= 122)
-		c -= 32;
-	return (c);
+	size_t	i;
+	char	*str;
+	char	ch;
+
+	str = (char *)s;
+	ch = (char)c;
+	i = 0;
+	while (str[i] && i < n)
+	{
+		if (str[i] == ch)
+			return ((void *)&s[i]);
+		i ++;
+	}
+	return (NULL);
 }
 
 /*#include <stdio.h>
@@ -24,9 +37,5 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	argv [1][0] = ft_toupper(argv[1][0]);
-	//int c = 'G';
-	//c = ft_toupper(c);
-	//printf("la lettre est %c\n", c);
-	printf("la lettre est %c\n", argv[1][0]);
+	printf("la lettre trouvee;%s\n", (char *)ft_memchr("d'accord", 'c', 8));
 }*/

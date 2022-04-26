@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 13:52:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/26 13:57:03 by eedy             ###   ########.fr       */
+/*   Created: 2022/04/26 14:04:41 by eedy              #+#    #+#             */
+/*   Updated: 2022/04/26 14:10:31 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+int	ft_tolower(int c)
 {
-	if (c >= 97 && c <= 122)
-		c -= 32;
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
 	return (c);
 }
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	argv [1][0] = ft_toupper(argv[1][0]);
+	argv [1][0] = ft_tolower(argv[1][0]);
 	//int c = 'G';
 	//c = ft_toupper(c);
 	//printf("la lettre est %c\n", c);

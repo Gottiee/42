@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 16:15:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/25 15:22:25 by eedy             ###   ########.fr       */
+/*   Updated: 2022/04/26 14:04:25 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	ft_strlen(char *str)
 
 	i = 0;
 	while (str[i])
-		i ++;	
+		i ++;
 	return (i);
 }
 
@@ -28,15 +28,15 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	i;
 	size_t	j;
 	size_t	dst_len;
-	size_t  src_len;
+	size_t	src_len;
 
 	dst_len = ft_strlen(dst);
 	src_len = ft_strlen((char *)src);
 	i = 0;
 	j = ft_strlen(dst);
-	if (size <= dst_len) 
+	if (size <= dst_len)
 		return (dst_len + src_len);
-	while(src[i] && size  - 1 > j)
+	while (src[i] && size - 1 > j)
 	{
 		dst[j] = src[i];
 		i ++;
