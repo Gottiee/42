@@ -1,46 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 17:33:12 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/27 14:58:09 by eedy             ###   ########.fr       */
+/*   Created: 2022/04/27 15:30:18 by eedy              #+#    #+#             */
+/*   Updated: 2022/04/27 15:58:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include <stdlib.h>
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int	i;
-	int	neg;
-	int	nbr;
+	size_t	i;
+	char	*str;
 
 	i = 0;
-	nbr = 0;
-	neg = 1;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i ++;
-	if (str[i] == '-' || str[i] == '+')
+	str = (char *)malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	while (s[i] && i < len)
 	{
-		if (str[i] == '-')
-			neg *= -1;
+		str[i] = s[start];
+		start ++;
 		i ++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nbr = nbr * 10 + (str[i] - '0');
-		i ++;
-	}
-	nbr *= neg;
-	return (nbr);
+	str[i] = '\0';
+	return (str);
 }
 
 /*#include <stdio.h>
-#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
 	(void)argc;
-	printf("%d\n", ft_atoi(argv[1]));
+	(void)argv;
+	char *str;
+	str = ft_substr("letsgo", 4, 2);
+	printf("%s\n", str);
 }*/

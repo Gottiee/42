@@ -1,46 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 17:33:12 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/27 14:58:09 by eedy             ###   ########.fr       */
+/*   Created: 2022/04/27 16:00:32 by eedy              #+#    #+#             */
+/*   Updated: 2022/04/27 16:19:21 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include <stdlib.h>
+
+static size_t	ft_strlen(char *s)
 {
 	int	i;
-	int	neg;
-	int	nbr;
 
 	i = 0;
-	nbr = 0;
-	neg = 1;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	while (s[i])
 		i ++;
-	if (str[i] == '-' || str[i] == '+')
+	return (i);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	int		j;
+	char	*str;
+	size_t	s1_len;
+
+	s1_len = ft_strlen((char *)s1);
+	i = 0;
+	j = 0;
+	str = (char *)malloc(sizeof(char) * (s1_len + ft_strlen((char *)s2)) + 1);
+	if (!str)
+		return (NULL);
+	while (s1[i])
 	{
-		if (str[i] == '-')
-			neg *= -1;
+		str[i] = s1[i];
 		i ++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (s2[j])
 	{
-		nbr = nbr * 10 + (str[i] - '0');
+		str[i] = s2[j];
 		i ++;
+		j ++;
 	}
-	nbr *= neg;
-	return (nbr);
+	str[i] = '\0';
+	return (str);
 }
 
 /*#include <stdio.h>
-#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
 	(void)argc;
-	printf("%d\n", ft_atoi(argv[1]));
+	(void)argv;
+	char *str; 
+	str = ft_strjoin("lets", "go");
+	printf("%s\n", str);
 }*/
