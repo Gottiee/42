@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:02:17 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/27 18:50:22 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/02 15:41:56 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	verif_s(const char *s, char c)
 	int	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] != c)
 			return (0);
