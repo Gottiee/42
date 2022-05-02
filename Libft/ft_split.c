@@ -14,7 +14,16 @@
 
 int	verif_s(const char *s, char c)
 {
-// ecrire une fonction qui renvoie 1 si aucun autre cararctere dans s est different de c sinon renvoi 0	
+	int	i;
+
+	i = 0;
+	while(s[i])
+	{
+		if (s[i] != c)
+			return (0);
+		i ++;
+		return (1);
+	}
 }
 
 void	print_str(char **str, const char *s, char c)
