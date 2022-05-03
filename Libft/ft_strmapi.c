@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/04 01:09:24 by eedy              #+#    #+#             */
+/*   Updated: 2022/05/04 01:11:26 by eedy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
 static int	ft_strlen(char *str)
@@ -17,8 +29,10 @@ char	*ft_strmapi(char const *s, char (*f) (unsigned int, char))
 
 	i = 0;
 	len = ft_strlen((char *)s);
-	if (!(new_s = malloc(sizeof(char) * len + 1)))
-	s_new[len + 1] ='\0';
+	new_s = malloc(sizeof(char) * len + 1);
+	if (!new_s)
+		return (NULL);
+	s_new[len] = '\0';
 	while (s[i])
 	{
 		new_s[i] = (f)(i, s[i]);
