@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:14:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/04 16:33:45 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/05 13:29:57 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,39 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	while (*lst)
-		*lst = lst -> next;
+	t_list	*tmp;
+
+	tmp = *lst;
+	while (tmp)
+		tmp = tmp -> next;
 	new -> next = NULL;
-	*lst = *new;
+	new = tmp;
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	t_list *first_lst;
-	first_lst = malloc(sizeof(t_list));
-	t_list **ptr_first;
-	*ptr_first = first_lst;
+	t_list *list;
+	int a = 0;
+	int b = 1;
+
+	t_list *first;
+	list = malloc(sizeof(t_list));
+	first = list;
+	list -> content = &a;
+	list -> next = NULL;
 	t_list *new;
-	new -> (int)content = 3;
-	first_lst -> (int)content = 1;
-	ft_lstadd_back(ptr_first, new);
-	while (*ptr_first)
+	new = malloc(sizeof(t_list));
+	new -> content = &b;
+	ft_lstadd_back(&first, new);
+
+	while (first)
 	{
-		printf("%d, ", first_lst -> (int)content);
-		*ptr_first = ptr_first -> next;
+		printf("%d -> ", *((int *)(first -> content)));
+		first = first -> next;
 	}
 	printf("\n");
-}
+}*/

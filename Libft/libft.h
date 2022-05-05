@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:15:24 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/04 15:21:27 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/05 12:33:26 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct s_list
 {
-	char			*content;
+	void			*content;
 	struct s_list	*next;
 }					t_list;
 #endif
