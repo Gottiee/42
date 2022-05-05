@@ -17,7 +17,7 @@
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	while (*lst)
-		*lst = *lst -> next;
+		*lst = lst -> next;
 	new -> next = NULL;
 	*lst = *new;
 }
@@ -28,7 +28,18 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	t_list *first;
-
-
+	t_list *first_lst;
+	first_lst = malloc(sizeof(t_list));
+	t_list **ptr_first;
+	*ptr_first = first_lst;
+	t_list *new;
+	new -> (int)content = 3;
+	first_lst -> (int)content = 1;
+	ft_lstadd_back(ptr_first, new);
+	while (*ptr_first)
+	{
+		printf("%d, ", first_lst -> (int)content);
+		*ptr_first = ptr_first -> next;
+	}
+	printf("\n");
 }
