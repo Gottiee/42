@@ -6,18 +6,18 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:14:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/05 13:29:57 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 19:16:37 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include <stdlib.h>
-
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*tmp;
 
+	if (!lst || !new)
+		return ;
 	tmp = *lst;
 	while (tmp)
 		tmp = tmp -> next;

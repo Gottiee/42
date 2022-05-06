@@ -6,33 +6,26 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 01:09:24 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/04 01:11:26 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 18:26:03 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-static int	ft_strlen(char *str)
-{
-	int	i;
-
-	while (str[i])
-		i ++;
-	return (i);
-}
+#include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f) (unsigned int, char))
 {
 	char	*new_s;
-	int		s_leng;
+	int		s_len;
 	int		i;
 
+	if (!s || !f)
+		return (NULL);
 	i = 0;
-	len = ft_strlen((char *)s);
-	new_s = malloc(sizeof(char) * len + 1);
+	s_len = ft_strlen((char *)s);
+	new_s = malloc(sizeof(char) * s_len + 1);
 	if (!new_s)
 		return (NULL);
-	s_new[len] = '\0';
+	new_s[s_len] = '\0';
 	while (s[i])
 	{
 		new_s[i] = (f)(i, s[i]);

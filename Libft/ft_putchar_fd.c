@@ -6,13 +6,15 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 01:11:37 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/04 01:11:37 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 19:07:54 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
+	if (fd == -1)
+		return ;
 	write(fd, &c, 1);
 }

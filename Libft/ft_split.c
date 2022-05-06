@@ -6,11 +6,11 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:02:17 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/02 15:41:56 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 18:38:00 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 int	verif_s(const char *s, char c)
 {
@@ -22,8 +22,8 @@ int	verif_s(const char *s, char c)
 		if (s[i] != c)
 			return (0);
 		i ++;
-		return (1);
 	}
+	return (1);
 }
 
 void	print_str(char **str, const char *s, char c)
@@ -105,7 +105,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**str;
 
-	if (s[0] == '\0' || verif_s)
+	if (s[0] == '\0' || verif_s(s, c))
 		return (NULL);
 	str = (char **)malloc(sizeof(char *) * str_line(s, c) + 1);
 	if (!str)

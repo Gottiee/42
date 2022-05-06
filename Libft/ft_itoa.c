@@ -6,11 +6,11 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:40:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/02 15:41:33 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 17:58:23 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 char	*print_0(char *str)
 {
@@ -76,10 +76,7 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-/*#include <stdio.h>
-#include <stdlib.h>
-
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;

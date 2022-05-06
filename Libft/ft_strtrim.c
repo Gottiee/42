@@ -6,11 +6,11 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 16:21:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/27 17:00:17 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 18:29:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 int	set_verif(char c, const char *set)
 {
@@ -26,22 +26,14 @@ int	set_verif(char c, const char *set)
 	return (1);
 }
 
-static size_t	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i ++;
-	return (i);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*str;
 	int		i;
 	int		j;
 
+	if (!s1 || !set)
+		return (NULL);
 	i = 0;
 	j = 0;
 	str = (char *)malloc(sizeof(char) * ft_strlen((char *)s1) + 1);

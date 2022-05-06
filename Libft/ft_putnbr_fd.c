@@ -6,11 +6,11 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 01:13:05 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/04 01:13:06 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 19:20:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putnbr(unsigned int n, int fd)
 {
@@ -28,6 +28,8 @@ void	ft_putnbr_fd(int n, int fd)
 	int				neg;
 	unsigned int	u_n;
 
+	if (fd == -1)
+		return ;
 	neg = 1;
 	if (n < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:45:45 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/04 16:30:07 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 19:29:06 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_lstsize(t_list *lst)
 {
 	int	lst_size;
 
+	if (!lst)
+		return (0);
 	lst_size = 0;
 	while (lst)
 	{

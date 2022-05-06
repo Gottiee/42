@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:23:07 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/04 16:29:52 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 19:01:40 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
+	if (!lst || !new)
+		return ;
 	new -> next = *lst;
 	*lst = new;
 }

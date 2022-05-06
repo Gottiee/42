@@ -6,22 +6,11 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 16:15:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/26 14:04:25 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 19:28:36 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-
-static size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i ++;
-	return (i);
-}
+#include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
@@ -30,6 +19,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	dst_len;
 	size_t	src_len;
 
+	if (!dst || !src)
+		return (0);
 	dst_len = ft_strlen(dst);
 	src_len = ft_strlen((char *)src);
 	i = 0;

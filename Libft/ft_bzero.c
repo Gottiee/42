@@ -6,17 +6,19 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:56:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/12 16:44:03 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 19:15:58 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
 	size_t			i;
 	unsigned char	*tmp;
 
+	if (!s)
+		return ;
 	i = 0;
 	tmp = (unsigned char *)s;
 	while (i < n)

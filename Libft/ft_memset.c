@@ -6,17 +6,19 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 13:38:43 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/12 15:55:20 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 19:23:19 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {
 	size_t			i;
 	unsigned char	*tmp;
 
+	if (!b)
+		return (NULL);
 	i = 0;
 	tmp = (unsigned char *)b;
 	while (i < len)

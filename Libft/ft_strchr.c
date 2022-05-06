@@ -6,21 +6,11 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:11:12 by eedy              #+#    #+#             */
-/*   Updated: 2022/04/26 14:53:16 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/06 18:07:11 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-static size_t	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i ++;
-	return (i);
-}
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
