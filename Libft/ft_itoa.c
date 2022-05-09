@@ -6,13 +6,13 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:40:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 17:58:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/09 16:17:17 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*print_0(char *str)
+static char	*print_0(char *str)
 {
 	str = (char *)malloc(sizeof(char) * 2);
 	str[0] = '0';
@@ -20,7 +20,7 @@ char	*print_0(char *str)
 	return (str);
 }
 
-void	print_n(char *str, unsigned int n, int *i)
+static void	print_n(char *str, unsigned int n, int *i)
 {
 	if (n > 0)
 		print_n(str, n / 10, i);
@@ -31,7 +31,7 @@ void	print_n(char *str, unsigned int n, int *i)
 	}
 }
 
-char	*malloc_str(char *str, unsigned int n, int neg)
+static char	*malloc_str(char *str, unsigned int n, int neg)
 {
 	int	i;
 

@@ -6,21 +6,22 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:30:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/09 12:18:58 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/09 17:38:44 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	cpy_str(char const *s, unsigned int start, size_t len, char *str)
+static void	cpy_str(char const *s, unsigned int start, size_t len, char *str)
 {
 	size_t	i;	
+	i = 0;
 	size_t	s_len;
 
 	s_len = ft_strlen(s);
-	i = 0;
 	if (start > s_len)
 		return ;
+	i = 0;
 	while (s[i] && i < len)
 	{
 		str[i] = s[start];
@@ -34,8 +35,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*str;
 	size_t	s_len;
 
-	if (!s)
-		return (NULL);
 	s_len = ft_strlen(s);
 	if (start > s_len)
 	{
@@ -54,7 +53,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	if (!str)
 		return (NULL);
-	cpy_str(s, start, len, str)	;
+	if (start < s_len)
+		cpy_str(s, start, len, str)	;
 	return (str);
 }
 
@@ -66,6 +66,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
     char * s = strdup("1");
     str = ft_substr(s, 42, 42000000);
     printf("%s\n", str);
+    if (!strcmp(str, ""))
+      printf("ok");
 	free(str);
 	free(s);
 }*/

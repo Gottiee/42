@@ -6,13 +6,13 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 16:21:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/09 12:58:29 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/09 16:18:51 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_set(char const *s1, char const *set)
+static int	count_set(char const *s1, char const *set)
 {
 	int	i;
 	int	j;
@@ -34,7 +34,7 @@ int	count_set(char const *s1, char const *set)
 	return (n_set);
 }
 
-int	set_verif(char c, const char *set)
+static int	set_verif(char c, const char *set)
 {
 	int	i;
 

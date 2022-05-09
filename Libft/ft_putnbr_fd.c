@@ -6,13 +6,13 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 01:13:05 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:20:43 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/09 16:17:51 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(unsigned int n, int fd)
+static void	ft_putnbr(unsigned int n, int fd)
 {
 	int	c;
 

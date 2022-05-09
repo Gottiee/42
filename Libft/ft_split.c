@@ -6,13 +6,13 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:02:17 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 18:38:00 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/09 18:12:26 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	verif_s(const char *s, char c)
+static int	verif_s(const char *s, char c)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	verif_s(const char *s, char c)
 	return (1);
 }
 
-void	print_str(char **str, const char *s, char c)
+static void	print_str(char **str, const char *s, char c)
 {
 	int	i;
 	int	j;
@@ -52,7 +52,7 @@ void	print_str(char **str, const char *s, char c)
 	}
 }
 
-void	malloc_line(char **str, const char *s, char c)
+static void	malloc_line(char **str, const char *s, char c)
 {
 	int	i;
 	int	count;
@@ -70,9 +70,10 @@ void	malloc_line(char **str, const char *s, char c)
 		}
 		if (count != 0)
 		{
-			str[j] = (char *)malloc(sizeof(char) * count + 1);
+			str[j] = (char *)malloc(sizeof(char) * (count + 1));
 			if (!str[j])
 				return ;
+			str[j][count] = '\0';
 			j ++;
 		}
 		if (s[i])
@@ -81,7 +82,7 @@ void	malloc_line(char **str, const char *s, char c)
 	print_str(str, s, c);
 }
 
-int	str_line(const char *s, char c)
+static int	str_line(const char *s, char c)
 {
 	int	i;
 	int	count;
@@ -104,12 +105,15 @@ int	str_line(const char *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**str;
+	size_t	str_len;
 
 	if (s[0] == '\0' || verif_s(s, c))
 		return (NULL);
-	str = (char **)malloc(sizeof(char *) * str_line(s, c) + 1);
+	str_len = str_line(s, c);
+	str = (char **)malloc(sizeof(char *) * (str_len + 1));
 	if (!str)
 		return (NULL);
+	str[str_len] = '\0';
 	malloc_line(str, s, c);
 	return (str);
 }

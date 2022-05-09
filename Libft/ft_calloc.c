@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:00:01 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:11:14 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/09 16:02:53 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*str;
+	char		*str;
+	size_t		i;
 
+	i = 0;
+	if (count == 0 || size == 0)
+		return (NULL);
 	str = (void *)malloc(count * size);
 	if (!str)
 		return (NULL);
-	return (str);
+	while (i < count * size)	
+	{
+		str[i] = 0;
+		i ++;
+	}
+	return ((void *)str);
 }
