@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 15:54:44 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:12:39 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/08 14:10:00 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,31 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	i;
 	char	*str;
-	char	ch;
+	int		i;
 
 	if (!s)
 		return (NULL);
-	str = (char *)s;
-	ch = (char)c;
 	i = 0;
-	while (str[i] && i < n)
+	str = (char *)s;
+	while (n)
 	{
-		if (str[i] == ch)
+		if (str[i] == (char)c)
 			return (str + i);
 		i ++;
+		n --;
 	}
 	return (NULL);
 }
 
-/*#include <stdio.h>
-#include <stdlib.h>
-
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	printf("la lettre trouvee;%s\n", (char *)ft_memchr("d'accord", 'c', 8));
+	char s[] = {0, 1, 2, 3, 4, 5};
+	printf("la lettre trouvee;%s\n", (char *)ft_memchr(s, 6, 6));
+	if (ft_memchr(s, 6, 6) == NULL)
+		printf("OK\n");
+	else
+		printf("KO\n");
 }*/

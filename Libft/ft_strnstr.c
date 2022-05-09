@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 16:47:57 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 18:27:17 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/08 16:55:07 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,28 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	i = 0;
 	if (needle[i] == '\0')
 		return ((char *)haystack);
-	while (haystack[i])
+	while (haystack[i] && i < len)
 	{
 		j = 0;
-		while (haystack[i] == needle[j])
-		{
-			if (!needle[j] || j == len - 1)
-				return ((char *)&haystack[i - j]);
+		while (haystack[i + j] && haystack[i + j] == needle[j] && len != 0 && i + j < len)
 			j ++;
-			i ++;
-		}
-		i -= j;
+		if (!needle[j] || j == ft_strlen(needle))
+			return ((char *)&haystack[i]);
 		i ++;
 	}
 	return (NULL);
 }
 
-/*#include <stdio.h>
-#include <stdlib.h>
-
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	printf("%s\n", ft_strnstr("salut", "", 4));
+	char haystack[30] = "aaabcabcd";
+	char needle[10] = "aabc";
+	char *empty = (char *)"";
+
+	if (ft_strnstr(haystack, "abcd", 9) == haystack + 5)
+		printf("OK\n");
+	else
+		printf("KO\n");
 }*/

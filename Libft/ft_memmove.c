@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:15:36 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:24:16 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/08 13:19:06 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,23 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	char	*dest;
 	char	*source;
+	size_t	i;
 
 	if (!dst || !src)
 		return (NULL);
 	dest = (char *)dst;
 	source = (char *)src;
+	i = 0;
 	if (source < dest)
-		ft_memcpy(dest, source, len);
+		while (len-- > 0)
+			dest[len] = source[len];
 	else
 	{
-		dest = (char *)dst + (len - 1);
-		source = (char *)src + (len - 1);
-		while (len --)
-			dest[len] = source[len];
+		while (i < len)
+		{
+			dest[i] = source[i];
+			i ++;
+		}
 	}
 	return (dst);
 }

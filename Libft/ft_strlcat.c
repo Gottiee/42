@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 16:15:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:28:36 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/08 15:04:23 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	j;
 	size_t	dst_len;
 	size_t	src_len;
 
@@ -24,27 +23,31 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst_len = ft_strlen(dst);
 	src_len = ft_strlen((char *)src);
 	i = 0;
-	j = ft_strlen(dst);
-	if (size <= dst_len)
-		return (dst_len + src_len);
-	while (src[i] && size - 1 > j)
+	if (size == 0)
+		return (src_len);
+	if (size < dst_len)
+		src_len += size;
+	else
+		src_len += dst_len;
+	while (src[i] && (dst_len + i) < (size - 1))
 	{
-		dst[j] = src[i];
+		dst[dst_len + i] = src[i];
 		i ++;
-		j ++;
 	}
-	dst[dst_len + src_len] = '\0';
-	return (dst_len + src_len);
+	dst[dst_len + i] = '\0';
+	return (src_len);
 }
 
-/*#include <string.h>
-
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	char source[10] = "testost";
-	char dst[10] = "ok";
-	ft_strlcat(dst, source, 10);
-	printf("%s\n", dst);
+	char dest[30];
+	memset(dest, 0, 30);
+	char *src = (char *)"AAAAAAAAA";
+	dest[0] = 'B';
+		if (ft_strlcat(dest, src, 6) == 13 && !strcmp(dest, "BBBBA"))
+		printf("OK\n");
+	else
+		printf("KO\n");
 }*/

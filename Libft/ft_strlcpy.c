@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:27:12 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:28:18 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/08 14:30:26 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		dst[i] = src[i];
 		i ++;
 	}
-	if (lensrc < dstsize)
-	dst[lensrc] = '\0';
-	return (lensrc);
+	if (i < dstsize)
+		dst[i] = '\0';
+	while (src[i])
+		i ++;
+	return (i);
 }
 
 /*#include <stdio.h>

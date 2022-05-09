@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 01:13:15 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:46:25 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/08 12:39:53 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	int	i;
 
+	i = 0;
 	if (!s || !f)
 		return ;
 	while (s[i])
