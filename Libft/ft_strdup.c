@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:06:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 18:11:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/09 11:10:05 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	s1_len = ft_strlen((char *)s1);
-	str = (char *)malloc(sizeof(char) * s1_len);
+	str = (char *)malloc(sizeof(char) * s1_len + 1);
 	if (!str)
 		return (NULL);
 	while (s1[i])
@@ -38,7 +38,8 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	char *str;
-	str = malloc(sizeof(char) * 1000);
-	str = ft_strdup(argv[1]);
+	str = ft_strdup((char *) "coucou");
 	printf("%s\n", str);
+	printf("%d <- mcheck fonction return\n", mcheck(str, strlen("coucou") + 1));
+	free(str);
 }*/
