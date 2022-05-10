@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 15:18:10 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/08 14:17:06 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/10 17:56:30 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,29 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	i;	
+	size_t			i;	
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	if (!s1 || !s2)
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	if (!str1 || !str2)
 		return (0);
 	i = 0;
 	while (n)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i ++;
 		n --;
 	}
 	return (0);
 }
 
-/*#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	//printf("%d\n", ft_strncmp(argv[1], argv[2], argv[3][0]));
-	printf("%d\n", ft_strncmp("helloa", "hellob", 6));
-	printf("%d\n", strncmp("helloa", "hellob", 6));
+	printf("%d\n", ft_strncmp("test\200", "test\0", 6));
+	printf("%d\n", strncmp("test\200", "test\0", 6));
 }*/

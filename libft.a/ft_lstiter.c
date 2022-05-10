@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:56:19 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:06:33 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/10 13:31:23 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	if (!lst || !f)
 		return ;
-	while (lst)
+	while (lst -> next)
 	{
 		f(lst -> content);
 		lst = lst -> next;
 	}
+		f(lst -> content);
 }
 
 /*#include <stdio.h>

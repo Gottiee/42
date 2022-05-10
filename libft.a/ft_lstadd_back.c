@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:14:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/06 19:16:37 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/10 13:21:06 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 	if (!lst || !new)
 		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
 	tmp = *lst;
-	while (tmp)
+	while (tmp -> next)
 		tmp = tmp -> next;
-	new -> next = NULL;
-	new = tmp;
+	tmp -> next = new;
 }
 
 /*#include <stdio.h>

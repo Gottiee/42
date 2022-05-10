@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 16:15:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/08 15:04:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/10 15:18:06 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,23 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (src_len);
 }
 
-/*int	main(int argc, char **argv)
+/*void	ft_print_result(int n)
 {
-	(void)argc;
-	(void)argv;
-	char dest[30];
-	memset(dest, 0, 30);
-	char *src = (char *)"AAAAAAAAA";
-	dest[0] = 'B';
-		if (ft_strlcat(dest, src, 6) == 13 && !strcmp(dest, "BBBBA"))
-		printf("OK\n");
-	else
-		printf("KO\n");
+	char c;
+
+	if (n >= 10)
+		ft_print_result(n / 10);
+	c = n % 10 + '0';
+	write (1, &c, 1);
+}
+
+int	main(int argc, char **argv)
+{
+		char	*dest;
+		if (!(dest = (char *)malloc(sizeof(*dest) * 15)))
+		return (0);
+		memset(dest, 'r', 15);
+		ft_print_result(ft_strlcat(dest, "lorem ipsum dolor sit amet", 5));
+		write(1, "\n", 1);
+		write(1, dest, 15);
 }*/

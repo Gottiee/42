@@ -6,55 +6,37 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:30:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/09 17:38:44 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/10 11:11:36 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	cpy_str(char const *s, unsigned int start, size_t len, char *str)
-{
-	size_t	i;	
-	i = 0;
-	size_t	s_len;
-
-	s_len = ft_strlen(s);
-	if (start > s_len)
-		return ;
-	i = 0;
-	while (s[i] && i < len)
-	{
-		str[i] = s[start];
-		start ++;
-		i ++;
-	}
-}
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	s_len;
+	int		malloc_s;
+	int		i;
 
 	s_len = ft_strlen(s);
 	if (start > s_len)
-	{
-		str = malloc(sizeof(char) * 1);
-		str[0] = '\0';
-	}
+		malloc_s = 1;
 	else if ((s_len + 1 - start) <= len)
-	{
-		str = (char *)malloc(sizeof(char) * s_len + 1 - start);
-		str[s_len - start] = '\0';
-	}
+		malloc_s = s_len + 1 - start;
 	else
-	{
-		str = (char *)malloc(sizeof(char) * len + 1);
-		str[len] = '\0';
-	}
+		malloc_s = len + 1;
+	str = (char *)malloc(sizeof(char) * malloc_s);
 	if (!str)
 		return (NULL);
-	if (start < s_len)
-		cpy_str(s, start, len, str)	;
+	i = 0;
+	while (i < malloc_s)
+	{
+		str[i] = '\0';
+		i ++;
+	}
+	if (s + start <= s + s_len)
+		ft_strlcpy(str, s + start, malloc_s);
 	return (str);
 }
 
