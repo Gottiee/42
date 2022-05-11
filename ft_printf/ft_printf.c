@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
+/*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 15:00:01 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/11 15:43:11 by eedy             ###   ########.fr       */
+/*   Created: 2022/05/11 11:21:32 by eedy              #+#    #+#             */
+/*   Updated: 2022/05/11 11:38:48 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+
+int	ft_printf(const char *str, ...)
 {
-	void			*str;
-	const size_t	m = count * size;
+	va_list ptr;
+	int		i; 
+	int		arg;
+	/* i pour avancer dans la chaine de caractere argument l'un apres 
+	l'autre sans revenir au debut*/
 
-	if (size && m / size != count)
-		return (NULL);
-	str = malloc(m);
-	if (!str)
-		return (NULL);
-	return (ft_memset(str, 0, m));
+	arg = check_str(str, &i);
 }
