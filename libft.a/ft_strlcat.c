@@ -6,7 +6,7 @@
 /*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 16:15:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/10 15:18:06 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/11 11:01:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,22 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	i;
-	size_t	dst_len;
-	size_t	src_len;
+	unsigned int	size_dst;
+	unsigned int	size_src;
+	unsigned int	i;
 
-	if (!dst || !src)
-		return (0);
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen((char *)src);
+	size_src = ft_strlen(src);
+	size_dst = ft_strlen(dst);
 	i = 0;
-	if (size == 0)
-		return (src_len);
-	if (size < dst_len)
-		src_len += size;
-	else
-		src_len += dst_len;
-	while (src[i] && (dst_len + i) < (size - 1))
+	if (size <= size_dst)
+		return (size + size_src);
+	while (src[i] && (size_dst + i) < size - 1)
 	{
-		dst[dst_len + i] = src[i];
-		i ++;
+		dst[size_dst + i] = src[i];
+		i++;
 	}
-	dst[dst_len + i] = '\0';
-	return (src_len);
+	dst[size_dst + i] = '\0';
+	return (size_dst + size_src);
 }
 
 /*void	ft_print_result(int n)
