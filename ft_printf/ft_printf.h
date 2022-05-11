@@ -7,6 +7,11 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+typedef struct	s_bolo;
+{
+	
+}
+
 int		ft_printf(const char *str, ...);
 
 #endif
