@@ -6,13 +6,14 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:21:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/12 13:06:30 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/12 18:00:02 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	distrib(int check, va_list ptr)
 {
-	
+	if (check == 1)
+		
 }
 
 int	check_str(char c)
@@ -75,8 +76,11 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	va_start(ptr, str);
-	init_bolo(bolo);
-	print_str(str, &i, ptr, bolo);
 	bolo = malloc(sizeof(t_bolo));
+	init_bolo(bolo);
+	count = print_str(str, &i, ptr, bolo);
 	free(bolo);
+	if (count == 0)
+		return (-1);
+	return (count);
 }
