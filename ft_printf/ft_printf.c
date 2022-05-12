@@ -6,9 +6,14 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:21:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/11 18:16:16 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/12 13:06:30 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	distrib(int check, va_list ptr)
+{
+	
+}
 
 int	check_str(char c)
 {
@@ -32,17 +37,26 @@ int	check_str(char c)
 		return (0);
 }
 
-int	print_str(const char *str, int *i, int str_len)
+int	print_str(const char *str, int *i, va_list ptr, t_bolo *bolo)
 {
 	int	count;
+	int	check;
+	int	str_len;
 
+	str_len = ft_strlen(str);
 	count = 0;
 	while (*i < str_len)
 	{
 		if (i + 1 < str_len && str[i] == '%')	
 		{
-			check_flags(str, i, str_len)
-			count += distrib(check_str(str[i]));
+			(*i)++;
+			check = check_flags(str, i, str_len)
+			if (check != 0 *i >= str_len)
+				return (0);
+			check = check_str(str[i])
+			if (check == 0)
+				return (0);
+			count += distrib(check, ptr);
 			/*distrib regarde le chiffre et renvoi vers les variable
 			qui traite les bons paramettres*/
 		}
@@ -55,23 +69,14 @@ int	print_str(const char *str, int *i, int str_len)
 int	ft_printf(const char *str, ...)
 {
 	va_list ptr;
-	int		i; 
-	int		type;
-	int		str_len;
+	t_bolo	*bolo;	
+	int		count;
+	int		i;
 
-	/* i pour avancer dans la chaine de caractere argument l'un apres 
-	l'autre sans revenir au debut
-	type pour que la fonction check str return des chiffes de 0 a ... pour dire
-	le type de l'argument traite*/
-	str_len = ft_strlen(str);
-	type = 0;
-	while (i < str_len)
-	{
-		type = check_str(str, &i, str_len);
-		if (type)
-		{
-			
-		}
-	}
-
+	i = 0;
+	va_start(ptr, str);
+	init_bolo(bolo);
+	print_str(str, &i, ptr, bolo);
+	bolo = malloc(sizeof(t_bolo));
+	free(bolo);
 }
