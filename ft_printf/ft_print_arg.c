@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_arg.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 15:06:21 by eedy              #+#    #+#             */
+/*   Updated: 2022/05/13 17:01:59 by eedy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 int	ft_putchar(va_list ptr)
 {
 	char	c;
@@ -25,23 +37,55 @@ int	ft_putstr(va_list ptr)
 	return (count);
 }
 
-unsigned long long	long_convert(va_list ptr, int check)
+int	long_convert(va_list ptr, int check, t_bolo *bolo)
 {
-	unsigned long long nbr;
+	unsigned long long	nbr;
+	int					count;
 
-	if (check ==)
-
-}
-int	ft_print_hexa_lowercase(unsigned long long nbr, int neg, int i)
-{
-	char	hexa[];
-
-
-	if (neg == 1)
+	i = 0;
+	count = 0;
+	(unsigned int)nbr = va_arg(ptr, unsigned int);
+	if (check = 6)
 	{
-		write(1, "-", 1);
-		ft_print_hexa_lowercase(nbr, neg--, i);
+		if (bolo -> hastag = 1)
+		{
+			write(1, "0x", 2);
+			count += 2;
+		}
+		count = ft_print_hexa_lowercase(nbr, count);
 	}
-	if (nbr)
+	else
+	{
+		if (bolo -> hastag = 1)
+		{
+			write(1, "0X", 2);
+			count += 2;
+		}
+		count = ft_print_hexa_uppercase(nbr, count);
+	}
+	return (count);
+}
 
+int	ft_print_hexa_lowercase(unsigned long long nbr, int count)
+{
+	const char	*str = "0123456789abcdef";
+
+	if (nbr)
+		ft_print_hexa_lowercase(nbr / 16, i, count ++);
+	nbr %= 16;
+	write(1, str + nbr, 1);
+	(*count) ++;
+	return (*count);
+}
+
+int	ft_print_hexa_uppercasr(unsigned long long nbr, int count)
+{
+	const char	*str = "0123456789ABCDEF";
+
+	if (nbr)
+		ft_print_hexa_lowercase(nbr / 16, i, count ++);
+	nbr %= 16;
+	write(1, str + nbr, 1);
+	(*count) ++;
+	return (*count);
 }

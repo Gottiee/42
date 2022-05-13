@@ -14,10 +14,14 @@ typedef struct	s_bolo
 	int	plus;
 }				t_bolo;
 
-int		ft_printf(const char *str, ...);
-int		chekc_flags(const char *str, int *i, int str_len, t_bolo *bolo);
-int		check_str(char c);
-int 	print_str(const char *str, int *i, va_list ptr, t_bolo *bolo);
-void	init_bolo(t_bolo bolo);
+/*			--- Fonction qui gere la string envoyee ---		*/
+
+int			distrib(int check, va_list ptr, t_bolo *bolo);
+int			check_str(char c);
+int			print_str(const char *str, int *i, va_list ptr, t_bolo *bolo);
+int			ft_printf(const char *str, ...);
+
+/*			--- Fonction qui gere la structure ---			*/
+
 
 #endif

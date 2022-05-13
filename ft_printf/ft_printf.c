@@ -6,14 +6,34 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:21:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/12 18:00:02 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/13 18:05:49 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	distrib(int check, va_list ptr)
+#include "ft_prinft.h"
+
+int	distrib(int check, va_list ptr, t_bolo *bolo)
 {
+	int	count;
+
 	if (check == 1)
-		
+		count = ft_putchar(ptr);
+	if (check == 2)
+		count = ft_putstr(ptr);
+	if (check == 3)
+		count = long_convert_ptr(ptr);
+	if (check == 4)
+		count = ft_ckecknbr(ptr, bolo);
+	if (check == 5)
+		count = ft_check_unsigned(ptr, bolo);
+	if (check == 6 || check == 7)
+		count = long_convert(ptr, check, bolo);
+	if (check == 8)
+	{
+		write(1, "%", 1);
+		count = 1;
+	}
+	return (count);
 }
 
 int	check_str(char c)
@@ -32,7 +52,7 @@ int	check_str(char c)
 		return (6)
 	if (c == 'X')	
 		return (7)
-	if (c == '%')	
+	if (c = '%')	
 		return (8);
 	else
 		return (0);
@@ -57,11 +77,11 @@ int	print_str(const char *str, int *i, va_list ptr, t_bolo *bolo)
 			check = check_str(str[i])
 			if (check == 0)
 				return (0);
-			count += distrib(check, ptr);
-			/*distrib regarde le chiffre et renvoi vers les variable
-			qui traite les bons paramettres*/
+			count += distrib(check, ptr, bolo);
+			init_bolo(bolo);
 		}
-		write(1, str + i, 1);
+		if (str[i] != '%')
+			write(1, str + i, 1);
 		i ++;
 	}
 	return (count);
