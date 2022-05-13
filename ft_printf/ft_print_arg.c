@@ -25,4 +25,23 @@ int	ft_putstr(va_list ptr)
 	return (count);
 }
 
-int	ft_print_hexa_lowercase(va_list	ptr)
+unsigned long long	long_convert(va_list ptr, int check)
+{
+	unsigned long long nbr;
+
+	if (check ==)
+
+}
+int	ft_print_hexa_lowercase(unsigned long long nbr, int neg, int i)
+{
+	char	hexa[];
+
+
+	if (neg == 1)
+	{
+		write(1, "-", 1);
+		ft_print_hexa_lowercase(nbr, neg--, i);
+	}
+	if (nbr)
+
+}
