@@ -30,10 +30,16 @@ $(NAME): $(OBJ)
 bonus : all
 
 clean :
-rm -f $(OBJ)
+	rm -f $(OBJ)
+	cd libft
+	make clean
+	cd ../
 
 fclean : clean
 		rm -f $(NAME)
+	cd libft
+	make fclean
+	cd ../
 
 re : flcean all
 	rm -f $(OBJ) $(BONUS_OBJ)

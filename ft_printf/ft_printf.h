@@ -23,5 +23,7 @@ int			ft_printf(const char *str, ...);
 
 /*			--- Fonction qui gere la structure ---			*/
 
+void		init_bolo(t_bolo bolo);
+
 
 #endif
