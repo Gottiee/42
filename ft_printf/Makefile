@@ -24,6 +24,7 @@ $(NAME): $(OBJ)
 
 lib : 
 		$(MAKE) -C  ./libft
+		cp ./libft/libft.a ./$(NAME)
 	
 %.o: %.c
 	$(CC) -c $(FLAGS) $(LIB) $^
