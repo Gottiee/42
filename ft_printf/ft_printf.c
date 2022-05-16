@@ -6,11 +6,11 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:21:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/13 18:05:49 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/16 14:48:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_prinft.h"
+#include "ft_printf.h"
 
 int	distrib(int check, va_list ptr, t_bolo *bolo)
 {
@@ -23,9 +23,9 @@ int	distrib(int check, va_list ptr, t_bolo *bolo)
 	if (check == 3)
 		count = long_convert_ptr(ptr);
 	if (check == 4)
-		count = ft_ckecknbr(ptr, bolo);
+		count = ft_checknbr(ptr, bolo);
 	if (check == 5)
-		count = ft_check_unsigned(ptr, bolo);
+		count = ft_check_unsigned(ptr);
 	if (check == 6 || check == 7)
 		count = long_convert(ptr, check, bolo);
 	if (check == 8)
@@ -49,10 +49,10 @@ int	check_str(char c)
 	if (c == 'u')	
 		return (5);
 	if (c == 'x')	
-		return (6)
+		return (6);
 	if (c == 'X')	
-		return (7)
-	if (c = '%')	
+		return (7);
+	if (c == '%')	
 		return (8);
 	else
 		return (0);
@@ -68,21 +68,23 @@ int	print_str(const char *str, int *i, va_list ptr, t_bolo *bolo)
 	count = 0;
 	while (*i < str_len)
 	{
-		if (i + 1 < str_len && str[i] == '%')	
+		if (*i + 1 < str_len && str[*i] == '%')	
 		{
 			(*i)++;
-			check = check_flags(str, i, str_len)
-			if (check != 0 *i >= str_len)
-				return (0);
-			check = check_str(str[i])
+			check_flags(str, i, str_len, bolo);
+			check = check_str(str[*i]);
 			if (check == 0)
 				return (0);
 			count += distrib(check, ptr, bolo);
 			init_bolo(bolo);
+			(*i) ++;
 		}
-		if (str[i] != '%')
-			write(1, str + i, 1);
-		i ++;
+		if (str[*i] != '%')
+		{
+			write(1, str + *i, 1);
+			count ++;
+		}
+		(*i) ++;
 	}
 	return (count);
 }
@@ -97,6 +99,8 @@ int	ft_printf(const char *str, ...)
 	i = 0;
 	va_start(ptr, str);
 	bolo = malloc(sizeof(t_bolo));
+	if (!bolo)
+		return (0);
 	init_bolo(bolo);
 	count = print_str(str, &i, ptr, bolo);
 	free(bolo);

@@ -1,47 +1,43 @@
-DIR_LIB = ./libft/
+LIB = -L$(DIR_LIB) -lft
+
+
+DIR_LIB = ./libft
 
 NAME = libftprintf.a
 
 SRC = ft_lst.c \
 	  ft_print_arg2.c \
 	  ft_print_arg.c \
-	  ft_printf.c \
+	  ft_printf.c 
 
-OBJ = &(SRC:.c=.o)	 
+OBJ = $(SRC:.c=.o)	 
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -L$(DIR_LIB)
+FLAGS = -Wall -Werror -Wextra 
 
 all : lib $(NAME)
 
-lib : 
-	cd libft
-	make bonus
-	mv libft.a ../.
-	cd ../
-
 $(NAME): $(OBJ) 
 		ar rc $(NAME) $^
-		rnalib $(NAME)
+		ranlib $(NAME)
+
+lib : 
+		$(MAKE) -C  ./libft
+	
 %.o: %.c
-	$(CC) -c $(FLAGS) $^
+	$(CC) -c $(FLAGS) $(LIB) $^
 
 bonus : all
 
 clean :
 	rm -f $(OBJ)
-	cd libft
-	make clean
-	cd ../
+	$(MAKE) clean -C ./libft
 
 fclean : clean
 		rm -f $(NAME)
-	cd libft
-	make fclean
-	cd ../
+	$(MAKE) fclean -C ./libft
 
-re : flcean all
-	rm -f $(OBJ) $(BONUS_OBJ)
+re : fclean all
 
 .PHONY: all bonus clean fclean re lib

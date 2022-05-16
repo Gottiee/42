@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:21:25 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/11 11:21:30 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/16 15:49:22 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	a = 10;
-	ft_printf("ma fonction: %d\n", a);
-	printf("la fontion original: %d\n", a);
+	//unsigned int c = 0;
+	printf("ma fonction renvoie la valeur %d\n", ft_printf("ma fonction: %#x\n", c));
+	printf("la fonction orignal renvoie la valeur %d\n", printf("la fonction: %#x\n", c));
 }

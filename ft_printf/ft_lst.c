@@ -6,13 +6,13 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:59:42 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/12 12:43:22 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/16 14:25:21 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	init_bolo(t_bolo bolo)
+void	init_bolo(t_bolo *bolo)
 {
 	bolo -> hastag = 0;
 	bolo -> space = 0;
@@ -31,11 +31,6 @@ int	check_flags(const char *str, int *i, int str_len, t_bolo *bolo)
 			bolo -> hastag += 1;
 		(*i)++;
 	}
-		if (bolo -> space > 1 || bolo -> hastag > 1 || bolo -> plus > 1)
-			return (1);
-		if ((bolo -> space > 1 && bolo -> hastag 1) ||
-			(bolo -> plus > 1 && bolo -> hastag > 1))
-			return (1);
 		if (bolo -> space > 1 && bolo -> plus > 1)
 			bolo -> space = 0;
 	return (0);

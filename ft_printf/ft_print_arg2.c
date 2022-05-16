@@ -6,19 +6,20 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 15:47:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/13 17:13:06 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/16 15:37:19 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_check_unsigned(va_list ptr, t_bolo *bolo)
+#include "ft_printf.h"
+
+int ft_check_unsigned(va_list ptr)
 {
 	int	nbr;
-	int	count
+	int	count;
 
+	count = 0;
 	nbr = va_arg(ptr, unsigned int);
-	if (nbr == 0)
-		count ++;
-	count = ft_putnbr((unsigned int)nbr, count);
+	count = ft_putnbr((unsigned int)nbr, &count);
 	return (count);
 }
 
@@ -27,13 +28,14 @@ int	ft_checknbr(va_list ptr, t_bolo *bolo)
 	int	nbr;
 	int	count;
 
+	count = 0;
 	nbr = va_arg(ptr, int);
-	if (bolo -> space = 1)
+	if (bolo -> space == 1 && nbr >= 0)
 	{
 		write(1, " ", 1);
-		count ++
+		count ++;
 	}
-	if (bolo -> plus = 1)
+	if (bolo -> plus == 1 && nbr >= 0)
 	{
 		if (nbr >= 0)
 		{
@@ -43,20 +45,27 @@ int	ft_checknbr(va_list ptr, t_bolo *bolo)
 	}
 	if (nbr < 0)
 	{
-		write(1, "-", 1);
-		count ++;
+		count += write(1, "-", 1);
+		if (nbr == -2148473648)
+		{
+			count += write(1, "2147483648", 10);
+			return (count);
+		}
+		nbr *= -1;
 	}
-	count = ft_putnbr((unsigned int)nbr, count);
+	count = ft_putnbr((unsigned int)nbr, &count);
 	return (count);
 }
 
-int	ft_putnbr(unsigned int nbr, int count)
+int	ft_putnbr(unsigned int nbr, int *count)
 {
-	if (nbr)
-		ft_putnbr(nbr / 10, count ++);
+	if (nbr > 9)
+		ft_putnbr(nbr / 10, count);
 	nbr %= 10;
+	nbr += '0';
+	(*count) ++;
 	write(1, &nbr, 1);
-	return (count);
+	return (*count);
 }
 
 int	long_convert_ptr(va_list ptr)
@@ -65,7 +74,6 @@ int	long_convert_ptr(va_list ptr)
 	unsigned long long	nbr;
 	int					count;
 
-	i = 0;
 	count = 0;
 	pt = va_arg(ptr, void *);
 	if (!pt)
@@ -75,8 +83,9 @@ int	long_convert_ptr(va_list ptr)
 	}
 	else
 	{
+		count += write(1, "0x", 2);
 		nbr = (unsigned long long)pt;
-		count = ft_print_hexa_lowercase(nbr, count);
+		count = ft_print_hexa_lowercase(nbr, &count);
 	}
 	return (count);
 }
