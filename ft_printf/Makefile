@@ -5,27 +5,25 @@ DIR_LIB = ./libft
 
 NAME = libftprintf.a
 
-SRC = ft_lst.c \
-	  ft_print_arg2.c \
-	  ft_print_arg.c \
-	  ft_printf.c 
-
-OBJ = $(SRC:.c=.o)	 
+SRC =	ft_printf.c \
+		ft_lst.c \
+		ft_print_arg.c \
+		ft_print_arg2.c \
+		ft_print_str_ex.c
+ 
+	OBJ = $(SRC:.c=.o)	 
 
 CC = gcc
 
 FLAGS = -Wall -Werror -Wextra 
 
-all : lib $(NAME)
+all : $(NAME)
 
 $(NAME): $(OBJ) 
-		ar rc $(NAME) $^
-		ranlib $(NAME)
+		$(MAKE) bonus -C ./libft
+		cp libft/libft.a ./$(NAME)
+		ar -rcs $(NAME) $^
 
-lib : 
-		$(MAKE) -C  ./libft
-		cp ./libft/libft.a ./$(NAME)
-	
 %.o: %.c
 	$(CC) -c $(FLAGS) $(LIB) $^
 

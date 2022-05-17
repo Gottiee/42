@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:21:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/16 17:27:20 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/17 12:44:13 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@ int	distrib(int check, va_list ptr, t_bolo *bolo)
 
 int	check_str(char c)
 {
-	if (c == 'c')	
+	if (c == 'c')
 		return (1);
-	if (c == 's')	
+	if (c == 's')
 		return (2);
-	if (c == 'p')	
+	if (c == 'p')
 		return (3);
-	if (c == 'd' || c == 'i')	
+	if (c == 'd' || c == 'i')
 		return (4);
-	if (c == 'u')	
+	if (c == 'u')
 		return (5);
-	if (c == 'x')	
+	if (c == 'x')
 		return (6);
-	if (c == 'X')	
+	if (c == 'X')
 		return (7);
-	if (c == '%')	
+	if (c == '%')
 		return (8);
 	else
 		return (0);
@@ -68,30 +68,26 @@ int	print_str(const char *str, int *i, va_list ptr, t_bolo *bolo)
 	count = 0;
 	while (*i < str_len)
 	{
-		if (*i + 1 < str_len && str[*i] == '%')	
+		if (*i + 1 < str_len && str[*i] == '%')
 		{
 			(*i)++;
 			check_flags(str, i, str_len, bolo);
 			check = check_str(str[*i]);
 			if (check == 0)
-				return (0);
+				return (-1);
 			count += distrib(check, ptr, bolo);
 			init_bolo(bolo);
-			(*i) ++;
+			(*i)++;
 		}
-		if (str[*i] != '%')
-		{
-			write(1, str + *i, 1);
-			count ++;
-		}
-		(*i) ++;
+		if (*i < str_len && str[*i] != '%')
+			ft_print_str_ext(&count, i, str);
 	}
 	return (count);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	va_list ptr;
+	va_list	ptr;
 	t_bolo	*bolo;	
 	int		count;
 	int		i;
@@ -104,7 +100,7 @@ int	ft_printf(const char *str, ...)
 	init_bolo(bolo);
 	count = print_str(str, &i, ptr, bolo);
 	free(bolo);
-	if (count == 0)
+	if (count < 0)
 		return (-1);
 	return (count);
 }

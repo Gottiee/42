@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 15:06:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/16 15:46:31 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/17 12:28:59 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int	ft_putstr(va_list ptr)
 	i = 0;
 	count = 0;
 	str = va_arg(ptr, char *);
+	if (!str)
+	{
+		count += write(1, "(null)", 6);
+		return (count);
+	}
 	while (str[i])
 	{
 		write(1, str + i, 1);
@@ -75,7 +80,7 @@ int	ft_print_hexa_lowercase(unsigned long long nbr, int *count)
 		ft_print_hexa_lowercase(nbr / 16, count);
 	nbr %= 16;
 	write(1, str + nbr, 1);
-	(*count) ++;
+	(*count)++;
 	return (*count);
 }
 
@@ -84,9 +89,9 @@ int	ft_print_hexa_uppercase(unsigned long long nbr, int *count)
 	const char	*str = "0123456789ABCDEF";
 
 	if (nbr > 15)
-		ft_print_hexa_lowercase(nbr / 16, count);
+		ft_print_hexa_uppercase(nbr / 16, count);
 	nbr %= 16;
 	write(1, str + nbr, 1);
-	(*count) ++;
+	(*count)++;
 	return (*count);
 }

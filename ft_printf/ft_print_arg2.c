@@ -6,13 +6,25 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 15:47:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/16 15:52:11 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/17 12:56:07 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_check_unsigned(va_list ptr)
+int	thanks_norminette(int *nbr, int count)
+{
+	count += write(1, "-", 1);
+	if (*nbr == -2147483648)
+	{
+		count += write(1, "2147483648", 10);
+		return (count);
+	}
+	(*nbr) *= -1;
+	return (count);
+}
+
+int	ft_check_unsigned(va_list ptr)
 {
 	int	nbr;
 	int	count;
@@ -44,16 +56,9 @@ int	ft_checknbr(va_list ptr, t_bolo *bolo)
 		}
 	}
 	if (nbr < 0)
-	{
-		count += write(1, "-", 1);
-		if (nbr == -2147483648)
-		{
-			count += write(1, "2147483648", 10);
-			return (count);
-		}
-		nbr *= -1;
-	}
-	count = ft_putnbr((unsigned int)nbr, &count);
+		count += thanks_norminette(&nbr, count);
+	if (nbr != -2147483648)
+		count = ft_putnbr((unsigned int)nbr, &count);
 	return (count);
 }
 
@@ -63,7 +68,7 @@ int	ft_putnbr(unsigned int nbr, int *count)
 		ft_putnbr(nbr / 10, count);
 	nbr %= 10;
 	nbr += '0';
-	(*count) ++;
+	(*count)++;
 	write(1, &nbr, 1);
 	return (*count);
 }
@@ -77,10 +82,7 @@ int	long_convert_ptr(va_list ptr)
 	count = 0;
 	pt = va_arg(ptr, void *);
 	if (!pt)
-	{
-		write(1, "NULL", 4);
-		count = 4;
-	}
+		count += write(1, "(nil)", 5);
 	else
 	{
 		count += write(1, "0x", 2);
