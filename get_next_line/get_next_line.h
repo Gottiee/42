@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 11:21:25 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/17 13:13:26 by eedy             ###   ########.fr       */
+/*   Created: 2022/05/17 16:52:06 by eedy              #+#    #+#             */
+/*   Updated: 2022/05/17 17:22:01 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef GET_NEXT_LINE.H
+# define GET_NEXT_LINE.H
 
-#include <stdio.h>
-#include <stdlib.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdarg.h>
+# include <limits.h>
+# include <fcntl.h>
+# include <
 
-int	main(int argc, char **argv)
-{
-	(void)argc;
-	(void)argv;
-	int c = '0';
-	printf("ma fonction renvoie la valeur %d\n", ft_printf(" %x ", 45));
-	write(1, "\n", 1);
-	printf("la fonction orignal renvoie la valeur %d\n", printf(" %x ", 45));
-	write(1, "\n", 1);
-}
+# define BUFFER_SIZE;
+
+/*			--- Fonction qui gere ---		*/
