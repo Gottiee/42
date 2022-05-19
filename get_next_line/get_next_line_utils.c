@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:46:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/19 13:30:49 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/19 14:47:54 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,21 @@ int	calcul_strlen(t_list *first)
 {
 	t_list	*tmp;
 	int		str_len;
+	int		i;
 
 	str_len = 0;
 	tmp = first;
 	tmp = tmp -> next;
 	while (tmp)
 	{
-		str_len += ft_strlen_remaster(tmp -> str);
+		i = 0;
+		while (tmp -> str[i])
+		{
+			if (tmp -> str[i] == '\n')
+				return (i + 1);
+			i ++;
+		}
+		str_len += i;
 		tmp = tmp -> next;
 	}
 	return (str_len);
@@ -77,7 +85,7 @@ char	*print_line(t_list *first, char *line)
 	while (tmp)
 	{
 		j = 0;
-		while (tmp -> str[j] && tmp -> str[j - 1] != '\n')	
+		while (tmp -> str[j] && tmp -> str[j - 1] != '\n')
 		{
 			line[i] = tmp -> str[j];
 			i ++;

@@ -6,11 +6,25 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:02:07 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/19 13:27:50 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/19 14:49:28 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	thks_nrm(size_t temp_i, unsigned char *tmp, size_t i, size_t n)
+{
+	while (tmp[temp_i + i])
+	{
+		tmp[i] = tmp[temp_i + i];
+		i ++;
+	}
+	while (i < n)
+	{
+		tmp[i] = 0;
+		i ++;
+	}
+}
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -32,23 +46,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-int	 ft_strlen_remaster(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')	
-			return (i + 1);
-		i ++;
-	}
-	return (i);
-}
-
 void	ft_bzero(void *s, size_t n)
 {
-	size_t			temp_i;
 	size_t			i;
 	unsigned char	*tmp;
 
@@ -65,18 +64,7 @@ void	ft_bzero(void *s, size_t n)
 	}
 	if (tmp[i] == '\n')
 	{
-		temp_i = i + 1;	
-		i = 0;
-		while (tmp[temp_i + i])
-		{
-			tmp[i] = tmp[temp_i + i];
-			i ++;
-		}
-		while (i < n)
-		{
-			tmp[i] = 0;
-			i ++;
-		}
+		thks_nrm(i + 1, tmp, 0, n);
 	}
 }
 
@@ -87,7 +75,7 @@ int	find_backslash(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\n')	
+		if (str[i] == '\n')
 			return (1);
 		i ++;
 	}
@@ -107,7 +95,7 @@ char	*get_next_line(int fd)
 	first = init();
 	if (!first)
 		return (NULL);
-	while (check_read > 0 && !find_backslash(buffer))	
+	while (check_read > 0 && !find_backslash(buffer))
 	{
 		if (buffer[0] != 0)
 			add_list(first, buffer);
