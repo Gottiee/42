@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:52:06 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/19 14:49:44 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/19 15:43:21 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	thks_nrm(size_t temp_i, unsigned char *tmp, size_t i, size_t n);
 /*			--- Fonction qui gere la liste chainee---		*/
 
 t_list	*init(void);
-char	*add_list(t_list *first, char *buffer);
+int		add_list(t_list *first, char *buffer);
 char	*print_line(t_list *first, char *line);
 void	del_list(t_list *first);
 

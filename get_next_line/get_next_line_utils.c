@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:46:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/19 14:47:54 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/19 16:55:25 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,14 @@ t_list	*init(void)
 	return (first);
 }
 
-char	*add_list(t_list *first, char *buffer)
+int	add_list(t_list *first, char *buffer)
 {
 	t_list	*new;
 	t_list	*tmp;
 
-	if (buffer[0] == '\0')
-		return (buffer);
 	new = malloc(sizeof(t_list));
 	if (!new)
-		return (NULL);
+		return (-1);
 	tmp = first;
 	while (tmp -> next)
 		tmp = tmp -> next;
@@ -40,7 +38,7 @@ char	*add_list(t_list *first, char *buffer)
 	new -> next = NULL;
 	ft_memcpy(new -> str, buffer, BUFFER_SIZE + 1);
 	ft_bzero(buffer, BUFFER_SIZE + 1);
-	return (buffer);
+	return (1);
 }
 
 int	calcul_strlen(t_list *first)
@@ -58,7 +56,7 @@ int	calcul_strlen(t_list *first)
 		while (tmp -> str[i])
 		{
 			if (tmp -> str[i] == '\n')
-				return (i + 1);
+				return (i + 1 + str_len);
 			i ++;
 		}
 		str_len += i;
@@ -85,12 +83,9 @@ char	*print_line(t_list *first, char *line)
 	while (tmp)
 	{
 		j = 0;
-		while (tmp -> str[j] && tmp -> str[j - 1] != '\n')
-		{
-			line[i] = tmp -> str[j];
-			i ++;
-			j ++;
-		}
+		while (tmp -> str[j] && tmp -> str[j] != '\n')
+			line[i ++] = tmp -> str[j ++];
+		line[i] = tmp -> str[j];
 		tmp = tmp -> next;
 	}
 	return (line);

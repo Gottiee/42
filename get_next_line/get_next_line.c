@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:02:07 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/19 14:49:28 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/19 16:57:36 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1)
 		return (NULL);
 	first = init();
-	if (!first)
-		return (NULL);
+	line = NULL;
 	while (check_read > 0 && !find_backslash(buffer))
 	{
 		if (buffer[0] != 0)
@@ -102,11 +101,11 @@ char	*get_next_line(int fd)
 		else
 		check_read = read(fd, buffer, BUFFER_SIZE);
 	}
-	add_list(first, buffer);
-	if (check_read == -1 || (check_read == 0 && first -> next == NULL))
-		return (NULL);
-	line = NULL;
-	line = print_line(first, line);
+	if (check_read > 0 || first -> next != NULL)
+	{
+		check_read = add_list(first, buffer);
+		line = print_line(first, line);
+	}
 	del_list(first);
 	return (line);
 }
