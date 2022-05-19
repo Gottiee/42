@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:02:07 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/19 16:57:36 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/19 18:09:42 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 void	thks_nrm(size_t temp_i, unsigned char *tmp, size_t i, size_t n)
 {
+	(void)n;
 	while (tmp[temp_i + i])
 	{
 		tmp[i] = tmp[temp_i + i];
 		i ++;
 	}
-	while (i < n)
-	{
-		tmp[i] = 0;
-		i ++;
-	}
+	tmp[i] = 0;
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)

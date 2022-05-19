@@ -16,9 +16,22 @@ int	main(void)
 {
 	int		fd;
 	char	*str;
+	char *filename = "41_with_nl";
 
-	fd = open("test", O_RDONLY);
-	printf("la seconde chaine lu est : %s", str = get_next_line(fd));
-	free(str);
+	fd = open(filename, O_RDONLY);
+	//printf("la seconde chaine lu est : %s", str = get_next_line(fd));
+	//free(str);
+	while(1)
+	{
+		str = get_next_line(fd);
+		if(!str)
+		{
+			free(str);
+			break;
+		}
+		printf("%s", str);
+		free(str);
+
+	}
 	close(fd);
 }
