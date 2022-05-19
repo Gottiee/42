@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:02:07 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/18 16:32:34 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/19 13:27:50 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	 ft_strlen_remaster(char *str)
 
 void	ft_bzero(void *s, size_t n)
 {
+	size_t			temp_i;
 	size_t			i;
 	unsigned char	*tmp;
 
@@ -57,8 +58,25 @@ void	ft_bzero(void *s, size_t n)
 	tmp = (unsigned char *)s;
 	while (i < n)
 	{
+		if (tmp[i] == '\n')
+			break ;
 		tmp[i] = 0;
 		i ++;
+	}
+	if (tmp[i] == '\n')
+	{
+		temp_i = i + 1;	
+		i = 0;
+		while (tmp[temp_i + i])
+		{
+			tmp[i] = tmp[temp_i + i];
+			i ++;
+		}
+		while (i < n)
+		{
+			tmp[i] = 0;
+			i ++;
+		}
 	}
 }
 
@@ -79,7 +97,7 @@ int	find_backslash(char *str)
 char	*get_next_line(int fd)
 {
 	char			*line;
-	static char		*buffer;
+	static char		buffer[BUFFER_SIZE + 1];
 	t_list			*first;
 	int				check_read;
 
@@ -87,22 +105,20 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1)
 		return (NULL);
 	first = init();
-	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!first || !buffer)
+	if (!first)
 		return (NULL);
 	while (check_read > 0 && !find_backslash(buffer))	
 	{
 		if (buffer[0] != 0)
-			buffer = add_list(first, buffer);
+			add_list(first, buffer);
 		else
 		check_read = read(fd, buffer, BUFFER_SIZE);
 	}
 	add_list(first, buffer);
-	if (check_read == -1)
+	if (check_read == -1 || (check_read == 0 && first -> next == NULL))
 		return (NULL);
 	line = NULL;
 	line = print_line(first, line);
 	del_list(first);
-	free(buffer);
 	return (line);
 }

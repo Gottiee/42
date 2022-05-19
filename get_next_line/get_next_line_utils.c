@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:46:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/18 16:20:09 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/19 13:30:49 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*add_list(t_list *first, char *buffer)
 	t_list	*new;
 	t_list	*tmp;
 
+	if (buffer[0] == '\0')
+		return (buffer);
 	new = malloc(sizeof(t_list));
 	if (!new)
 		return (NULL);
@@ -75,7 +77,7 @@ char	*print_line(t_list *first, char *line)
 	while (tmp)
 	{
 		j = 0;
-		while (tmp -> str[j] && tmp -> str[j] != '\n')	
+		while (tmp -> str[j] && tmp -> str[j - 1] != '\n')	
 		{
 			line[i] = tmp -> str[j];
 			i ++;
