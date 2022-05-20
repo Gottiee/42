@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:02:07 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/19 18:09:42 by eedy             ###   ########.fr       */
+/*   Updated: 2022/05/20 12:54:37 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	thks_nrm(size_t temp_i, unsigned char *tmp, size_t i, size_t n)
 		tmp[i] = tmp[temp_i + i];
 		i ++;
 	}
-	tmp[i] = 0;
+	while (i < n && tmp[i])
+		tmp[i++] = 0;
+	tmp[BUFFER_SIZE - 1] = 0;
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
@@ -34,11 +36,12 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	i = 0;
 	if (n != 0)
 	{
-		while (i < n)
+		while (i < n && source[i])
 		{
 			dest[i] = source[i];
 			i ++;
 		}
+		dest[i] = '\0';
 	}
 	return (dst);
 }
@@ -52,11 +55,11 @@ void	ft_bzero(void *s, size_t n)
 		return ;
 	i = 0;
 	tmp = (unsigned char *)s;
-	while (i < n)
+	while (i < n && tmp[i])
 	{
 		if (tmp[i] == '\n')
 			break ;
-		tmp[i] = 0;
+		tmp[i] = '\0';
 		i ++;
 	}
 	if (tmp[i] == '\n')
