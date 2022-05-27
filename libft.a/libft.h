@@ -3,68 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eedy <gottiedev@gmail.com>                 +#+  +:+       +#+        */
+/*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 15:15:24 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/09 11:06:44 by eedy             ###   ########.fr       */
+/*   Created: 2022/05/17 12:30:45 by eedy              #+#    #+#             */
+/*   Updated: 2022/05/27 14:34:02 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <unistd.h>
-# include <string.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
 # include <stdlib.h>
-# include <fcntl.h>
 # include <stdio.h>
-# include <mcheck.h>
+# include <unistd.h>
+# include <stdarg.h>
+# include "./libft/libft.h"
+# include <limits.h>
 
-typedef struct s_list
+typedef struct s_bolo
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+	int	hastag;
+	int	space;
+	int	plus;
+}				t_bolo;
 
-char	*ft_itoa(int n);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strrchr(const char *s, int c);
-char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char const *s, char c);
-int		ft_atoi(const char *str);
-int		ft_isalnum(int c);
-int		ft_isalpha(int c);
-int		ft_isascii(int c);
-int		ft_isdigit(int c);
-int		ft_isprint(int c);
-int		ft_lstsize(t_list *lst);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_toupper(int c);
-int		ft_tolower(int c);
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlen(const char *s);
-t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstnew(void *content);
-void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-void	ft_bzero(void *s, size_t n);
-void	ft_lstadd_back(t_list **alst, t_list *new);
-void	ft_lstadd_front(t_list **alst, t_list *new);
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-void	ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	*ft_calloc(size_t count, size_t size);
-void	*ft_memchr(const void *s, int c, size_t n);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-void	*ft_memset(void *b, int c, size_t len);
+/*			--- Fonction qui gere la string envoyee ---		*/
+
+int			ft_printf(const char *str, ...);
+int			distrib(int check, va_list ptr, t_bolo *bolo);
+int			check_str(char c);
+int			print_str(const char *str, int *i, va_list ptr, t_bolo *bolo);
+void		ft_print_str_ext(int *count, int *i, const char *str);
+
+/*			--- Fonction qui gere la structure ---			*/
+
+void		init_bolo(t_bolo *bolo);
+int			check_flags(const char *str, int *i, int str_len, t_bolo *bolo);
+
+/*			--- Fonction qui gere les argument variadiques ---			*/
+
+int			ft_putchar(va_list ptr);
+int			long_convert(va_list ptr, int check, t_bolo *bolo);
+int			ft_putstr(va_list ptr);
+int			ft_print_hexa_lowercase(unsigned long long nbr, int *count);
+int			ft_print_hexa_uppercase(unsigned long long nbr, int *count);
+int			ft_check_unsigned(va_list ptr);
+int			ft_checknbr(va_list ptr, t_bolo *bolo);
+int			ft_putnbr(unsigned int nbr, int *count);
+int			long_convert_ptr(va_list ptr);
+int			thanks_norminette(int *nbr, int count);
 #endif
