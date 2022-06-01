@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <mlx.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
 
 #define W_H 1080
 #define W_W 1920
@@ -59,14 +61,46 @@ int	render(t_data *data)
 	return (0);
 }
 
+int	handle_keypress(int keysym, t_data *data)
+{
+	if (keysym == XK_Escape)
+		mlx_destroy_window(data->mlx, data->mlx_win);
+	return (0);
+}
+
+int	handle_keyrelease(int keysym, void *data)
+{
+	(void)data;
+	printf("Keyrelease: %d\n", keysym);
+	return (0);
+}
+
 int	main(void)
 {
 	t_data	data;
 
 	data.mlx = mlx_init();
+	if (data.mlx == NULL)
+		return(0);
 	data.mlx_win = mlx_new_window(data.mlx, 1920, 1080, "line");
+	if (data.mlx_win == NULL)
+	{
+		free(data.mlx_win);
+		return (0);
+	}
+
+	//set up image and print int it
 	data.img.img = mlx_new_image(data.mlx, W_W, W_H);
 	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bpp, &data.img.line_len, &data.img.endian);
 	mlx_loop_hook(data.mlx, &render, &data);
+
+	//set up hooks
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &handle_keypress, &data);
+	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, &handle_keyrelease, &data);
+
 	mlx_loop(data.mlx);
+
+	//quit the window and free everythink
+	mlx_destroy_image(data.mlx, data.img.img);
+	free(data.mlx);
 }
