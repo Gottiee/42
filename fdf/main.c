@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:33:50 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/01 15:21:22 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/01 18:13:20 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,34 @@ void	render_background(t_img *img, int color)
 	}
 }
 
+void	render_image(t_img *img, t_data *data)
+{
+	t_img	*new_image;
+	int		max_pixel;
+	int		y;
+	int		x;
+	//void	*pixel;
+	int		i;
+	int		x_img;
+	int		h_img;
+
+	x_img = 200;
+	h_img = 200;
+	i = 0;
+	max_pixel = 40000;
+	y = W_H / 2;
+	x = W_W / 2;
+	new_image = malloc(sizeof(t_img));
+	new_image->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "image/AnyConv.com__1.xpm", &x_img, &h_img);
+	new_image->addr = mlx_get_data_addr(new_image->mlx_img, &data->img.bpp, &data->img.line_len, &data->img.endian);
+	while (i < max_pixel)
+	{
+		*((char *)img->addr + i + (y * img->line_len + x * (img->bpp/8))) = *((char *)new_image->addr + i);
+	 	i ++;
+	}
+	mlx_destroy_image(data->mlx_ptr, new_image->mlx_img);
+	free(new_image);
+}
 
 int	render(t_data *data)
 {
@@ -80,6 +108,7 @@ int	render(t_data *data)
 		return (1);
 	render_background(&data->img, color_gen(255, 255, 255));
 	render_line(&data->img, color_gen(0, 0, 255));
+	render_image(&data->img, data);
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 
@@ -133,7 +162,7 @@ int	main(void)
 	mlx_hook(data.win_ptr, 17, StructureNotifyMask, &handle_destroy, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 
-		mlx_loop(data.mlx_ptr);
+	mlx_loop(data.mlx_ptr);
 
 	//quit the window and free everythink
 
