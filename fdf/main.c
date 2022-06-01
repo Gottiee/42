@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:33:50 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/01 13:08:01 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/01 15:21:22 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,22 @@ int	handle_keypress(int keysym, t_data *data)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
+		mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		exit(0);
 	}
 	return (0);
+}
+
+int	handle_destroy(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	data->win_ptr = NULL;
+	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
+	exit(0);
 }
 
 int	main(void)
@@ -116,9 +130,10 @@ int	main(void)
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 
 	//set up hooks
+	mlx_hook(data.win_ptr, 17, StructureNotifyMask, &handle_destroy, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 
-	mlx_loop(data.mlx_ptr);
+		mlx_loop(data.mlx_ptr);
 
 	//quit the window and free everythink
 
