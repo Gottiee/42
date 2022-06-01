@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/01 12:33:50 by eedy              #+#    #+#             */
+/*   Updated: 2022/06/01 13:08:01 by eedy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <mlx.h>
@@ -9,7 +21,7 @@
 
 typedef struct	s_img
 {
-	void	*img;
+	void	*mlx_img;
 	void	*addr;
 	int		bpp;
 	int		line_len;
@@ -18,12 +30,13 @@ typedef struct	s_img
 
 typedef struct	s_data
 {
-	void 	*mlx;	
-	void	*mlx_win;
+	void 	*mlx_ptr;	
+	void	*win_ptr;
 	t_img	img;
+	int		cur_img;
 }				t_data;
 
-int	color(int red, int green, int blue)
+int	color_gen(int red, int green, int blue)
 {
 	return (red << 16 | green << 8 | blue);
 }
@@ -36,42 +49,50 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-int	render(t_data *data)
+void	render_line(t_img *img, int color)
 {
 	int i;
+
+	i = 0;
+	while (i < W_W)
+		img_pix_put(img, i++ , 100, color);
+}
+
+void	render_background(t_img *img, int color)
+{
 	int	j;
+	int	i;
 
 	j = 0;
-	if (data->mlx_win == NULL)
-		return (0);
 	while (j < W_H)
 	{
 		i = 0;
 		while (i < W_W)
-			img_pix_put(&data->img, i++, j, color(125, 125, 000));
+			img_pix_put(img, i++, j, color);
 		j ++;
 	}
-	i = 0;
-	while (i < W_W)
-	{
-		img_pix_put(&data->img, i , 100, color(255, 0, 0));
-		i ++;
-	}
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
+}
+
+
+int	render(t_data *data)
+{
+	if (data->win_ptr == NULL)
+		return (1);
+	render_background(&data->img, color_gen(255, 255, 255));
+	render_line(&data->img, color_gen(0, 0, 255));
+
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+
 	return (0);
 }
 
 int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
-		mlx_destroy_window(data->mlx, data->mlx_win);
-	return (0);
-}
-
-int	handle_keyrelease(int keysym, void *data)
-{
-	(void)data;
-	printf("Keyrelease: %d\n", keysym);
+	{
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		data->win_ptr = NULL;
+	}
 	return (0);
 }
 
@@ -79,28 +100,29 @@ int	main(void)
 {
 	t_data	data;
 
-	data.mlx = mlx_init();
-	if (data.mlx == NULL)
+	data.mlx_ptr = mlx_init();
+	if (data.mlx_ptr == NULL)
 		return(0);
-	data.mlx_win = mlx_new_window(data.mlx, 1920, 1080, "line");
-	if (data.mlx_win == NULL)
+	data.win_ptr = mlx_new_window(data.mlx_ptr, W_W, W_W, "Please");
+	if (data.win_ptr == NULL)
 	{
-		free(data.mlx_win);
+		free(data.win_ptr);
 		return (0);
 	}
 
 	//set up image and print int it
-	data.img.img = mlx_new_image(data.mlx, W_W, W_H);
-	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bpp, &data.img.line_len, &data.img.endian);
-	mlx_loop_hook(data.mlx, &render, &data);
+	data.img.mlx_img = mlx_new_image(data.mlx_ptr, W_W, W_H);
+	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
+	mlx_loop_hook(data.mlx_ptr, &render, &data);
 
 	//set up hooks
-	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &handle_keypress, &data);
-	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, &handle_keyrelease, &data);
+	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 
-	mlx_loop(data.mlx);
+	mlx_loop(data.mlx_ptr);
 
 	//quit the window and free everythink
-	mlx_destroy_image(data.mlx, data.img.img);
-	free(data.mlx);
+
+	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
+	mlx_destroy_display(data.mlx_ptr);
+	free(data.mlx_ptr);
 }
