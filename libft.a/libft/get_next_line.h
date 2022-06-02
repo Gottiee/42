@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:52:06 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/02 15:05:58 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:23:32 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 typedef struct s_list_gnl
 {
-	char			str[BUFFER_SIZE + 1];
-	struct s_list	*next;
+	char				str[BUFFER_SIZE + 1];
+	struct s_list_gnl	*next;
 }	t_list_gnl;
 
 /*			--- Fonction Principal---		*/

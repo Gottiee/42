@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:45 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/27 14:34:02 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:18:59 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ int			ft_checknbr(va_list ptr, t_bolo *bolo);
 int			ft_putnbr(unsigned int nbr, int *count);
 int			long_convert_ptr(va_list ptr);
 int			thanks_norminette(int *nbr, int count);
+
 #endif

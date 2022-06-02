@@ -6,11 +6,11 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:36:55 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/27 14:35:11 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:19:50 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 void	ft_print_str_ext(int *count, int *i, const char *str)
 {

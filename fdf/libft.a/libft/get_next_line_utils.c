@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:46:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/02 15:08:36 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:16:22 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	add_list(t_list_gnl *first, char *buffer)
 int	calcul_strlen(t_list_gnl *first)
 {
 	t_list_gnl	*tmp;
-	int		str_len;
-	int		i;
+	int			str_len;
+	int			i;
 
 	str_len = 0;
 	tmp = first;

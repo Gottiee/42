@@ -6,11 +6,11 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 15:47:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/27 14:34:38 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:19:42 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 int	thanks_norminette(int *nbr, int count)
 {

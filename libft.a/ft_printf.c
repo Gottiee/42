@@ -6,11 +6,11 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:21:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/27 14:35:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:19:56 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 int	distrib(int check, va_list ptr, t_bolo *bolo)
 {

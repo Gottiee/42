@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/02 15:09:53 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:22:46 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <fcntl.h>
-# include "libft.a/libft.h"
+# include "libft.a/ft_printf.h"
 # include "libft.a/libft/libft.h"
 # include "libft.a/libft/get_next_line.h"
 
