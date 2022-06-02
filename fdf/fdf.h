@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/02 13:43:13 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:09:53 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <fcntl.h>
+# include "libft.a/libft.h"
+# include "libft.a/libft/libft.h"
+# include "libft.a/libft/get_next_line.h"
 
 # define WINDOW_H 1080
 # define WINDOW_W 1920
@@ -52,4 +55,15 @@ typedef struct	s_map
 
 /*          --- Fonction qui gere le parsing de MAP ---     */
 
-#endef
+void    map_parsing(char *file_name);
+
+/*          --- Fonction qui gere les erreurs ---     */
+
+void    error_center(int error);
+void    error_no_free(int error);
+
+/*          --- Fonction principals ---     */
+
+int main(int argc, char **argv);
+
+#endif

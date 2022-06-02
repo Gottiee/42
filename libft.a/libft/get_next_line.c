@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:02:07 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/27 13:44:53 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:06:45 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 {
 	char			*line;
 	static char		buffer[BUFFER_SIZE + 1];
-	t_list			*first;
+	t_list_gnl		*first;
 	int				check_read;
 
 	check_read = 1;

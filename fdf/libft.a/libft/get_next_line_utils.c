@@ -6,29 +6,29 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:46:38 by eedy              #+#    #+#             */
-/*   Updated: 2022/05/27 13:45:20 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:08:36 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*init(void)
+t_list_gnl	*init(void)
 {
-	t_list	*first;
+	t_list_gnl	*first;
 
-	first = malloc(sizeof(t_list));
+	first = malloc(sizeof(t_list_gnl));
 	if (!first)
 		return (NULL);
 	first -> next = NULL;
 	return (first);
 }
 
-int	add_list(t_list *first, char *buffer)
+int	add_list(t_list_gnl *first, char *buffer)
 {
-	t_list	*new;
-	t_list	*tmp;
+	t_list_gnl	*new;
+	t_list_gnl	*tmp;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_list_gnl));
 	if (!new)
 		return (-1);
 	tmp = first;
@@ -41,9 +41,9 @@ int	add_list(t_list *first, char *buffer)
 	return (1);
 }
 
-int	calcul_strlen(t_list *first)
+int	calcul_strlen(t_list_gnl *first)
 {
-	t_list	*tmp;
+	t_list_gnl	*tmp;
 	int		str_len;
 	int		i;
 
@@ -65,12 +65,12 @@ int	calcul_strlen(t_list *first)
 	return (str_len);
 }
 
-char	*print_line(t_list *first, char *line)
+char	*print_line(t_list_gnl *first, char *line)
 {
-	t_list	*tmp;
-	int		line_size;
-	int		i;
-	int		j;
+	t_list_gnl	*tmp;
+	int			line_size;
+	int			i;
+	int			j;
 
 	i = 0;
 	line_size = calcul_strlen(first);
@@ -91,9 +91,9 @@ char	*print_line(t_list *first, char *line)
 	return (line);
 }
 
-void	del_list(t_list *first)
+void	del_list(t_list_gnl *first)
 {
-	t_list	*tmp;
+	t_list_gnl	*tmp;
 
 	while (first)
 	{

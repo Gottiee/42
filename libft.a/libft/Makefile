@@ -1,10 +1,8 @@
-BUFFER_SIZE = -D BUFFER_SIZE=100
-
 NAME = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra $(BUFFER_SIZE)
+CFLAGS = -Wall -Werror -Wextra
 
 SRC = ft_memset.c \
 	ft_bzero.c \
