@@ -1,17 +1,23 @@
 NAME  = fdf
 
-SRC = main.c
+SRC_DIR = src/
+
+SRC_FILES = main \
+error \
+map_parsing
+
+SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-FLAGS = -Wall -Wextra  -g -I/usr/include -Imlx_linux -O3 -c $< -o $@
+FLAGS = -Wall -Wextra  -g -I/usr/include -Imlx_linux -O0 -c $< -o $@
 
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o -L/libft.a -lft $(NAME)
 
 %.o: %.c
 	$(CC) $(FLAGS)
