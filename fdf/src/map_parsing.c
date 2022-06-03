@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:47:27 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/03 13:06:58 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/03 18:01:44 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,53 @@ int	count_x(char *str)
 	return (x_count + 1);
 }
 
-void	malloc_struct()
+void	malloc_struct(t_map ***map, char *file_name, int x_count)
+{
+	int		y;
+	int		x;
+	int		fd;
+	char	*str;
 
-void	malloc_map_x(char ***map, int x_count)
+	y = 0;
+	fd = open(file_name, O_RDONLY);
+	while(map[y])
+	{
+		x = 0;
+		str = get_next_line(fd);
+		while (x < x_count)
+		{
+			map[y][x] = malloc(sizeof(t_map));
+			put_data_struct(map[y][x], str, x);
+			x ++;	
+		}
+		y ++;
+		free(str);
+	}
+}
+
+void	malloc_map_x(t_map ***map, int x_count, char *file_name, int line)
 {
 	int i;
 
 	i = 0;
-	while (map[i])
+	while (i < line)
 	{
-		map[i] = (char **)malloc(sizeof(char *) * (x_count + 1));
+		map[i] = malloc(sizeof(t_map *) * (x_count + 1));
 		i ++;
 		map[i] = NULL;
 		if (!map[i -1])
 			error_center(MAP_MALLOC_X_PRB, map, i - 1);
 	}
-	malloc_struct(map, x_count);
+	malloc_struct(map, file_name, x_count);
 }
 
-void	map_parsing_two(int fd, char ***map, char *str)
+void	map_parsing_two(int fd, t_map ***map, char *str, char *file_name)
 {
 	int	x_count;
 	int	previous_x_count;
 	int	line;
 
+	line = -1;
 	previous_x_count = 0;
 	while (line ++)
 	{
@@ -63,11 +86,9 @@ void	map_parsing_two(int fd, char ***map, char *str)
 		if (str == NULL)
 			break ;
 		x_count = count_x(str);
+		line += (previous_x_count == 0);
 		if (previous_x_count == 0)
-		{
 			previous_x_count = x_count;
-			line = 1;
-		}
 		if (x_count != previous_x_count)
 		{
 			free(str);
@@ -76,13 +97,13 @@ void	map_parsing_two(int fd, char ***map, char *str)
 		free(str);
 	}
 	close(fd);
-	malloc_map_x(map, x_count);
+	malloc_map_x(map, x_count, file_name, line - 1);
 }
 
 void	map_parsing(char *file_name)
 {
 	int		fd;
-	char	***map;
+	t_map	***map;
 	int		line_count;
 	char 	*str;
 
@@ -98,11 +119,12 @@ void	map_parsing(char *file_name)
 		free(str);
 		line_count ++;
 	}
-	map = (char ***)malloc(sizeof(char **) * (line_count + 1));
+	map = malloc(sizeof(t_map **) * (line_count + 1));
 	if (!map)
 		exit(0);
 	map[line_count] = NULL;
 	close(fd);
 	fd = open(file_name, O_RDONLY);
-	map_parsing_two(fd, map, str);
+	map_parsing_two(fd, map, str, file_name);
+	printf("%d\n", map[0][0]->z);
 }

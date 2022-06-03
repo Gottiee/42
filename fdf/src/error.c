@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 13:05:55 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/03 13:06:50 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/03 13:12:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ void	error_center(int error, ...)
 	if (error == MAP_PARSING_PRB)
 		error_free_map_y(ptr);
 	if (error == MAP_MALLOC_X_PRB)
-		error_free_map_xy(va_arg(ptr, char ***), va_arg(ptr, int));
+		error_free_map_xy(ptr);
 }
 
-void	error_free_map_xy(char ***map, int i)
+void	error_free_map_xy(va_list ptr)
 {
+	char	***map;
+	int		i;
+
+	map = va_arg(ptr, char ***);
+	i = va_arg(ptr, int);
 	while (i > -1)	
 	{
 		free(map[i]);
