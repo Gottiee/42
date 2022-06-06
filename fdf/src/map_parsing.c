@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:47:27 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/03 18:01:44 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/06 11:35:09 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	map_parsing_two(int fd, t_map ***map, char *str, char *file_name)
 	malloc_map_x(map, x_count, file_name, line - 1);
 }
 
-void	map_parsing(char *file_name)
+t_map	***map_parsing(char *file_name)
 {
 	int		fd;
 	t_map	***map;
@@ -126,5 +126,5 @@ void	map_parsing(char *file_name)
 	close(fd);
 	fd = open(file_name, O_RDONLY);
 	map_parsing_two(fd, map, str, file_name);
-	printf("%d\n", map[0][0]->z);
+	return (map);
 }
