@@ -5,7 +5,10 @@ SRC_DIR = src/
 SRC_FILES = main \
 error \
 map_parsing \
-map_parsing_two
+map_parsing_two \
+algo \
+handle \
+mlx_fonction
 
 SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 

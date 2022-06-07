@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:37:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/06 17:39:33 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/07 13:53:04 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,35 @@ int	render(t_data *data)
 	int			x;
 	t_square	square;
 
-	square.px_square = pixel_square(data->map);
+	square.px_square = pixel_square(data->map, &square);
+	quaddrille(&data->img, 7914472, square.px_square);
 	y = 0;
 	if (data->win_ptr == NULL)
 		return (1);
 	while (data->map[y])
 	{
 		x = 0;
-		while (data->map[y][x + 1])
+		while (data->map[y][x])
 		{
-			square.x1 = x * px_square * 2 + (WINDOW_W / 2) - (y * (px_square * 2));	
-			square.y1 = y * px_square + x * px_square;
+			if (data->map[y][x + 1])
+				square.x1 = x * square.px_square * 2 + (WINDOW_W / 2) - (y * (square.px_square * 2));	
+			else 
+				square.x1 = 0 + (y * (square.px_square * 2));
+			square.y1 = y * square.px_square + x * square.px_square;
 			square.x2 = square.x1 + square.px_square * 2;
 			square.y2 = square.y1 + square.px_square;
-			render_line(&data->img, &square, map[y][x]->color);
-			square.x1 = (WINDOW_W / 2) - x * px_square * 2 + (y * (px_square * 2));
+			render_line(&data->img, &square, data->map[y][x]->color);
+			square.y1 = y * square.px_square + x * square.px_square;
+			if (data->map[y][x + 1])
+				square.x1 = (WINDOW_W / 2) - x * square.px_square * 2 + (y * (square.px_square * 2));
+			else 
+				square.x1 = WINDOW_W - (y * (square.px_square * 2));
 			square.x2 = square.x1 - square.px_square * 2;
-			render_line(&data->img, &square, map[y][x]->color);
+			render_line(&data->img, &square, data->map[y][x]->color);
 			x ++;
 		}
+		square.x1 = 0 + (y * (square.px_square * 2));
+
 		y ++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
@@ -56,7 +66,11 @@ void	render_line(t_img *img, t_square *square, int color)
 	t_bre	bre;		
 
 	bre.ex = square->x2 - square->x1;
+	if (bre.ex < 0)
+		bre.ex *= -1;
 	bre.ey = square->y2 - square->y1;
+	if (bre.ey < 0)
+		bre.ey *= -1;
 	bre.dx = 2 * bre.ex;
 	bre.dy = 2 * bre.ey;
 	bre.dx2 = bre.ex;
@@ -70,8 +84,29 @@ void	render_line(t_img *img, t_square *square, int color)
 		bre.yincr = -1;
 	if (bre.dx2 > bre.dy2)
 		algo_bresenham_1(img, square, color, &bre);
-	else
+	if (bre.dx2 < bre.dy2)	
 		algo_bresenham_2(img, square, color, &bre);
+}
+
+void	quaddrille(t_img *img, int color, int pixel)
+{
+	int i = 0;
+	int	x;
+	while (i * pixel < WINDOW_H)
+	{
+		x = 0;
+		while (x < WINDOW_W)
+			img_pix_put(img, x++, pixel * i , color);
+		i ++;
+	}
+	i = 0;
+	while (i * pixel < WINDOW_W)
+	{
+		x = 0;	
+		while (x < WINDOW_H)
+			img_pix_put(img, pixel * i, x++, color);
+		i ++;
+	}
 }
 
 void	mlx_center(t_map ***map)
@@ -103,4 +138,5 @@ void	mlx_center(t_map ***map)
 	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
+	error_center(FREE_MAP, map);
 }

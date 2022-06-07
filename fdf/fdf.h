@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/06 17:43:33 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/07 13:39:24 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "libft.a/libft/libft.h"
 # include "libft.a/libft/get_next_line.h"
 
-# define WINDOW_H 1080
-# define WINDOW_W 1920
+# define WINDOW_H 800
+# define WINDOW_W 800
 # define ARGC_PRB 1
 # define FD_PRB 2
 # define MAP_PARSING_PRB 3
@@ -62,11 +62,12 @@ typedef struct	s_bre
 	int	yincr;
 }				t_bre;
 
-typedef struct	s_square;
+typedef struct	s_square
 {
 	int	x1;
 	int	y1;
 	int	px_square;
+	int	y_per_two;
 	int x2;
 	int	y2;
 }				t_square;
@@ -113,6 +114,20 @@ int main(int argc, char **argv);
 /*          --- Fonction qui gere les calculs des points ---     */
 
 /*Fichier: algo.c*/
-int	pixel_square(t_map ***map);
+int		pixel_square(t_map ***map, t_square *square);
 void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre);
+void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre);
+
+/*          --- Fonction qui gere la lib Mlx ---     */
+
+/*Fichier: mlx_fonction.c*/
+void	img_pix_put(t_img *img, int x, int y, int color);
+int		render(t_data *data);
+void	render_line(t_img *img, t_square *square, int color);
+void	mlx_center(t_map ***map);
+void	quaddrille(t_img *img, int color, int pixel);
+
+/*Fichier: handle.c*/
+int	handle_destroy(t_data *data);
+int	handle_keypress(int keysym, t_data *data);
 #endif
