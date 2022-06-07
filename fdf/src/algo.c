@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:24:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/07 12:45:18 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/07 16:34:25 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,28 @@ int	pixel_square(t_map ***map, t_square *square)
 {
 	int	x;
 	int	y;
-	int	x_count;
+	int	square_size;
 
+	square->y_per_two = 2;
 	y = 0;
 	x = 0;
-	x_count = 0;
+	while (map[y][x])
+		x ++;
 	while (map[y])
 		y ++;
-	square->y_per_two = y / 2;
-	y = 0;
-	while (map[y][x])
+	if (x > y)
 	{
-		x_count ++;
-		x ++;
+		square_size = ((WINDOW_H / 2 / (x - 1)) / 2);
+		if (square_size * x > WINDOW_H || square_size * x > WINDOW_W)
+			square_size /= 2;
 	}
-	return ((WINDOW_W / 2 / (x_count - 1)) / 2);
+	if (y > x)
+	{
+		square_size = ((WINDOW_W / 2 / (y - 1)) / 2);
+		if (square_size * y > WINDOW_H || square_size * y > WINDOW_W)
+			square_size /= 2;
+	}
+	return (square_size);
 }
 
 void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre)
