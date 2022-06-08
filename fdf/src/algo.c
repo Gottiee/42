@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:24:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/08 13:06:29 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/08 16:04:06 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	pixel_square(t_map ***map)
 	if (y > x)
 	{
 		square_size = ((WINDOW_W / 2 / (y - 1)) / 2);
-		while (square_size * y > WINDOW_H / 4 || square_size * y > WINDOW_W || bigest_z *square_size > WINDOW_H / 4 )
+		while (square_size * y > WINDOW_H / 4 || square_size * y > WINDOW_W || bigest_z *square_size > WINDOW_H / 2 )
 			square_size /= 2;
 	}
 	return (square_size);
@@ -54,7 +54,7 @@ int	pixel_square(t_map ***map)
 
 void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre)
 {
-	while (bre->i <= bre->dx2)
+	while (bre->i <= bre->dy2)
 	{
 		img_pix_put(img, square->x1, square->y1, color);
 		bre->i ++;
@@ -63,7 +63,7 @@ void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre)
 		if (bre->ey < 0)
 		{
 			square->x1 += bre->xincr;
-			bre->ey =+ bre->dy;
+			bre->ey += bre->dy;
 		}
 	}
 }

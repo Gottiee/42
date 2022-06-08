@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:37:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/08 12:38:21 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/08 17:02:16 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	render(t_data *data)
 	t_square	square;
 
 	square.px_square = pixel_square(data->map);
-	//quaddrille(&data->img, 7914472, square.px_square);
+	quaddrille(&data->img, 7914472, square.px_square);
 	y = 0;
 	if (data->win_ptr == NULL)
 		return (1);
@@ -37,19 +37,31 @@ int	render(t_data *data)
 		while (data->map[y][x])
 		{
 			square.x1 = WINDOW_W / 2 + (x * square.px_square * 2) - (y * square.px_square * 2);
-			square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
+			if (data->map[y][x]->z >= 0)
+				square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
+			else 
+				square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) + (data->map[y][x]->z * square.px_square);
 			if (data->map[y][x + 1])
 			{
 				square.x2 = square.x1 + square.px_square * 2;
-				square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y][x + 1]->z * square.px_square);
+				if (data->map[y][x + 1]->z >= 0)
+					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y][x + 1]->z * square.px_square);
+				else 
+					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) + (data->map[y][x + 1]->z * square.px_square);
 				render_line(&data->img, &square, data->map[y][x]->color);
 			}
 			if (data->map[y + 1])
 			{
 				square.x1 = WINDOW_W / 2 + (x * square.px_square * 2) - (y * square.px_square * 2);
-			square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
+				if (data->map[y][x]->z >= 0)
+					square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
+				else
+					square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) + (data->map[y][x]->z * square.px_square);
 				square.x2 = square.x1 - square.px_square * 2;
-				square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y + 1][x]->z * square.px_square);
+				if (data->map[y + 1][x]->z >= 0)
+					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y + 1][x]->z * square.px_square);
+				else
+					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) + (data->map[y + 1][x]->z * square.px_square);
 				render_line(&data->img, &square, data->map[y][x]->color);
 			}
 			x ++;

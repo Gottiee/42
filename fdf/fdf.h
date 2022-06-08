@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/08 12:46:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/08 16:18:56 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "libft.a/libft/libft.h"
 # include "libft.a/libft/get_next_line.h"
 
-# define WINDOW_H 1080
-# define WINDOW_W 1920
+# define WINDOW_H 2000
+# define WINDOW_W 2000
 # define ARGC_PRB 1
 # define FD_PRB 2
 # define MAP_PARSING_PRB 3
