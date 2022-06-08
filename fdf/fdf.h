@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/07 16:12:21 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/08 12:46:19 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "libft.a/libft/libft.h"
 # include "libft.a/libft/get_next_line.h"
 
-# define WINDOW_H 800
-# define WINDOW_W 800
+# define WINDOW_H 1080
+# define WINDOW_W 1920
 # define ARGC_PRB 1
 # define FD_PRB 2
 # define MAP_PARSING_PRB 3
@@ -67,7 +67,6 @@ typedef struct	s_square
 	int	x1;
 	int	y1;
 	int	px_square;
-	int	y_per_two;
 	int x2;
 	int	y2;
 }				t_square;
@@ -114,7 +113,7 @@ int main(int argc, char **argv);
 /*          --- Fonction qui gere les calculs des points ---     */
 
 /*Fichier: algo.c*/
-int		pixel_square(t_map ***map, t_square *square);
+int		pixel_square(t_map ***map);
 void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre);
 void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre);
 
