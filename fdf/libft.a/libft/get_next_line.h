@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:52:06 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/02 15:23:32 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/08 17:53:24 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 10000000
 
 typedef struct s_list_gnl
 {
