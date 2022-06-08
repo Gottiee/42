@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:24:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/07 16:34:25 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/08 11:25:54 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ int	pixel_square(t_map ***map, t_square *square)
 		x ++;
 	while (map[y])
 		y ++;
-	if (x > y)
+	if (x >= y)
 	{
 		square_size = ((WINDOW_H / 2 / (x - 1)) / 2);
-		if (square_size * x > WINDOW_H || square_size * x > WINDOW_W)
+		while (square_size * x > WINDOW_H || square_size * x > WINDOW_W)
 			square_size /= 2;
 	}
 	if (y > x)
 	{
 		square_size = ((WINDOW_W / 2 / (y - 1)) / 2);
-		if (square_size * y > WINDOW_H || square_size * y > WINDOW_W)
+		while (square_size * y > WINDOW_H || square_size * y > WINDOW_W)
 			square_size /= 2;
 	}
 	return (square_size);

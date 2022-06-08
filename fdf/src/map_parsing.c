@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:47:27 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/06 11:35:09 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/08 11:47:37 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	malloc_map_x(t_map ***map, int x_count, char *file_name, int line)
 	while (i < line)
 	{
 		map[i] = malloc(sizeof(t_map *) * (x_count + 1));
+		map[i][x_count] = NULL;
 		i ++;
 		map[i] = NULL;
 		if (!map[i -1])
