@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:24:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/08 16:04:06 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 18:00:39 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,14 @@ void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre)
 			bre->ex += bre->dx;
 		}
 	}
+}
+
+int	find_w(void)
+{
+	return ((((IMG_W / WINDOW_W) - 1) * (WINDOW_W / 2) * - 1));
+}
+
+int find_h(void)
+{
+	return (((IMG_H / WINDOW_H) - 1) * (WINDOW_H / 4) * -1);
 }

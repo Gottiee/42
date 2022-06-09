@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:37:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 16:10:10 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 17:58:48 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,28 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
+void	render_background(t_img *img, int color)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	while (j < IMG_H)
+	{
+		i = 0;
+		while (i < IMG_W)
+			img_pix_put(img, i++, j, color);
+		j ++;
+	}
+}
+
 int	render(t_data *data)
 {
 	int			y;
 	int			x;
 	t_square	square;
 
+	render_background(&data->img, 0x451241);
 	square.px_square = pixel_square(data->map);
 	y = 0;
 	if (data->win_ptr == NULL)
@@ -35,8 +51,8 @@ int	render(t_data *data)
 		x = 0;
 		while (data->map[y][x])
 		{
-			square.x1 = WINDOW_W / 2 + (x * square.px_square * 2) - (y * square.px_square * 2);
-			square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
+			square.x1 = IMG_W / 2 + (x * square.px_square * 2) - (y * square.px_square * 2);
+			square.y1 = IMG_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
 			if (data->map[y][x + 1])
 			{
 				square.x2 = square.x1 + square.px_square * 2;
@@ -45,8 +61,8 @@ int	render(t_data *data)
 			}
 			if (data->map[y + 1])
 			{
-				square.x1 = WINDOW_W / 2 + (x * square.px_square * 2) - (y * square.px_square * 2);
-				square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
+				square.x1 = IMG_W / 2+ (x * square.px_square * 2) - (y * square.px_square * 2);
+				square.y1 = IMG_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
 				square.x2 = square.x1 - square.px_square * 2;
 				square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y + 1][x]->z * square.px_square);
 				render_line(&data->img, &square, data->map[y][x]->color);
@@ -55,7 +71,7 @@ int	render(t_data *data)
 		}
 		y ++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, /*-500 , -250*/find_w(), find_h());
 	return (0);
 }
 
