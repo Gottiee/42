@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 15:42:43 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 16:00:15 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 # define WINDOW_H 1000
 # define WINDOW_W 2000
+# define IMG_H 5000
+# define IMG_W 5000
 # define ARGC_PRB 1
 # define FD_PRB 2
 # define MAP_PARSING_PRB 3
