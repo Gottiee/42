@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 18:00:55 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 18:10:50 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "libft.a/libft/get_next_line.h"
 
 # define WINDOW_H 1000
-# define WINDOW_W 1000
+# define WINDOW_W 2000
 # define IMG_H 3000
 # define IMG_W 3000
 # define ARGC_PRB 1

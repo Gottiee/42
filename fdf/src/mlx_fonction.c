@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:37:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 17:58:48 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 18:11:23 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	render(t_data *data)
 		}
 		y ++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, /*-500 , -250*/find_w(), find_h());
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, -500 , -500/*find_w(), find_h()*/);
 	return (0);
 }
 
