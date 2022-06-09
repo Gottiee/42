@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:47:27 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/08 11:47:37 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:41:36 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	malloc_struct(t_map ***map, char *file_name, int x_count)
 		y ++;
 		free(str);
 	}
+	close(fd);
 }
 
 void	malloc_map_x(t_map ***map, int x_count, char *file_name, int line)
@@ -109,7 +110,7 @@ t_map	***map_parsing(char *file_name)
 	char 	*str;
 
 	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
+	if (fd < 0 || check_file(file_name))
 		error_center(FD_PRB);
 	line_count = 0;
 	while (1)	

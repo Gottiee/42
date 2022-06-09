@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/08 17:59:52 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:42:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	put_data_struct(t_map *info_map, char *str, int x);
 void	struc_fill(t_map *info_map, int nbr, char *str, int i);
 int		deci_from_hexa(const char *hexa_str, char *hexa);
 int		search_index(const char *hexa_str, char hexa);
+int		check_file(char *file_name);
 
 /*Fichier: map_parsing.c*/
 

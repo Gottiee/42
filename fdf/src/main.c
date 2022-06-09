@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 13:03:29 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/06 13:44:18 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 14:38:57 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ int	main(int argc, char **argv)
 		error_center(ARGC_PRB);
 	map = map_parsing(argv[1]);
 	mlx_center(map);
+	error_center(FREE_MAP, map);
 }

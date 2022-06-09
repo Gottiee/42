@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:37:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/08 17:35:10 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:53:12 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	render(t_data *data)
 	t_square	square;
 
 	square.px_square = pixel_square(data->map);
-	//quaddrille(&data->img, 7914472, square.px_square);
 	y = 0;
 	if (data->win_ptr == NULL)
 		return (1);
@@ -37,31 +36,31 @@ int	render(t_data *data)
 		while (data->map[y][x])
 		{
 			square.x1 = WINDOW_W / 2 + (x * square.px_square * 2) - (y * square.px_square * 2);
-			if (data->map[y][x]->z >= 0)
+		/*if (data->map[y][x]->z >= 0)*/
 				square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
-			else 
-				square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
+			/*else 
+				square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);*/	
 			if (data->map[y][x + 1])
 			{
 				square.x2 = square.x1 + square.px_square * 2;
-				if (data->map[y][x + 1]->z >= 0)
+			/*if (data->map[y][x + 1]->z >= 0)*/
 					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y][x + 1]->z * square.px_square);
-				else 
-					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y][x + 1]->z * square.px_square);
+				/*else 
+					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y][x + 1]->z * square.px_square);*/	
 				render_line(&data->img, &square, data->map[y][x]->color);
 			}
 			if (data->map[y + 1])
 			{
 				square.x1 = WINDOW_W / 2 + (x * square.px_square * 2) - (y * square.px_square * 2);
-				if (data->map[y][x]->z >= 0)
+			/*if (data->map[y][x]->z >= 0)*/
 					square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
-				else
-					square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
+				/*else
+					square.y1 = WINDOW_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);*/	
 				square.x2 = square.x1 - square.px_square * 2;
-				if (data->map[y + 1][x]->z >= 0)
+			/*if (data->map[y + 1][x]->z >= 0)*/
 					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y + 1][x]->z * square.px_square);
-				else
-					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y + 1][x]->z * square.px_square);
+				/*else
+					square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y + 1][x]->z * square.px_square);*/	
 				render_line(&data->img, &square, data->map[y][x]->color);
 			}
 			x ++;
@@ -137,17 +136,10 @@ void	mlx_center(t_map ***map)
 	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_W, WINDOW_H);
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
-
-	//set up hooks
 	mlx_hook(data.win_ptr, 17, StructureNotifyMask, &handle_destroy, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-
 	mlx_loop(data.mlx_ptr);
-
-	//quit the window and free everythink
-
 	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
-	error_center(FREE_MAP, map);
 }

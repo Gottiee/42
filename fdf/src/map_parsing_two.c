@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:35:28 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/03 17:56:31 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:45:47 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,25 @@ void	put_data_struct(t_map *info_map, char *str, int x)
 	}
 	nbr *= neg;
 	struc_fill(info_map, nbr, str, i);
+}
+
+int	check_file(char *file_name)
+{
+	int		fd;
+	int		line_count;
+	char	*str;
+
+	line_count = 0;
+	fd = open(file_name, O_RDONLY);
+	while (1)	
+	{
+		str = get_next_line(fd);
+		if (str == NULL)
+			break ;
+		free(str);
+		line_count ++;
+	}
+	if (line_count > 0)
+		return (0);
+	return (1);
 }

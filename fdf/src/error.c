@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 13:05:55 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/07 10:53:41 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:47:57 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	error_no_free(int error)
 	}
 	if (error == FD_PRB)
 	{
-		ft_printf("No such file or directory.\nExit Programm.\n");
+		ft_printf("File problem. Inexistant or empty\nExit Programm.\n");
 		exit(EXIT_FAILURE);
 	}
 }
