@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/10 15:39:00 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 18:11:44 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@
 
 typedef struct	s_img
 {
-	void	*mlx_img;
-	void	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
+	void	*i;
+	void	*a;
+	int		b;
+	int		l;
+	int		e;
 }				t_img;
 
 typedef struct	s_map
@@ -77,7 +77,7 @@ typedef struct	s_data
 {
 	void 	*mlx_ptr;	
 	void	*win_ptr;
-	t_img	img;
+	t_img	i;
 	int		cur_img;
 	t_map	***map;
 	int 	zoom;
@@ -125,6 +125,9 @@ void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre);
 int 	find_w(int img_w, int window_w, t_data *data);
 int		find_h(int img_h, int window_h, t_data *data);
 
+/*Fichier: algo2.c*/
+int pixel_square2(t_map ***map, int *y, int *x, int *x_count);
+
 /*          --- Fonction qui gere la lib Mlx ---     */
 
 /*Fichier: mlx_fonction.c*/
@@ -138,4 +141,5 @@ void	render_background(t_img *img, int color);
 /*Fichier: handle.c*/
 int		handle_destroy(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
+void    keypress_manage(int keysym, t_data *data);
 #endif

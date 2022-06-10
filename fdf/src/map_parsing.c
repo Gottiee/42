@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:47:27 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 15:41:36 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 17:56:22 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	count_x(char *str)
 	{
 		while (str[i] != ' ' && str[i])
 			i ++;
-		if (str[i] == ' ')	
+		if (str[i] == ' ')
 			x_count ++;
 		i ++;
 	}
@@ -41,7 +41,7 @@ void	malloc_struct(t_map ***map, char *file_name, int x_count)
 
 	y = 0;
 	fd = open(file_name, O_RDONLY);
-	while(map[y])
+	while (map[y])
 	{
 		x = 0;
 		str = get_next_line(fd);
@@ -49,7 +49,7 @@ void	malloc_struct(t_map ***map, char *file_name, int x_count)
 		{
 			map[y][x] = malloc(sizeof(t_map));
 			put_data_struct(map[y][x], str, x);
-			x ++;	
+			x ++;
 		}
 		y ++;
 		free(str);
@@ -59,7 +59,7 @@ void	malloc_struct(t_map ***map, char *file_name, int x_count)
 
 void	malloc_map_x(t_map ***map, int x_count, char *file_name, int line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < line)
@@ -107,13 +107,13 @@ t_map	***map_parsing(char *file_name)
 	int		fd;
 	t_map	***map;
 	int		line_count;
-	char 	*str;
+	char	*str;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0 || check_file(file_name))
 		error_center(FD_PRB);
 	line_count = 0;
-	while (1)	
+	while (1)
 	{
 		str = get_next_line(fd);
 		if (str == NULL)

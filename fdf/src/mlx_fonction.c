@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:37:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/10 15:23:03 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 18:14:23 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 
-	pixel = img->addr + (y * img->line_len + x * (img->bpp/8));
+	pixel = img->a + (y * img->l + x * (img->b/8));
 	*(int *)pixel = color;
 }
 
@@ -41,7 +41,7 @@ int	render(t_data *data)
 	int			x;
 	t_square	square;
 
-	render_background(&data->img, 0x451241);
+	render_background(&data->i, 0x451241);
 	square.px_square = pixel_square(data->map);
 	if (square.px_square + data->zoom > 0)
 		square.px_square += data->zoom;
@@ -61,7 +61,7 @@ int	render(t_data *data)
 			{
 				square.x2 = square.x1 + square.px_square * 2;
 				square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y][x + 1]->z * square.px_square);
-				render_line(&data->img, &square, data->map[y][x]->color);
+				render_line(&data->i, &square, data->map[y][x]->color);
 			}
 			if (data->map[y + 1])
 			{
@@ -69,13 +69,13 @@ int	render(t_data *data)
 				square.y1 = IMG_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
 				square.x2 = square.x1 - square.px_square * 2;
 				square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y + 1][x]->z * square.px_square);
-				render_line(&data->img, &square, data->map[y][x]->color);
+				render_line(&data->i, &square, data->map[y][x]->color);
 			}
 			x ++;
 		}
 		y ++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, find_w(IMG_W, WINDOW_W, data), find_h(IMG_H, WINDOW_H, data));
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->i.i, find_w(IMG_W, WINDOW_W, data), find_h(IMG_H, WINDOW_H, data));
 	return (0);
 }
 
@@ -144,13 +144,13 @@ void	mlx_center(t_map ***map)
 		free(data.win_ptr);
 		error_center(MLX_PRB, map);
 	}
-	data.img.mlx_img = mlx_new_image(data.mlx_ptr, IMG_W, IMG_H);
-	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
+	data.i.i = mlx_new_image(data.mlx_ptr, IMG_W, IMG_H);
+	data.i.a = mlx_get_data_addr(data.i.i, &data.i.b, &data.i.l, &data.i.e);
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, 17, StructureNotifyMask, &handle_destroy, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_loop(data.mlx_ptr);
-	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
+	mlx_destroy_image(data.mlx_ptr, data.i.i);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
 }

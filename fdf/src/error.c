@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 13:05:55 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 15:47:57 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 17:58:28 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	error_free_map_xy(va_list ptr)
 
 	map = va_arg(ptr, t_map ***);
 	i = va_arg(ptr, int);
-	while (i > -1)	
+	while (i > -1)
 	{
 		free(map[i]);
 		i --;
@@ -46,7 +46,7 @@ void	error_free_map_xy(va_list ptr)
 
 void	error_no_free(int error)
 {
-	if (error == ARGC_PRB) 
+	if (error == ARGC_PRB)
 	{
 		ft_printf("To many arguments or to few arguments.\nExit Programm.\n");
 		exit(0);
@@ -62,11 +62,11 @@ void	error_free_map_y(va_list ptr)
 {
 	int		line;
 	t_map	***map;
-	
+
 	map = va_arg(ptr, t_map ***);
 	line = va_arg(ptr, int);
 	free(map);
-	ft_printf("Map problem. Number of characters differ beetween line %d ", line);
+	ft_printf("Map problem. Number of char differ beetween line %d ", line);
 	ft_printf("and line %d.\nExit Programm.\n", line -1);
 	exit(EXIT_FAILURE);
 }
@@ -79,9 +79,9 @@ void	error_free_map(va_list ptr)
 
 	i = 0;
 	map = va_arg(ptr, t_map ***);
-	while(map[i])
+	while (map[i])
 	{
-		j = 0;	
+		j = 0;
 		while (map[i][j])
 		{
 			free(map[i][j]);

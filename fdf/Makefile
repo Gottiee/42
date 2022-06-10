@@ -8,7 +8,8 @@ map_parsing \
 map_parsing_two \
 algo \
 handle \
-mlx_fonction
+mlx_fonction \
+algo2
 
 SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 

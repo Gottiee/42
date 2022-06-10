@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:24:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/10 15:22:54 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 17:51:11 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,21 @@ int	pixel_square(t_map ***map)
 	int	x_count;
 	int	bigest_z;
 
-	y = 0;
-	x = 0;
-	bigest_z = 0;
-	while (map[y][x])
-		x ++;
-	x_count = x;
-	while (map[y])
-	{
-		x = 0;	
-		while (map[y][x])
-		{
-			if (map[y][x]->z - y > bigest_z)
-				bigest_z = map[y][x]->z - y;
-			x ++;
-		}
-		y ++;
-	}
+	bigest_z = pixel_square2(map, &y, &x, &x_count);
 	if (x >= y)
 	{
 		square_size = ((WINDOW_H / 2 / (x_count - 1)) / 2);
-		while (square_size * x_count > WINDOW_H / 4 || square_size * x_count > WINDOW_W || bigest_z *square_size > WINDOW_H / 4)
+		while (square_size * x_count > WINDOW_H / 4
+			|| square_size * x_count > WINDOW_W
+			|| bigest_z * square_size > WINDOW_H / 4)
 			square_size /= 2;
 	}
 	if (y > x)
 	{
 		square_size = ((WINDOW_W / 2 / (y - 1)) / 2);
-		while (square_size * y > WINDOW_H / 4 || square_size * y > WINDOW_W || bigest_z *square_size > WINDOW_H / 2 )
+		while (square_size * y > WINDOW_H / 4
+			|| square_size * y > WINDOW_W
+			|| bigest_z * square_size > WINDOW_H / 2)
 			square_size /= 2;
 	}
 	return (square_size);
@@ -56,7 +44,8 @@ void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre)
 {
 	while (bre->i <= bre->dy2)
 	{
-		if (square->y1 < IMG_H && square->x1 < IMG_W)
+		if (square->y1 < IMG_H && square->x1 < IMG_W
+			&&square->y1 > 0 && square->x1 > 0)
 			img_pix_put(img, square->x1, square->y1, color);
 		bre->i ++;
 		square->y1 += bre->yincr;
@@ -73,7 +62,8 @@ void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre)
 {
 	while (bre->i <= bre->dx2)
 	{
-		if (square->y1 < IMG_H && square->x1 < IMG_W)
+		if (square->y1 < IMG_H && square->x1 < IMG_W
+			&&square->y1 > 0 && square->x1 > 0)
 			img_pix_put(img, square->x1, square->y1, color);
 		bre->i ++;
 		square->x1 += bre->xincr;
@@ -94,12 +84,12 @@ int	find_w(int img_w, int window_w, t_data *data)
 
 	i_w = img_w;
 	w_w = window_w;
-	result = ((i_w / w_w) - 1) * (w_w / 2) * - 1;
+	result = ((i_w / w_w) - 1) * (w_w / 2) * -1;
 	result += data->x;
 	return (result);
 }
 
-int find_h(int img_h, int window_h, t_data *data)
+int	find_h(int img_h, int window_h, t_data *data)
 {
 	float	result;
 	float	i_h;

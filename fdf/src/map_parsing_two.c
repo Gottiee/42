@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:35:28 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 15:45:47 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 17:59:28 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	struc_fill(t_map *info_map, int nbr, char *str, int i)
 		return ;
 	}
 	i += 3;
-	while (str[i] != ' ' && str[i])	
+	while (str[i] != ' ' && str[i])
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')
 		{
@@ -80,8 +80,8 @@ void	put_data_struct(t_map *info_map, char *str, int x)
 	while (x != space_count)
 	{
 		if (str[i] == ' ')
-			space_count	++;
-		i++;	
+			space_count++;
+		i++;
 	}
 	neg -= 2 * (str[i] == '-');
 	i += (str[i] == '-');
@@ -102,7 +102,7 @@ int	check_file(char *file_name)
 
 	line_count = 0;
 	fd = open(file_name, O_RDONLY);
-	while (1)	
+	while (1)
 	{
 		str = get_next_line(fd);
 		if (str == NULL)
