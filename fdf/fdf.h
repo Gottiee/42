@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 18:10:50 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 15:39:00 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # include "libft.a/libft/libft.h"
 # include "libft.a/libft/get_next_line.h"
 
-# define WINDOW_H 1000
-# define WINDOW_W 2000
-# define IMG_H 3000
-# define IMG_W 3000
+# define WINDOW_H 1080
+# define WINDOW_W 1920
+# define IMG_H 4000
+# define IMG_W 4000
 # define ARGC_PRB 1
 # define FD_PRB 2
 # define MAP_PARSING_PRB 3
@@ -80,6 +80,9 @@ typedef struct	s_data
 	t_img	img;
 	int		cur_img;
 	t_map	***map;
+	int 	zoom;
+	int		x;
+	int		y;
 }				t_data;
 
 /*          --- Fonction qui gere le parsing de MAP ---     */
@@ -119,8 +122,8 @@ int main(int argc, char **argv);
 int		pixel_square(t_map ***map);
 void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre);
 void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre);
-int 	find_w(void);
-int		find_h(void);
+int 	find_w(int img_w, int window_w, t_data *data);
+int		find_h(int img_h, int window_h, t_data *data);
 
 /*          --- Fonction qui gere la lib Mlx ---     */
 
@@ -133,6 +136,6 @@ void	quaddrille(t_img *img, int color, int pixel);
 void	render_background(t_img *img, int color);
 
 /*Fichier: handle.c*/
-int	handle_destroy(t_data *data);
-int	handle_keypress(int keysym, t_data *data);
+int		handle_destroy(t_data *data);
+int		handle_keypress(int keysym, t_data *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:42:25 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 14:50:51 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 15:08:29 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ int	handle_keypress(int keysym, t_data *data)
 		error_center(FREE_MAP, data->map);
 		exit(0);
 	}
+	else if (keysym == 119)
+		data->zoom +=1;
+	else if (keysym == 115)
+		data->zoom -=1;
+	else if (keysym == XK_Up)
+	{
+		data->y -= 15;	
+	}
+	else if (keysym == XK_Left)
+		data->x -= 15;
+	else if (keysym == XK_Down)
+	{
+		data->y += 15;
+	}
+	else if (keysym == XK_Right)
+		data->x += 15;
 	return (0);
 }
 

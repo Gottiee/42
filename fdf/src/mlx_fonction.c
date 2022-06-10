@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:37:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 18:11:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 15:23:03 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ int	render(t_data *data)
 
 	render_background(&data->img, 0x451241);
 	square.px_square = pixel_square(data->map);
+	if (square.px_square + data->zoom > 0)
+		square.px_square += data->zoom;
+	else 
+		data->zoom += 1;
 	y = 0;
 	if (data->win_ptr == NULL)
 		return (1);
@@ -71,7 +75,7 @@ int	render(t_data *data)
 		}
 		y ++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, -500 , -500/*find_w(), find_h()*/);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, find_w(IMG_W, WINDOW_W, data), find_h(IMG_H, WINDOW_H, data));
 	return (0);
 }
 
@@ -127,11 +131,14 @@ void	mlx_center(t_map ***map)
 {
 	t_data	data;
 
+	data.zoom = 0;
+	data.x = 0;
+	data.y = 0;
 	data.map = map;
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == NULL)
 		error_center(MLX_PRB, map);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_W, WINDOW_H, "Please");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_W, WINDOW_H, "FDF Eedy");
 	if (data.win_ptr == NULL)
 	{
 		free(data.win_ptr);

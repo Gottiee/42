@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:24:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/09 18:00:39 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/10 15:22:54 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre)
 {
 	while (bre->i <= bre->dy2)
 	{
-		img_pix_put(img, square->x1, square->y1, color);
+		if (square->y1 < IMG_H && square->x1 < IMG_W)
+			img_pix_put(img, square->x1, square->y1, color);
 		bre->i ++;
 		square->y1 += bre->yincr;
 		bre->ey -= bre->dx;
@@ -72,7 +73,8 @@ void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre)
 {
 	while (bre->i <= bre->dx2)
 	{
-		img_pix_put(img, square->x1, square->y1, color);
+		if (square->y1 < IMG_H && square->x1 < IMG_W)
+			img_pix_put(img, square->x1, square->y1, color);
 		bre->i ++;
 		square->x1 += bre->xincr;
 		bre->ex -= bre->dy;
@@ -84,12 +86,28 @@ void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre)
 	}
 }
 
-int	find_w(void)
+int	find_w(int img_w, int window_w, t_data *data)
 {
-	return ((((IMG_W / WINDOW_W) - 1) * (WINDOW_W / 2) * - 1));
+	float	result;
+	float	i_w;
+	float	w_w;
+
+	i_w = img_w;
+	w_w = window_w;
+	result = ((i_w / w_w) - 1) * (w_w / 2) * - 1;
+	result += data->x;
+	return (result);
 }
 
-int find_h(void)
+int find_h(int img_h, int window_h, t_data *data)
 {
-	return (((IMG_H / WINDOW_H) - 1) * (WINDOW_H / 4) * -1);
+	float	result;
+	float	i_h;
+	float	w_h;
+
+	i_h = img_h;
+	w_h = window_h;
+	result = ((i_h / w_h) - 1) * (w_h / 4) * -1;
+	result += data->y;
+	return (result);
 }
