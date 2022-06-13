@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:24:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/10 17:51:11 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/13 12:24:03 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	pixel_square(t_map ***map)
 	return (square_size);
 }
 
-void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre)
+void	algo_bresenham_2(t_img *img, t_s *square, int color, t_bre *bre)
 {
 	while (bre->i <= bre->dy2)
 	{
@@ -58,7 +58,7 @@ void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre)
 	}
 }
 
-void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre)
+void	algo_bresenham_1(t_img *img, t_s *square, int color, t_bre *bre)
 {
 	while (bre->i <= bre->dx2)
 	{

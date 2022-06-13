@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:41:18 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/10 18:11:44 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/13 14:02:26 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@
 # define MLX_PRB 5
 # define FREE_MAP 6
 
-typedef struct	s_img
+typedef struct s_sreen
+{
+	int	w;
+	int	h;
+}				t_screen;
+
+typedef struct s_img
 {
 	void	*i;
 	void	*a;
@@ -45,13 +51,13 @@ typedef struct	s_img
 	int		e;
 }				t_img;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int	color;
 	int	z;
 }				t_map;
 
-typedef struct	s_bre
+typedef struct s_bre
 {
 	int	ex;
 	int	ey;
@@ -64,23 +70,23 @@ typedef struct	s_bre
 	int	yincr;
 }				t_bre;
 
-typedef struct	s_square
+typedef struct s_s
 {
 	int	x1;
 	int	y1;
-	int	px_square;
-	int x2;
+	int	px_s;
+	int	x2;
 	int	y2;
-}				t_square;
+}				t_s;
 
-typedef struct	s_data
+typedef struct s_data
 {
-	void 	*mlx_ptr;	
+	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	i;
 	int		cur_img;
 	t_map	***map;
-	int 	zoom;
+	int		zoom;
 	int		x;
 	int		y;
 }				t_data;
@@ -105,41 +111,43 @@ int		count_x(char *str);
 /*          --- Fonction qui gere les erreurs ---     */
 
 /*Fichier: error.c*/
-void    error_center(int error, ...);
-void    error_no_free(int error);
-void    error_free_map_y(va_list ptr);
-void    error_free_map_xy(va_list ptr);
+void	error_center(int error, ...);
+void	error_no_free(int error);
+void	error_free_map_y(va_list ptr);
+void	error_free_map_xy(va_list ptr);
 void	error_free_map(va_list ptr);
 
 /*          --- Fonction principals ---     */
 
 /*Fichier: main.c*/
-int main(int argc, char **argv);
+int		main(int argc, char **argv);
 
 /*          --- Fonction qui gere les calculs des points ---     */
 
 /*Fichier: algo.c*/
 int		pixel_square(t_map ***map);
-void	algo_bresenham_1(t_img *img, t_square *square, int color, t_bre *bre);
-void	algo_bresenham_2(t_img *img, t_square *square, int color, t_bre *bre);
-int 	find_w(int img_w, int window_w, t_data *data);
+void	algo_bresenham_1(t_img *img, t_s *square, int color, t_bre *bre);
+void	algo_bresenham_2(t_img *img, t_s *square, int color, t_bre *bre);
+int		find_w(int img_w, int window_w, t_data *data);
 int		find_h(int img_h, int window_h, t_data *data);
 
 /*Fichier: algo2.c*/
-int pixel_square2(t_map ***map, int *y, int *x, int *x_count);
+int		pixel_square2(t_map ***map, int *y, int *x, int *x_count);
+
+/*Fichier: algo2.c*/
+int		render(t_data *data);
+int		calcul_coordinate(t_data *d, t_s *s, int *x, int *y);
 
 /*          --- Fonction qui gere la lib Mlx ---     */
 
 /*Fichier: mlx_fonction.c*/
 void	img_pix_put(t_img *img, int x, int y, int color);
-int		render(t_data *data);
-void	render_line(t_img *img, t_square *square, int color);
+void	render_line(t_img *img, t_s *square, int color);
 void	mlx_center(t_map ***map);
-void	quaddrille(t_img *img, int color, int pixel);
 void	render_background(t_img *img, int color);
 
 /*Fichier: handle.c*/
 int		handle_destroy(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
-void    keypress_manage(int keysym, t_data *data);
+void	keypress_manage(int keysym, t_data *data);
 #endif

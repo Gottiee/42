@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:37:59 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/10 18:14:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/13 12:24:18 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 
-	pixel = img->a + (y * img->l + x * (img->b/8));
+	pixel = img->a + (y * img->l + x * (img->b / 8));
 	*(int *)pixel = color;
 }
 
@@ -35,51 +35,7 @@ void	render_background(t_img *img, int color)
 	}
 }
 
-int	render(t_data *data)
-{
-	int			y;
-	int			x;
-	t_square	square;
-
-	render_background(&data->i, 0x451241);
-	square.px_square = pixel_square(data->map);
-	if (square.px_square + data->zoom > 0)
-		square.px_square += data->zoom;
-	else 
-		data->zoom += 1;
-	y = 0;
-	if (data->win_ptr == NULL)
-		return (1);
-	while (data->map[y])
-	{
-		x = 0;
-		while (data->map[y][x])
-		{
-			square.x1 = IMG_W / 2 + (x * square.px_square * 2) - (y * square.px_square * 2);
-			square.y1 = IMG_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
-			if (data->map[y][x + 1])
-			{
-				square.x2 = square.x1 + square.px_square * 2;
-				square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y][x + 1]->z * square.px_square);
-				render_line(&data->i, &square, data->map[y][x]->color);
-			}
-			if (data->map[y + 1])
-			{
-				square.x1 = IMG_W / 2+ (x * square.px_square * 2) - (y * square.px_square * 2);
-				square.y1 = IMG_H / 4 + (y * square.px_square + x * square.px_square) - (data->map[y][x]->z * square.px_square);
-				square.x2 = square.x1 - square.px_square * 2;
-				square.y2 = square.y1 + square.px_square + (data->map[y][x]->z * square.px_square) - (data->map[y + 1][x]->z * square.px_square);
-				render_line(&data->i, &square, data->map[y][x]->color);
-			}
-			x ++;
-		}
-		y ++;
-	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->i.i, find_w(IMG_W, WINDOW_W, data), find_h(IMG_H, WINDOW_H, data));
-	return (0);
-}
-
-void	render_line(t_img *img, t_square *square, int color)
+void	render_line(t_img *img, t_s *square, int color)
 {
 	t_bre	bre;		
 
@@ -102,29 +58,8 @@ void	render_line(t_img *img, t_square *square, int color)
 		bre.yincr = -1;
 	if (bre.dx2 >= bre.dy2)
 		algo_bresenham_1(img, square, color, &bre);
-	if (bre.dx2 < bre.dy2)	
+	if (bre.dx2 < bre.dy2)
 		algo_bresenham_2(img, square, color, &bre);
-}
-
-void	quaddrille(t_img *img, int color, int pixel)
-{
-	int i = 0;
-	int	x;
-	while (i * pixel < WINDOW_H)
-	{
-		x = 0;
-		while (x < WINDOW_W)
-			img_pix_put(img, x++, pixel * i , color);
-		i ++;
-	}
-	i = 0;
-	while (i * pixel < WINDOW_W)
-	{
-		x = 0;	
-		while (x < WINDOW_H)
-			img_pix_put(img, pixel * i, x++, color);
-		i ++;
-	}
 }
 
 void	mlx_center(t_map ***map)
