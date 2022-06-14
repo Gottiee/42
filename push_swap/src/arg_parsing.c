@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:12:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/14 18:11:46 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/14 18:22:56 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	fill_tab(int *stack, char **argv, int argc)
 
 int *arg_parsing(int argc, char **argv)
 {
-	int	*stack_1;
+	int	*stack_a;
 
 	stack_1 = malloc(sizeof(int) * (argc));
-	fill_tab(stack_1, argv, argc);
-	return (stack_1);
+	fill_tab(stack_a, argv, argc);
+	return (stack_a);
 }

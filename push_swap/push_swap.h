@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/14 18:09:18 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/14 18:37:08 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include "libft.a/libft/get_next_line.h"
 
 # define ERROR_ARG 1
+
+typedef struct s_count
+{
+	int	a_count;
+	int	b_count;
+}				t_count;
 
 /*          --- Fonction qui gere le parsing de MAP ---     */
 
@@ -36,4 +42,9 @@ int		main(int argc, char **argv);
 /*Fichier: error.c*/
 void	end_center(int event, ...);
 void	error_arg(va_list ptr);
+
+/*          --- Fonction de tri ---     */
+
+/*Fichier: instruction*/
+void	sa(int *stack_a, int argc);
 #endif

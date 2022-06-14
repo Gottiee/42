@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/14 15:25:01 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/14 18:40:07 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 int	main(int argc, char **argv)
 {
-	int	*stack_1;
-	int	*stack_2;
+	int		*stack_a;
+	int		*stack_b;
+	t_count	count;
 
-	(void)stack_2;
-	(void)stack_1;
+	count.count_a = argc - 1;
+	count.count_b = 0;
+	(void)stack_a;
+	(void)stack_b;
 	if (argc == 1)
 		return (0);
-	stack_1 = arg_parsing(argc, argv);
+	stack_a = arg_parsing(argc, argv);
 }

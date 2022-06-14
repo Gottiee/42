@@ -4,7 +4,8 @@ SRC_DIR = src/
 
 SRC_FILES = main \
 arg_parsing \
-error
+error \
+instruction
 
 SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 
