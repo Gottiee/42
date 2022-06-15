@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   check_buffer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 14:18:22 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 11:24:10 by eedy             ###   ########.fr       */
+/*   Created: 2022/06/15 13:05:04 by eedy              #+#    #+#             */
+/*   Updated: 2022/06/15 13:06:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
-
-void	end_center(int event, ...)
+int	check_s(char *buf)
 {
-	va_list	ptr;		
+	int	i;
+	int	check;
 
-	va_start(ptr, event);
-	if (event == ERROR_ARG)
-		error_arg(ptr);
-}
-
-void	error_arg(va_list ptr)
-{
-	int	*tab;
-
-	tab = va_arg(ptr, int *);
-	free(tab);
-	ft_printf("Error\n");
-	exit(1);
+	i = 1;
+	while (buf[i] != '\n')
 }

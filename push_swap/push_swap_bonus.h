@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 11:50:56 by eedy             ###   ########.fr       */
+/*   Created: 2022/06/15 12:08:28 by eedy              #+#    #+#             */
+/*   Updated: 2022/06/15 13:02:37 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
 # include "libft.a/ft_printf.h"
 # include "libft.a/libft/libft.h"
 # include "libft.a/libft/get_next_line.h"
-
-# define ERROR_ARG 1
 
 typedef struct s_count
 {
@@ -25,17 +23,24 @@ typedef struct s_count
 	int	b_count;
 }				t_count;
 
+/*          --- Fonctions principals ---     */
+
+/*Fichier: main_bonus.c*/
+int		main(int argc, char **argv);
+void	read_terminal(int *stack_a, int *stack_b, t_count * count);
+int		verif_buf(char *buf, int i);
+
+/*          --- Fonctions qui checkent le buffer ---     */
+
+/*Fichier: check_buffer.c*/
+
+
 /*          --- Fonctions qui gere le parsing de MAP ---     */
 
 /*Fichier: arg_parsing.c*/
 int		*arg_parsing(int argc, char **argv);
 void	check_arg(char *str, int *stack);
 void	fill_tab(int *stack, char **argv, int argc);
-
-/*          --- Fonctions principals ---     */
-
-/*Fichier: main.c*/
-int		main(int argc, char **argv);
 
 /*          --- Fonctions qui gere la fin du program ---     */
 
