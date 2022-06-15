@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:12:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/14 18:22:56 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/15 16:47:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ void	fill_tab(int *stack, char **argv, int argc)
 	int	k;
 
 	i = 1;
-	while (argv[i])	
+	while (argv[i + 1])	
 	{
 		check_arg(argv[i], stack);
 		stack[i - 1] = ft_atoi(argv[i]);
 		i ++;
 	}
 	i = 0;
-	while (i < argc - 1)
+	while (i < argc - 2)
 	{
 		k = i + 1;
-		while (k < argc - 1)
+		while (k < argc - 2)
 		{
 			if (stack[i] == stack[k])
 				end_center(ERROR_ARG, stack);
@@ -71,7 +71,7 @@ int *arg_parsing(int argc, char **argv)
 {
 	int	*stack_a;
 
-	stack_1 = malloc(sizeof(int) * (argc));
+	stack_a = malloc(sizeof(int) * (argc - 1));
 	fill_tab(stack_a, argv, argc);
 	return (stack_a);
 }

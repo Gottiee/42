@@ -19,7 +19,8 @@ error \
 instruction \
 instruction_2 \
 instruction_3 \
-check_buffer
+check_buffer \
+print_stack
 
 SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 
@@ -45,13 +46,20 @@ $(NAME) : $(OBJ)
 clean :
 	rm -f $(OBJ)
 
-fclean_all: fclean
+fclean_lib: fclean
 	$(MAKE) fclean -C ./libft.a
 
 re_lib:
 	$(MAKE) re -C ./libft.a
 
 fclean : clean
+	rm -f $(NAME)
+
+clean_all: clean
+	rm -f $(BONUS_OBJ)
+
+fclean_all: clean_all
+	rm -f $(BONUS_NAME)
 	rm -f $(NAME)
 
 re : fclean all

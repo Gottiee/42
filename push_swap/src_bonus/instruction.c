@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:21:34 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 11:30:55 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/15 14:30:19 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	sa(int *stack_a, t_count *count)
 
 void	sb(int *stack_b, t_count *count)
 {
+	int tmp;
+
 	if (count->count_b == 0 || count->count_b == 1)
 		return ;
 	tmp = stack_b[0];
@@ -56,8 +58,8 @@ void	pa(int *stack_a, int *stack_b, t_count *count)
 		stack_a[i] = tmp_cur;
 		i ++;
 	}
-	stack_a[0] = stack_b;
-	up_stack(stack_b, count)
+	stack_a[0] = stack_b[0];
+	up_stack_b(stack_b, count);
 	count->count_a++;
 	count->count_b--;
 }
@@ -65,6 +67,8 @@ void	pa(int *stack_a, int *stack_b, t_count *count)
 void	up_stack_b(int *stack_b, t_count *count)
 {
 	int	i;
+	int	tmp_cur;
+	int	tmp;
 
 	i = count->count_b;
 	tmp = stack_b[i];
@@ -73,7 +77,7 @@ void	up_stack_b(int *stack_b, t_count *count)
 	{
 		tmp_cur = tmp;
 		tmp = stack_b[i];
-		stack_j[i] = tmp_cur;
+		stack_b[i] = tmp_cur;
 		i --;
 	}
 }

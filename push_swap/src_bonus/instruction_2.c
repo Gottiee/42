@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:23:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 11:48:51 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/15 14:32:49 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	pb(int *stack_a, int *stack_b, t_count *count)
 		stack_b[i] = tmp_cur;
 		i ++;
 	}
-	stack_b[0] = stack_a;
-	up_stack(stack_a, count)
+	stack_b[0] = stack_a[0];
+	up_stack_a(stack_a, count);
 	count->count_b++;
 	count->count_a--;
 }
@@ -39,6 +39,8 @@ void	pb(int *stack_a, int *stack_b, t_count *count)
 void	up_stack_a(int *stack_a, t_count *count)
 {
 	int	i;
+	int	tmp;
+	int	tmp_cur;
 
 	i = count->count_a;
 	tmp = stack_a[i];
@@ -55,6 +57,8 @@ void	up_stack_a(int *stack_a, t_count *count)
 void	rra(int *stack_a, t_count *count)
 {
 	int	i;
+	int	tmp;
+	int tmp_cur;
 
 	if (count->count_a == 0)
 		return ;
@@ -73,6 +77,8 @@ void	rra(int *stack_a, t_count *count)
 void	rrb(int *stack_b, t_count *count)
 {
 	int	i;
+	int	tmp;
+	int tmp_cur;
 
 	if (count->count_b == 0)
 		return ;

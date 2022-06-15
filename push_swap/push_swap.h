@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 11:50:56 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/15 15:55:32 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_count
 {
-	int	a_count;
-	int	b_count;
+	int	count_a;
+	int	count_b;
 }				t_count;
 
 /*          --- Fonctions qui gere le parsing de MAP ---     */
@@ -43,10 +43,11 @@ int		main(int argc, char **argv);
 void	end_center(int event, ...);
 void	error_arg(va_list ptr);
 
+
 /*          --- Fonctions d'instruction (gestion de tableau) ---     */
 
 /*Fichier: instruction*/
-void	sa(int *stack_a, int argc);
+void	sa(int *stack_a, t_count *count);
 void	sb(int *stack_b, t_count *count);
 void	ss(int *stack_a, int *stack_b, t_count *count);
 void	pa(int *stack_a, int *stack_b, t_count *count);

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/14 18:40:07 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/15 16:32:51 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	main(int argc, char **argv)
 	count.count_b = 0;
 	(void)stack_a;
 	(void)stack_b;
+	(void)count;
 	if (argc == 1)
 		return (0);
 	stack_a = arg_parsing(argc, argv);
+	printf("sa\n");
 }
