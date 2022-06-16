@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:23:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 14:32:49 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/16 12:37:32 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	rra(int *stack_a, t_count *count)
 	if (count->count_a == 0)
 		return ;
 	tmp = stack_a[0];
-	stack_a[0] = stack_a[count->count_a];
+	stack_a[0] = stack_a[count->count_a - 1];
 	i = 1;
 	while (i < count->count_a)
 	{
@@ -83,7 +83,7 @@ void	rrb(int *stack_b, t_count *count)
 	if (count->count_b == 0)
 		return ;
 	tmp = stack_b[0];
-	stack_b[0] = stack_b[count->count_b];
+	stack_b[0] = stack_b[count->count_b - 1];
 	i = 1;
 	while (i < count->count_b)
 	{

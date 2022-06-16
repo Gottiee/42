@@ -62,9 +62,10 @@ fclean_all: clean_all
 	rm -f $(BONUS_NAME)
 	rm -f $(NAME)
 
-re : fclean all
-
 bonus: $(BONUS_NAME)
+
+re : fclean_all all bonus
+
 
 $(BONUS_NAME) : $(BONUS_OBJ)
 	$(MAKE) -C ./libft.a
