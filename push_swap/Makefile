@@ -11,7 +11,8 @@ arg_parsing \
 error \
 instruction \
 instruction_2 \
-instruction_3
+instruction_3 \
+verif_tab
 
 BONUS_SRC_FILES = main_bonus \
 arg_parsing \
