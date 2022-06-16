@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:08:28 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/16 12:45:29 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/16 15:09:02 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "libft.a/libft/get_next_line.h"
 
 # define ERROR_ARG 1
+# define TAB_PRB 2
+# define WIN 3
 
 typedef struct s_count
 {
@@ -33,6 +35,11 @@ typedef struct s_count
 /*Fichier: main_bonus.c*/
 int		main(int argc, char **argv);
 void	verif_buf(char *buf, int *stack_a, int * stack_b, t_count *count);
+
+/*          --- Fonctions qui verifient si le tableau est triee ---     */
+
+/*Fichier: check_buffer.c*/
+void	verif_tab(int *stack_a, t_count *count, int *stack_b);
 
 /*          --- Fonctions qui checkent le buffer ---     */
 
@@ -62,6 +69,8 @@ void	fill_tab(int *stack, char **argv, int argc);
 /*Fichier: error.c*/
 void	end_center(int event, ...);
 void	error_arg(va_list ptr);
+void	free_2_stacks(va_list ptr);
+void	win(va_list ptr);
 
 /*          --- Fonctions d'instruction (gestion de tableau) ---     */
 

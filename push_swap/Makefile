@@ -20,7 +20,8 @@ instruction \
 instruction_2 \
 instruction_3 \
 check_buffer \
-print_stack
+print_stack \
+verif_tab
 
 SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 

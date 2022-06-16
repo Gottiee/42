@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:05:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/16 12:45:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/16 15:29:21 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	check_r(char *buf, int *stack_a, int * stack_b, t_count *count)
 	}
 	else if (buf[count->i + 1] == 'r')
 	{
-		if (buf[count->i + 2] != 'n')
+		if (buf[count->i + 2] != '\n')
 		{
 			check_r2(buf, stack_a, stack_b, count);
 			return (4);

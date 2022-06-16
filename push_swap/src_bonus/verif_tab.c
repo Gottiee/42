@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   verif_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/16 15:31:12 by eedy             ###   ########.fr       */
+/*   Created: 2022/06/16 14:23:57 by eedy              #+#    #+#             */
+/*   Updated: 2022/06/16 15:28:31 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../push_swap_bonus.h"
 
-int	main(int argc, char **argv)
+void	verif_tab(int *stack_a, t_count *count, int *stack_b)
 {
-	int		*stack_a;
-	int		*stack_b;
-	t_count	count;
+	int max_nbr;
+	int	i;
 
-	count.count_a = argc - 1;
-	count.count_b = 0;
-	(void)stack_a;
-	(void)stack_b;
-	(void)count;
-	if (argc == 1)
-		return (0);
-	stack_a = arg_parsing(argc, argv);
-	printf("\n");
+	if (count->count_b != 0)
+		end_center(TAB_PRB, stack_a, stack_b);
+	max_nbr = stack_a[0];
+	i = 1;	
+	while (i < count->count_a)
+	{
+		if (stack_a[i] < max_nbr)
+			end_center(TAB_PRB, stack_a, stack_b);
+		max_nbr = stack_a[i];
+		i ++;
+	}
+	end_center(WIN, stack_a, stack_b);
 }
