@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 16:32:51 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/16 12:07:23 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	stack_a = arg_parsing(argc, argv);
-	printf("sa\n");
+	printf("sa\npb\npb\nsb\npa\n");
 }

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:07:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 16:55:53 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/16 12:12:44 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,20 @@ int	main(int argc, char **argv)
 		return (0);
 	stack_a = arg_parsing(argc, argv);
 	stack_b = malloc(sizeof(int) * (argc - 1));
+	ft_printf("\nOriginal Tab :\n");
+	print_stack(stack_a, stack_a, &count);
 	verif_buf(argv[argc - 1], stack_a, stack_b, &count);
 }
 
 void	verif_buf(char *buf, int *stack_a, int * stack_b, t_count *count)
 {
-	while (buf[count->i] && buf[count->i] != '\n')
+	while (buf[count->i])
 	{
 		if (buf[count->i] == 's')
-			count->i = check_s(buf, stack_a, stack_b, count);
-		/*else if (buf[count->i] == 'p')
-			count->i = check_p(buf, stack_a, stack_b, count);
+			count->i += check_s(buf, stack_a, stack_b, count);
+		else if (buf[count->i] == 'p')
+			count->i += check_p(buf, stack_a, stack_b, count);
 		else if (buf[count->i] == 'r')
-			count->i = check_r(buf, stack_a, stack_b, count);
-*/	}
+			count->i += check_r(buf, stack_a, stack_b, count);
+	}
 }
