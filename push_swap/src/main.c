@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/16 15:31:12 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/17 18:10:00 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ int	main(int argc, char **argv)
 
 	count.count_a = argc - 1;
 	count.count_b = 0;
-	(void)stack_a;
-	(void)stack_b;
-	(void)count;
 	if (argc == 1)
 		return (0);
 	stack_a = arg_parsing(argc, argv);
-	printf("\n");
+	stack_b = malloc(sizeof(stack_a));
+	brut_center(stack_a, stack_b, &count, argc);
 }

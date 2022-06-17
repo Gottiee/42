@@ -6,11 +6,11 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:12:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 16:47:41 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/17 18:02:02 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../push_swap_bonus.h"
 
 void	check_arg(char *str, int *stack)
 {

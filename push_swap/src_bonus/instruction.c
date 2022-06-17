@@ -6,11 +6,11 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:21:34 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 14:30:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/17 18:02:12 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../push_swap_bonus.h"
 
 void	sa(int *stack_a, t_count *count)
 {
