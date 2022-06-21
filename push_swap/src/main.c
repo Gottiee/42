@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/17 18:10:00 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 17:27:44 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,6 @@ int	main(int argc, char **argv)
 	stack_a = arg_parsing(argc, argv);
 	stack_b = malloc(sizeof(stack_a));
 	brut_center(stack_a, stack_b, &count, argc);
+	free(stack_a);
+	free(stack_b);
 }

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:45:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/21 17:07:08 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 17:34:20 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	brut_center(int *stack_a, int *stack_b, t_count *count, int argc)
 	}
 	print_solution(first);
 	de_list(first);
+	free(rec.cp_a);
+	free(rec.cp_b);
+	free(rec.cp_cp_b);
+	free(rec.cp_cp_a);
+	de_list(first);
 }
 
 int	back_track(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
@@ -51,7 +56,11 @@ int	back_track(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
 	a = malloc(sizeof(int) * (rec->argc + 1));
 	k = 2;
 	if (verif_tab(rec->cp_a, count))
+	{
+		free(a);
+		free(b);
 		return(1);
+	}
 	while (k <= 12)
 	{
 		rec->k_cp = k;
@@ -74,6 +83,8 @@ int	back_track(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
 		}
 		k ++;
 	}
+	free(a);
+	free(b);
 	return (0);
 }
 
@@ -89,13 +100,6 @@ void	cancel_k(t_rec *rec, t_count *count, t_lists *first)
 	copy_a(rec->cp_a, rec->cp_cp_a, count);
 	copy_b(rec->cp_b, rec->cp_cp_b, count);
 	del_move(first, rec);
-/*if (rec->k_cp == PA)
-		if (count->count_b != 0) 
-			count->count_b--;
-	if (rec->k_cp == PB)
-		if (count->count_a != 0)
-			count->count_a--;*/	
-	
 }
 
 void	call_instructions(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
