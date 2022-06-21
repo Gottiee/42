@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/21 13:20:05 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 17:08:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_rec
 	int		nbr_cout;
 	int		cout;
 	int		k_cp;
+	int		argc;
 }				t_rec;
 
 /*          --- Fonctions qui gere le parsing de MAP ---     */

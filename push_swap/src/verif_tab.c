@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:23:57 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/21 12:38:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 17:08:02 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	copy_a(int *cp_a, int *stack_a, t_count *count)
 	int	i;
 
 	i = 0;
-	while (i < count->before_a)
+	while (i < count->count_a)
 	{
 		cp_a[i] = stack_a[i];
 		i ++;
@@ -48,7 +48,7 @@ void	copy_b(int *cp_b, int *stack_b, t_count *count)
 	int	i;
 
 	i = 0;
-	while (i < count->before_b)
+	while (i < count->count_b)
 	{
 		cp_b[i] = stack_b[i];
 		i ++;

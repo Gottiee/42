@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:06:53 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/21 13:19:34 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 13:25:28 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	del_move(t_lists *first, t_rec *rec)
 	t_lists	*tmp2;
 	int		i;
 
+	tmp = first;
 	i = 1;
 	while (i < rec->cout)
 	{
