@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/17 18:47:10 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 13:20:05 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_count
 {
 	int	count_a;
 	int	count_b;
+	int	before_a;
+	int	before_b;
 }				t_count;
 
 typedef struct s_lists
@@ -48,6 +50,8 @@ typedef struct s_rec
 {
 	int		*cp_a;
 	int		*cp_b;
+	int		*cp_cp_a;
+	int		*cp_cp_b;
 	int		nbr_cout;
 	int		cout;
 	int		k_cp;
@@ -71,7 +75,7 @@ int		main(int argc, char **argv);
 void	brut_center(int *stack_a, int *stack_b, t_count *count_b, int argc);
 int		back_track(int nbr_cout, t_rec *rec, t_count *count, t_lists *first);
 int		verif_move(int i, int cout);
-void	cancel_k(int k, t_count *count);
+void	cancel_k(t_rec *rec, t_count *count, t_lists *first);
 void	call_instructions(int nbr_cout, t_rec *rec, t_count *count, t_lists *first);
 
 /*Fichier: call_instruction.c*/
@@ -87,12 +91,14 @@ int		add_new_list(t_lists *first, char *buffer, int malloc_size);
 void	de_list(t_lists *first);
 void	replace_list(int nbr_cout, char *buffer, int malloc_size, t_lists *first);
 void	print_solution(t_lists *first);
+void	del_move(t_lists *first, t_rec *rec);
 
 /*          --- Fonctions qui verifient le si le tableau est trie ---     */
 
 /*Fichier: verif_tab.c*/
 int		verif_tab(int *stack_a, t_count *count);
 void	copy_a(int *cp_a, int *stack_a, t_count *count);
+void	copy_b(int *cp_b, int *stack_b, t_count *count);
 
 /*          --- Fonctions qui gere la fin du program ---     */
 

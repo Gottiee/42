@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:06:53 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/17 20:06:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 13:19:34 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	add_new_list(t_lists *first, char *buffer, int malloc_size)
 	return (1);
 }
 
-void	replace_list(int nbr_cout, char *buffer, int malloc_size, t_lists *first)
+/*void	replace_list(int nbr_cout, char *buffer, int malloc_size, t_lists *first)
 {
 	int 	i;
 	t_lists	*tmp;
@@ -53,7 +53,7 @@ void	replace_list(int nbr_cout, char *buffer, int malloc_size, t_lists *first)
 		i ++;
 	}
 	ft_strlcpy(tmp->move, buffer, malloc_size);
-}
+}*/
 
 void	de_list(t_lists *first)
 {
@@ -78,4 +78,21 @@ void	print_solution(t_lists *first)
 		ft_printf("%s\n", tmp->move);
 		tmp = tmp->next;
 	}
+}
+
+void	del_move(t_lists *first, t_rec *rec)
+{
+	t_lists	*tmp;	
+	t_lists	*tmp2;
+	int		i;
+
+	i = 1;
+	while (i < rec->cout)
+	{
+		tmp = tmp->next;
+		i ++;
+	}
+	tmp2 = tmp->next;
+	free(tmp2);
+	tmp->next = NULL;
 }

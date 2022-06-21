@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:45:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/17 19:56:00 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 13:23:10 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,21 @@ void	brut_center(int *stack_a, int *stack_b, t_count *count, int argc)
 	t_lists	*first;
 	t_rec	rec;
 
-	rec.cout = 1;
+	rec.cout = 0;
 	rec.nbr_cout = 1;
 	first = init_list();
 
 	rec.cp_a = malloc(sizeof(stack_a));
+	rec.cp_cp_a = malloc(sizeof(stack_a));
 	rec.cp_b = malloc(sizeof(stack_b));
+	rec.cp_cp_b = malloc(sizeof(stack_a));
+	count->before_a = count->count_a;
+	count->before_b = count->count_b;
 	copy_a(rec.cp_a, stack_a, count);
 	while(!back_track(rec.nbr_cout, &rec, count, first))
 	{
 		rec.nbr_cout++;
 		rec.cout = 0;
-		count->count_a = argc - 1;
-		copy_a(rec.cp_a, stack_a, count);
-		if (count->count_b != 0)
-		{
-			free(rec.cp_b);
-			rec.cp_b = malloc(sizeof(stack_b));
-		}
-		count->count_b = 0;
 	}
 	print_solution(first);
 	de_list(first);
@@ -53,11 +49,15 @@ int	back_track(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
 		rec->k_cp = k;
 		if (verif_move(nbr_cout, rec->cout))
 		{
+			count->before_a = count->count_a;
+			count->before_b = count->count_b;
+			copy_a(rec->cp_cp_a, rec->cp_a, count);
+			copy_b(rec->cp_cp_b, rec->cp_b, count);
 			call_instructions(nbr_cout, rec, count, first);
+			rec->cout++;
 			if (back_track(nbr_cout, rec, count, first))
 				return (1);
-			if (k == PA || k == PB)
-				cancel_k(k, count);
+			cancel_k(rec, count, first);
 			rec->cout--;
 		}
 		k ++;
@@ -72,14 +72,21 @@ int	verif_move(int i, int cout)
 	return(1);
 }
 
-void	cancel_k(int k, t_count *count)
+void	cancel_k(t_rec *rec, t_count *count, t_lists *first)
 {
-	if (k == PA)
+	(void)first;
+	copy_a(rec->cp_a, rec->cp_cp_a, count);
+	copy_b(rec->cp_b, rec->cp_cp_b, count);
+	count->count_a = count->before_a;
+	count->count_b = count->before_b;
+	del_move(first, rec);
+/*if (rec->k_cp == PA)
 		if (count->count_b != 0) 
 			count->count_b--;
-	if (k == PB)
+	if (rec->k_cp == PB)
 		if (count->count_a != 0)
-			count->count_a--;
+			count->count_a--;*/	
+	
 }
 
 void	call_instructions(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)

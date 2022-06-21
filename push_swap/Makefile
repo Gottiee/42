@@ -56,6 +56,7 @@ fclean_lib: fclean
 
 re_lib:
 	$(MAKE) re -C ./libft.a
+	$(MAKE) clean -C ./libft.a
 
 fclean : clean
 	rm -f $(NAME)

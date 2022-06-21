@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:26:58 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/17 19:14:26 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/21 12:19:55 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,4 @@ void	instruction4(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
 		else
 			replace_list(nbr_cout, "rr", 4, first);
 	}
-	rec->cout++;
 }
