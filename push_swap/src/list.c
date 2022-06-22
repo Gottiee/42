@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:06:53 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/21 13:25:28 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/22 12:00:07 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,20 @@ int	add_new_list(t_lists *first, char *buffer, int malloc_size)
 	return (1);
 }
 
-/*void	replace_list(int nbr_cout, char *buffer, int malloc_size, t_lists *first)
-{
-	int 	i;
-	t_lists	*tmp;
-
-	i = 0;
-	tmp = first;
-	while (i < nbr_cout)
-	{
-		tmp = tmp->next;
-		i ++;
-	}
-	ft_strlcpy(tmp->move, buffer, malloc_size);
-}*/
-
 void	de_list(t_lists *first)
 {
 	t_lists	*tmp;
+	int		boolean;
 
+	boolean = 0;
 	while (first)
 	{
 		tmp = first;
 		first = first -> next;
-		free(tmp->move);
+		if (boolean != 0)
+			if (tmp->move)
+				free(tmp->move);
+		boolean ++;
 		free(tmp);
 	}
 }
@@ -94,6 +84,7 @@ void	del_move(t_lists *first, t_rec *rec)
 		i ++;
 	}
 	tmp2 = tmp->next;
+	free(tmp2->move);
 	free(tmp2);
 	tmp->next = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:45:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/21 17:34:20 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/22 12:03:56 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	brut_center(int *stack_a, int *stack_b, t_count *count, int argc)
 	free(rec.cp_b);
 	free(rec.cp_cp_b);
 	free(rec.cp_cp_a);
-	de_list(first);
 }
 
 int	back_track(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
@@ -73,7 +72,11 @@ int	back_track(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
 			call_instructions(nbr_cout, rec, count, first);
 			rec->cout++;
 			if (back_track(nbr_cout, rec, count, first))
+			{
+				free(a);
+				free(b);
 				return (1);
+			}
 			count->count_a = before_a;
 			count->count_b = before_b;
 			copy_a(rec->cp_cp_a, a, count);
