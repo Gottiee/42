@@ -13,9 +13,9 @@ instruction \
 instruction_2 \
 instruction_3 \
 verif_tab \
-brut_force \
 list \
-call_instruction
+call_instruction \
+small_algo
 
 BONUS_SRC_FILES = main_bonus \
 arg_parsing \

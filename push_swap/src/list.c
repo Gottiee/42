@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:06:53 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/22 12:00:07 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/22 15:39:24 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,4 @@ void	print_solution(t_lists *first)
 		ft_printf("%s\n", tmp->move);
 		tmp = tmp->next;
 	}
-}
-
-void	del_move(t_lists *first, t_rec *rec)
-{
-	t_lists	*tmp;	
-	t_lists	*tmp2;
-	int		i;
-
-	tmp = first;
-	i = 1;
-	while (i < rec->cout)
-	{
-		tmp = tmp->next;
-		i ++;
-	}
-	tmp2 = tmp->next;
-	free(tmp2->move);
-	free(tmp2);
-	tmp->next = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/21 17:08:43 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/22 19:16:38 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,9 @@
 # define RA 7
 # define RB 8
 # define RR 9
-# define RRA 10 
-# define RRB 11 
-# define RRR 12 
-# define MAX 4000
-
-typedef struct s_count
-{
-	int	count_a;
-	int	count_b;
-	int	before_a;
-	int	before_b;
-}				t_count;
+# define RRA 10
+# define RRB 11
+# define RRR 12
 
 typedef struct s_lists
 {
@@ -46,16 +37,17 @@ typedef struct s_lists
 	struct s_lists	*next;
 }				t_lists;
 
+typedef struct s_count
+{
+	int	count_a;
+	int	count_b;
+}				t_count;
+
 typedef struct s_rec
 {
-	int		*cp_a;
-	int		*cp_b;
-	int		*cp_cp_a;
-	int		*cp_cp_b;
-	int		nbr_cout;
-	int		cout;
-	int		k_cp;
-	int		argc;
+	int	*stack_a;
+	int	*stack_b;
+	int	argc;
 }				t_rec;
 
 /*          --- Fonctions qui gere le parsing de MAP ---     */
@@ -70,36 +62,11 @@ void	fill_tab(int *stack, char **argv, int argc);
 /*Fichier: main.c*/
 int		main(int argc, char **argv);
 
-/*          --- Fonctions qui gerent le brut force ---     */
-
-/*Fichier: brut_force.c*/
-void	brut_center(int *stack_a, int *stack_b, t_count *count_b, int argc);
-int		back_track(int nbr_cout, t_rec *rec, t_count *count, t_lists *first);
-int		verif_move(int i, int cout);
-void	cancel_k(t_rec *rec, t_count *count, t_lists *first);
-void	call_instructions(int nbr_cout, t_rec *rec, t_count *count, t_lists *first);
-
-/*Fichier: call_instruction.c*/
-void	instruction2(int nbr_cout, t_rec *rec, t_count *count, t_lists *first);
-void	instruction3(int nbr_cout, t_rec *rec, t_count *count, t_lists *first);
-void	instruction4(int nbr_cout, t_rec *rec, t_count *count, t_lists *first);
-
-/*          --- Fonctions qui gerent les listes ---     */
-
-/*Fichier: list.c*/
-t_lists	*init_list(void);
-int		add_new_list(t_lists *first, char *buffer, int malloc_size);
-void	de_list(t_lists *first);
-void	replace_list(int nbr_cout, char *buffer, int malloc_size, t_lists *first);
-void	print_solution(t_lists *first);
-void	del_move(t_lists *first, t_rec *rec);
 
 /*          --- Fonctions qui verifient le si le tableau est trie ---     */
 
 /*Fichier: verif_tab.c*/
 int		verif_tab(int *stack_a, t_count *count);
-void	copy_a(int *cp_a, int *stack_a, t_count *count);
-void	copy_b(int *cp_b, int *stack_b, t_count *count);
 
 /*          --- Fonctions qui gere la fin du program ---     */
 
@@ -128,5 +95,27 @@ void	rrr(int *stack_a, int *stack_b, t_count *count);
 void	ra(int *stack_a, t_count *count);
 void	rb(int *stack_b, t_count *count);
 void	rr(int *stack_a, int *stack_b, t_count *count);
+
+/*          --- Fonctions qui gerent les listes ---     */
+
+/*Fichier: list.c*/
+t_lists	*init_list(void);
+int		add_new_list(t_lists *first, char *buffer, int malloc_size);
+void	de_list(t_lists *first);
+void	replace_list(int nbr_cout, char *buffer, int malloc_size, t_lists *first);
+void	print_solution(t_lists *first);
+
+/*Fichier: call_instruction.c*/
+void	call_instructions(int k, t_rec *rec, t_count *count, t_lists *first);
+void	instruction2(int k, t_rec *rec, t_count *count, t_lists *first);
+void	instruction3(int k, t_rec *rec, t_count *count, t_lists *first);
+void	instruction4(int k, t_rec *rec, t_count *count, t_lists *first);
+
+/*          --- Fonctions qui gerent les algorythmes ---     */
+
+/*Fichier: small_algo.c*/
+void	small_algo(t_count *count, t_rec *rec, t_lists *list);
+void	five_nbr_algo(t_count *count, t_rec *rec, t_lists *first);
+void	small_algo2(t_count *count, t_rec *rec, t_lists *first);
 
 #endif

@@ -1,70 +1,75 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   call_instruction.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 18:26:58 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/21 13:26:20 by eedy             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../push_swap.h"
 
-void	instruction2(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
+void	call_instructions(int k, t_rec *rec, t_count *count, t_lists *first)
 {
-	(void)nbr_cout;
-	if (rec->k_cp == PA)	
+	if (k == SA)
 	{
-		pa(rec->cp_a, rec->cp_b, count);
+		sa(rec->stack_a, count);
+			add_new_list(first, "sa", 4);
+	}
+	if (k == SB)
+	{
+		sb(rec->stack_b, count);
+			add_new_list(first, "sb", 4);
+	}
+	if (k == SS)
+	{
+		ss(rec->stack_a, rec->stack_b, count);
+			add_new_list(first, "ss", 4);
+	}
+	instruction2(k, rec, count, first);
+}
+
+void	instruction2(int k, t_rec *rec, t_count *count, t_lists *first)
+{
+	if (k == PA)	
+	{
+		pa(rec->stack_a, rec->stack_b, count);
 			add_new_list(first, "pa", 4);
 	}
-	if (rec->k_cp == PB)	
+	if (k == PB)	
 	{
-		pb(rec->cp_a, rec->cp_b, count);
+		pb(rec->stack_a, rec->stack_b, count);
 			add_new_list(first, "pb", 4);
 	}
-	if (rec->k_cp == RRA)	
+	if (k == RRA)	
 	{
-		rra(rec->cp_a, count);
+		rra(rec->stack_a, count);
 			add_new_list(first, "rra", 4);
 	}
-	instruction3(nbr_cout, rec, count, first);
+	instruction3(k, rec, count, first);
 }
 
-void	instruction3(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
+void	instruction3(int k, t_rec *rec, t_count *count, t_lists *first)
 {
-	(void)nbr_cout;
-	if (rec->k_cp == RRB)	
+	if (k == RRB)	
 	{
-		rrb(rec->cp_b, count);
+		rrb(rec->stack_b, count);
 			add_new_list(first, "rrb", 4);
 	}
-	if (rec->k_cp == RRR)	
+	if (k == RRR)	
 	{
-		rrr(rec->cp_a, rec->cp_b, count);
+		rrr(rec->stack_a, rec->stack_b, count);
 			add_new_list(first, "rrr", 4);
 	}
-	if (rec->k_cp == RA)	
+	if (k == RA)	
 	{
-		ra(rec->cp_a, count);
+		ra(rec->stack_a, count);
 			add_new_list(first, "ra", 4);
 	}
-	instruction4(nbr_cout, rec, count, first);
+	instruction4(k, rec, count, first);
 }
 
-void	instruction4(int nbr_cout, t_rec *rec, t_count *count, t_lists *first)
+void	instruction4(int k, t_rec *rec, t_count *count, t_lists *first)
 {
-	(void)nbr_cout;
-	if (rec->k_cp == RB)	
+	if (k == RB)	
 	{
-		rb(rec->cp_b, count);
+		rb(rec->stack_b, count);
 		add_new_list(first, "rb", 4);
 	}
-	if (rec->k_cp == RR)	
+	if (k == RR)	
 	{
-		rr(rec->cp_a, rec->cp_b, count);
+		rr(rec->stack_a, rec->stack_b, count);
 		add_new_list(first, "rr", 4);
 	}
 }
