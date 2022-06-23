@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/22 19:16:38 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/23 15:08:15 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ typedef struct s_rec
 	int	*stack_a;
 	int	*stack_b;
 	int	argc;
+	int	lower;
+	int	hold_then;
+	int	nbr_move_hold;
+	int	nbr_move_lower;
+	int	no_push_lower;
+	int	move_lower;
+	int	move_hold_then;
 }				t_rec;
 
 /*          --- Fonctions qui gere le parsing de MAP ---     */

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/22 19:23:32 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/23 15:34:00 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 		return (0);
 	rec.stack_a = arg_parsing(argc, argv);
 	rec.argc = argc;
+	rec.count = 0;
 	count.count_a = argc - 1;
 	count.count_b = 0;
 	if (verif_tab(rec.stack_a, &count))
