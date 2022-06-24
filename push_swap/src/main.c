@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/23 15:34:00 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/24 16:13:18 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	main(int argc, char **argv)
 	else if(argc <= 6)
 		five_nbr_algo(&count, &rec, first);
 	else if(argc <= 101)
+		one_undred_and_less(&count, &rec, first);
+	else
 		one_undred_and_less(&count, &rec, first);
 	free(rec.stack_a);
 	free(rec.stack_b);

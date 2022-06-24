@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/23 15:08:15 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/24 17:29:51 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,19 @@ typedef struct s_rec
 	int	argc;
 	int	lower;
 	int	hold_then;
+	int	upper;
+	int	hold_before;
 	int	nbr_move_hold;
+	int	nbr_move_upper;
+	int	nbr_move_before;
 	int	nbr_move_lower;
 	int	no_push_lower;
 	int	move_lower;
+	int	move_upper;
 	int	move_hold_then;
+	int	move_hold_before;
+	int	count;
+	int	count_up;
 }				t_rec;
 
 /*          --- Fonctions qui gere le parsing de MAP ---     */
@@ -125,4 +133,11 @@ void	small_algo(t_count *count, t_rec *rec, t_lists *list);
 void	five_nbr_algo(t_count *count, t_rec *rec, t_lists *first);
 void	small_algo2(t_count *count, t_rec *rec, t_lists *first);
 
+/*Fichier: small_algo.c*/
+void	one_undred_and_less(t_count *count, t_rec *rec, t_lists *first);
+void	manage_lower(t_rec *rec, t_count *count, t_lists *first);
+void	manage_lower2(int i, t_rec *rec, t_count *count, t_lists *first);
+void	find_lower(t_rec *rec, t_count *count);
+void	find_hold_then(t_rec *rec, t_count *count);
+void	check_push(t_rec *rec, t_count *count);
 #endif
