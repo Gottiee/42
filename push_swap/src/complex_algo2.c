@@ -6,49 +6,84 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:12:54 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/24 18:30:21 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/27 16:58:12 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	manage_upper(t_rec *rec, t_count *count, t_lists *first)
+int	push_chunck_a(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 {
-	
-}
-
-int	manage_move(t_rec *rec, t_count *count)
-{
-	if (rec->nbr_move_lower <= rec->nbr_move_hold
-		&& rec->nbr_move_lower <= rec->nbr_move_upper
-		&& rec->nbr_move_lower <= rec->nbr_move_before)
-		return (1);
-	else if (rec->nbr_move_hold < rec->nbr_move_lower
-		&& rec->nbr_move_hold < rec->nbr_move_upper
-		&& rec->nbr_move_hold < rec->nbr_move_before)
-		return (2);
-	else if (rec->nbr_move_upper < rec->nbr_move_lower
-		&& rec->nbr_move_upper < rec->nbr_move_hold
-		&& rec->nbr_move_upper < rec->nbr_move_before)
-		return (3);
-	else
-		return (4);
-}
-
-void	manage_hold_then(t_rec *rec, t_count *count, t_lists *first)
-{
-	int i
+	int	i;
 
 	i = 0;
-	if (rec->nbr_move_lower > rec->nbr_move_hold && count->count_a != 1)
+	while (i < size_chunck / 2)
 	{
-		while (i < rec->nbr_move_hold)
+		if (rec->stack_b[0] > rec->mid_value)
 		{
-			call_instructions(rec->move_hold_then, rec, count, first);
+			call_instructions(PA, rec, count, first);
 			i ++;
 		}
-		i = 0;
-		call_instructions(PB, rec, count, first);
-		rec->count++;
+		else
+			call_instructions(RB, rec, count, first);
+	}
+	return (i);	
+}
+
+int	*sort_chunck(int	*chunck, int pushed)
+{
+	int	*cp_stack;
+	int	i;	
+	int	j;
+	int	min;
+	int tmp;
+	
+	cp_stack = malloc(sizeof(int) * (pushed + 1));
+	copy_chunck(cp_stack, chunck, pushed);
+	i = 0;
+	while (i < pushed)
+	{
+		min = i;
+		j = i + 1;
+		while (j < pushed)
+		{
+			if (cp_stack[j] < cp_stack[min])
+				min = j;
+			j ++;	
+		}
+		tmp = cp_stack[min];
+		cp_stack[min] = cp_stack[i];
+		cp_stack[i] = tmp;
+		i ++;
+	}
+	return(cp_stack);
+}
+
+int	verif_sort_chunck(int *cp_chunck, int pushed)
+{
+	int max_nbr;
+	int	i;
+
+	max_nbr = cp_chunck[0];
+	i = 1;	
+	while (i < pushed)
+	{
+		if (cp_chunck[i] > max_nbr)
+			return (0);
+		max_nbr = cp_chunck[i];
+		i ++;
+	}
+	return (1);	
+}
+
+void	copy_chunck(int *cp_chunck, int *stack, int pushed)
+{
+	int	i;	
+
+	i = 0;
+	while (i < pushed)
+	{
+		cp_chunck[i] = stack[i];
+		i++;
 	}
 }

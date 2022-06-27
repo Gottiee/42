@@ -16,7 +16,8 @@ verif_tab \
 list \
 call_instruction \
 small_algo \
-complex_algo
+complex_algo \
+complex_algo2
 
 BONUS_SRC_FILES = main_bonus \
 arg_parsing \

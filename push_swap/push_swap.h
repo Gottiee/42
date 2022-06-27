@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/24 17:29:51 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/27 17:48:53 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,10 @@ typedef struct s_count
 
 typedef struct s_rec
 {
+	int argc;
 	int	*stack_a;
 	int	*stack_b;
-	int	argc;
-	int	lower;
-	int	hold_then;
-	int	upper;
-	int	hold_before;
-	int	nbr_move_hold;
-	int	nbr_move_upper;
-	int	nbr_move_before;
-	int	nbr_move_lower;
-	int	no_push_lower;
-	int	move_lower;
-	int	move_upper;
-	int	move_hold_then;
-	int	move_hold_before;
-	int	count;
-	int	count_up;
+	int mid_value;
 }				t_rec;
 
 /*          --- Fonctions qui gere le parsing de MAP ---     */
@@ -133,11 +119,15 @@ void	small_algo(t_count *count, t_rec *rec, t_lists *list);
 void	five_nbr_algo(t_count *count, t_rec *rec, t_lists *first);
 void	small_algo2(t_count *count, t_rec *rec, t_lists *first);
 
-/*Fichier: small_algo.c*/
-void	one_undred_and_less(t_count *count, t_rec *rec, t_lists *first);
-void	manage_lower(t_rec *rec, t_count *count, t_lists *first);
-void	manage_lower2(int i, t_rec *rec, t_count *count, t_lists *first);
-void	find_lower(t_rec *rec, t_count *count);
-void	find_hold_then(t_rec *rec, t_count *count);
-void	check_push(t_rec *rec, t_count *count);
+/*Fichier: complex_algo.c*/
+void	one_undred_and_less(int size_chunck, t_count *count, t_rec *rec, t_lists *first);
+int		manage_chunck(int pushed, t_count *count, t_rec *rec, t_lists *first);
+int		push_chunck(int size_chunck, t_rec *rec, t_lists *first, t_count *count);
+
+/*Fichier: complex_algo2.c*/
+int		push_chunck_a(int size_chunck, t_rec *rec, t_lists *first, t_count *count);	
+int		*sort_chunck(int *chunck, int pushed);
+int		verif_sort_chunck(int *cp_chunck, int pushed);
+void	copy_chunck(int *cp_chunck, int *stack, int pushed);
+
 #endif

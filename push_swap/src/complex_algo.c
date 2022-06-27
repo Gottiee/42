@@ -6,188 +6,95 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:22:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/24 19:09:08 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/27 17:51:20 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	one_undred_and_less(t_count *count, t_rec *rec, t_lists *first)
+void	one_undred_and_less(int	size_chunck, t_count *count, t_rec *rec, t_lists *first)
 {
-	int	manage;
-
-	find_lower(rec, count);
-	check_push(rec, count);
-	while (count->count_a)
+	int	*cp_stack;
+	int	pushed;
+	
+	if (verif_tab(rec->stack_a, count) || size_chunck == 2)
 	{
-		manage = manage_move;
-		if (manage == 1)
-			manage_lower(rec, count, first);
-		else if (manage == 2)
-			manage_hold_then(rec, count, first);
-		else if (manage == 3)
-			manage_upper(rec, count, first);
-		else
-			manage_hold_before(rec, count, first);
-		find_lower(rec, count);
-		check_push(rec, count);
+		if (rec->stack_a[0] > rec->stack_a[1])
+			call_instructions(SA, rec, count, first);
+		return ;
 	}
-	while (count->count_b)
+	cp_stack = sort_chunck(rec->stack_a, size_chunck);
+	rec->mid_value = cp_stack[count->count_a / 2];
+	pushed = push_chunck(size_chunck, rec, first, count);
+	size_chunck -= pushed;
+	printf("sizechunked = %d", size_chunck);
+	one_undred_and_less(size_chunck, count, rec, first);
+	if (pushed == 1)
 		call_instructions(PA, rec, count, first);
-}
-
-void	manage_lower(t_rec *rec, t_count *count, t_lists *first)
-{
-	int	 i;
-
-	i = 0;
-	if (rec->nbr_move_lower <= rec->nbr_move_hold ) 
+	else if (pushed == 2)
 	{
-		while (i++ < rec->nbr_move_lower)
-			call_instructions(rec->move_lower, rec, count, first);
-		i = 0;
-	}
-	if ((rec->nbr_move_lower <= rec->nbr_move_hold && rec->count == 0) || (count->count_a == 1 && rec->count == 0))
-	{
-		call_instructions(PB, rec, count, first);
-		find_lower(rec, count);
-	}
-	else if ((rec->nbr_move_lower <= rec->nbr_move_hold && rec->count != 0) || (count->count_a == 1 && rec->count != 0))
-		manage_lower2(i, rec, count, first);
-}
-
-void	manage_lower2(int i, t_rec *rec, t_count *count, t_lists *first)
-{
-	if (rec->count == 1)
-	{
-		call_instructions(RB, rec, count, first);
-		call_instructions(PB, rec, count, first);
-		call_instructions(RRB, rec, count, first);
-		rec->count = 0;
+		if (rec->stack_b[0] > rec->stack_b[1])
+			call_instructions(SB, rec, count, first);
+		call_instructions(PA, rec, count, first);
+		call_instructions(PA, rec, count, first);
 	}
 	else
 	{
-		while (i < rec->count)
+		size_chunck = manage_chunck(pushed, count, rec, first);
+		printf("sizechunked = %d", size_chunck);
+		one_undred_and_less(size_chunck, count, rec, first);
+	}
+	free(cp_stack);
+}
+
+int	manage_chunck(int pushed, t_count *count, t_rec *rec, t_lists *first)
+{
+	int	*cp_chunck;	
+	int	*sort_ck;
+	int	i;
+
+	cp_chunck = malloc(sizeof(int) * (pushed) + 1);
+	copy_chunck(cp_chunck, rec->stack_a, pushed);
+	i = 0;
+	if (verif_sort_chunck(cp_chunck, pushed))
+	{
+		while (i < pushed)
 		{
-			call_instructions(RB, rec, count, first);
+			call_instructions(PA, rec, count, first);
 			i ++;
 		}
-		call_instructions(PB, rec, count, first);
-		while (i > 0) 
-		{
-			call_instructions(RRB, rec, count, first);
-			i --;
-		}
-		rec->count = 0;
-		i = 0;
 	}
-	find_lower(rec, count);
+	else 
+	{
+		sort_ck = sort_chunck(cp_chunck, pushed);
+		rec->mid_value = sort_ck[pushed / 2];
+		free(sort_ck);
+		i = push_chunck_a(pushed, rec, first, count);
+	}
+	free(cp_chunck);
+	return (i);
 }
 
-void	find_lower(t_rec *rec, t_count *count)
+int	push_chunck(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 {
-	int	i;	
-	int lower_value;
-	int	hold_then_value;
+	int	i;
 
-	lower_value = rec->stack_a[0];
-	i = 1;
-	rec->lower = 0;
-	if (count->count_a > 1)
-		hold_then_value= rec->stack_a[1];
-	while (i < count->count_a)
+	i = 0;
+	while (i < size_chunck / 2)
 	{
-		if (lower_value > rec->stack_a[i])	
+		if (rec->stack_a[0] < rec->mid_value)
 		{
-			hold_then_value = lower_value;
-			rec->hold_then = rec->lower;
-			lower_value = rec->stack_a[i];
-			rec->lower = i;
+			call_instructions(PB, rec, count, first);
+			i ++;
 		}
-		else if (hold_then_value > rec->stack_a[i])
+		else if (rec->stack_a[count->count_a - 1] < rec->mid_value)
 		{
-			hold_then_value = rec->stack_a[i];
-			rec->hold_then = i;
+			call_instructions(RRA, rec, count, first);
+			call_instructions(PB, rec, count, first);
+			i ++;
 		}
-		i ++;
+		else
+			call_instructions(RA, rec, count, first);
 	}
-	find_upper(rec, count);
-}
-
-void	find_upper(t_rec *rec, t_count *count)
-{
-	int i;	
-	int	hold_before_value;
-	int	upper_value;
-
-	upper_value = rec->stack_a[count->count_a - 1];
-	i = 1;
-	rec->upper = 0;
-	if (count->count_a > 1)
-		hold_before_value = rec->stack_a[1];
-	while (i < count->count_a)
-	{
-		if (upper_value > rec->stack_a[i])	
-		{
-			hold_before_value = upper_value;
-			rec->hold_before = rec->upper;
-			upper_value = rec->stack_a[i];
-			rec->upper = i;
-		}
-		else if (hold_before_value > rec->stack_a[i])
-		{
-			hold__value = rec->stack_a[i];
-			rec->hold_before = i;
-		}
-		i ++;
-	}
-}
-
-void	check_push(t_rec *rec, t_count *count)
-{
-	if (rec->lower >= count->count_a / 2)
-	{
-		rec->nbr_move_lower = count->count_a - rec->lower;
-		rec->move_lower = RRA;
-	}
-	else if (rec->lower < count->count_a / 2)
-	{
-		rec->nbr_move_lower = rec->lower;
-		rec->move_lower = RA;
-	}
-	if (rec->hold_then >= count->count_a / 2)
-	{
-		rec->nbr_move_hold = count->count_a - rec->hold_then;
-		rec->move_hold_then = RRA;
-	}
-	else if (rec->hold_then < count->count_a / 2)
-	{
-		rec->nbr_move_hold = rec->hold_then;
-		rec->move_hold_then = RA;
-	}
-	check_push2(rec, count);
-}
-
-void	check_push2(t_rec *rec, t_count *count)
-{
-	if (rec->upper >= count->count_a / 2)
-	{
-		rec->nbr_move_upper = count->count_a - rec->upper;
-		rec->move_upper = RRA;
-	}
-	else if (rec->upper < count->count_a / 2)
-	{
-		rec->nbr_move_upper = rec->upper;
-		rec->move_upper = RA;
-	}
-	if (rec->hold_before >= count->count_a / 2)
-	{
-		rec->nbr_move_hold = count->count_a - rec->hold_before;
-		rec->move_hold_before = RRA;
-	}
-	else if (rec->hold_before < count->count_a / 2)
-	{
-		rec->nbr_move_hold = rec->hold_before;
-		rec->move_hold_before = RA;
-	}
+	return (i);
 }
