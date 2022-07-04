@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/04 14:23:47 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 16:38:55 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	main2(int argc, t_count *count, t_rec *rec, t_lists *first)
 {
 	if (argc <= 4)
 		small_algo(count, rec, first);
-	else if (argc <= 6)
-		five_nbr_algo(count, rec, first);
+/*else if (argc <= 6)
+		five_nbr_algo(count, rec, first);*/	
 	else
 		one(argc - 1, count, rec, first);
 	free(rec->stack_a);

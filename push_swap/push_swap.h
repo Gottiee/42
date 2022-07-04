@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/04 14:21:24 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 16:41:15 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	instruction4(int k, t_rec *rec, t_count *count, t_lists *first);
 
 /*Fichier: small_algo.c*/
 void	small_algo(t_count *count, t_rec *rec, t_lists *list);
-void	five_nbr_algo(t_count *count, t_rec *rec, t_lists *first);
 void	small_algo2(t_count *count, t_rec *rec, t_lists *first);
 
 /*Fichier: complex_algo.c*/
