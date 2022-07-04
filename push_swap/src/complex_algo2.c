@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:12:54 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/27 16:58:12 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 12:21:16 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 int	push_chunck_a(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 {
 	int	i;
+	int	stop;
+	int	count_ra;
+
+	count_ra = 0;
+	if (size_chunck % 2 == 0)
+		stop = size_chunck / 2;	
+	else
+		stop = size_chunck / 2 + 1;
 
 	i = 0;
-	while (i < size_chunck / 2)
+	while (i < stop)
 	{
 		if (rec->stack_b[0] > rec->mid_value)
 		{
@@ -25,7 +33,15 @@ int	push_chunck_a(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 			i ++;
 		}
 		else
+		{
 			call_instructions(RB, rec, count, first);
+			count_ra ++;
+		}
+	}
+	while (count_ra)
+	{
+		call_instructions(RRB, rec, count, first);
+		count_ra --;
 	}
 	return (i);	
 }

@@ -66,7 +66,7 @@ fclean : clean
 clean_all: clean
 	rm -f $(BONUS_OBJ)
 
-fclean_all: clean_all
+fclean_all: clean_all fclean_lib
 	rm -f $(BONUS_NAME)
 	rm -f $(NAME)
 

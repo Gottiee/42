@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:22:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/27 17:51:20 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 12:46:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,37 @@ void	one_undred_and_less(int	size_chunck, t_count *count, t_rec *rec, t_lists *f
 	{
 		if (rec->stack_a[0] > rec->stack_a[1])
 			call_instructions(SA, rec, count, first);
+		rec->bolo = 1;
 		return ;
 	}
 	cp_stack = sort_chunck(rec->stack_a, size_chunck);
-	rec->mid_value = cp_stack[count->count_a / 2];
+	rec->mid_value = cp_stack[size_chunck / 2];
 	pushed = push_chunck(size_chunck, rec, first, count);
 	size_chunck -= pushed;
-	printf("sizechunked = %d", size_chunck);
 	one_undred_and_less(size_chunck, count, rec, first);
-	if (pushed == 1)
-		call_instructions(PA, rec, count, first);
-	else if (pushed == 2)
+	while (1)
 	{
-		if (rec->stack_b[0] > rec->stack_b[1])
-			call_instructions(SB, rec, count, first);
-		call_instructions(PA, rec, count, first);
-		call_instructions(PA, rec, count, first);
-	}
-	else
-	{
-		size_chunck = manage_chunck(pushed, count, rec, first);
-		printf("sizechunked = %d", size_chunck);
-		one_undred_and_less(size_chunck, count, rec, first);
+		if (pushed == 0)
+			break ;
+		if (pushed == 1)
+		{
+			call_instructions(PA, rec, count, first);
+			break;
+		}
+		else if (pushed == 2)
+		{
+			if (rec->stack_b[0] < rec->stack_b[1])
+				call_instructions(SB, rec, count, first);
+			call_instructions(PA, rec, count, first);
+			call_instructions(PA, rec, count, first);
+			break;
+		}
+		else
+		{
+			size_chunck = manage_chunck(pushed, count, rec, first);
+			pushed -= size_chunck;
+			one_undred_and_less(size_chunck, count, rec, first);
+		}
 	}
 	free(cp_stack);
 }
@@ -54,7 +63,7 @@ int	manage_chunck(int pushed, t_count *count, t_rec *rec, t_lists *first)
 	int	i;
 
 	cp_chunck = malloc(sizeof(int) * (pushed) + 1);
-	copy_chunck(cp_chunck, rec->stack_a, pushed);
+	copy_chunck(cp_chunck, rec->stack_b, pushed);
 	i = 0;
 	if (verif_sort_chunck(cp_chunck, pushed))
 	{
@@ -67,7 +76,7 @@ int	manage_chunck(int pushed, t_count *count, t_rec *rec, t_lists *first)
 	else 
 	{
 		sort_ck = sort_chunck(cp_chunck, pushed);
-		rec->mid_value = sort_ck[pushed / 2];
+		rec->mid_value = sort_ck[pushed / 2 - 1];
 		free(sort_ck);
 		i = push_chunck_a(pushed, rec, first, count);
 	}
@@ -78,8 +87,10 @@ int	manage_chunck(int pushed, t_count *count, t_rec *rec, t_lists *first)
 int	push_chunck(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 {
 	int	i;
+	int	count_ra;
 
 	i = 0;
+	count_ra = 0;
 	while (i < size_chunck / 2)
 	{
 		if (rec->stack_a[0] < rec->mid_value)
@@ -94,7 +105,18 @@ int	push_chunck(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 			i ++;
 		}
 		else
+		{
 			call_instructions(RA, rec, count, first);
+			count_ra ++;
+		}
+	}
+	if (rec->bolo == 1)
+	{
+		while (count_ra)
+			{
+				call_instructions(RRA, rec, count, first);
+				count_ra --;
+			}
 	}
 	return (i);
 }

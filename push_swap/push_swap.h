@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/27 17:48:53 by eedy             ###   ########.fr       */
+/*   Updated: 2022/06/28 14:29:46 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_rec
 	int	*stack_a;
 	int	*stack_b;
 	int mid_value;
+	int	bolo;
 }				t_rec;
 
 /*          --- Fonctions qui gere le parsing de MAP ---     */
