@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:21:34 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/15 14:30:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 13:47:22 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sa(int *stack_a, t_count *count)
 
 void	sb(int *stack_b, t_count *count)
 {
-	int tmp;
+	int	tmp;
 
 	if (count->count_b == 0 || count->count_b == 1)
 		return ;
@@ -46,7 +46,7 @@ void	pa(int *stack_a, int *stack_b, t_count *count)
 	int	tmp_cur;
 	int	i;
 
-	if (count->count_b == 0 )
+	if (count->count_b == 0)
 		return ;
 	if (count->count_a != 0)
 		tmp = stack_a[0];

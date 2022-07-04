@@ -6,13 +6,13 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:12:54 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/04 12:21:16 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 13:42:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	push_chunck_a(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
+int	push_a(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 {
 	int	i;
 	int	stop;
@@ -20,10 +20,9 @@ int	push_chunck_a(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 
 	count_ra = 0;
 	if (size_chunck % 2 == 0)
-		stop = size_chunck / 2;	
+		stop = size_chunck / 2;
 	else
 		stop = size_chunck / 2 + 1;
-
 	i = 0;
 	while (i < stop)
 	{
@@ -38,12 +37,17 @@ int	push_chunck_a(int size_chunck, t_rec *rec, t_lists *first, t_count *count)
 			count_ra ++;
 		}
 	}
+	push_2(count_ra, rec, first, count);
+	return (i);
+}
+
+void	push_2(int count_ra, t_rec *rec, t_lists *first, t_count *count)
+{
 	while (count_ra)
 	{
 		call_instructions(RRB, rec, count, first);
 		count_ra --;
 	}
-	return (i);	
 }
 
 int	*sort_chunck(int	*chunck, int pushed)
@@ -52,8 +56,8 @@ int	*sort_chunck(int	*chunck, int pushed)
 	int	i;	
 	int	j;
 	int	min;
-	int tmp;
-	
+	int	tmp;
+
 	cp_stack = malloc(sizeof(int) * (pushed + 1));
 	copy_chunck(cp_stack, chunck, pushed);
 	i = 0;
@@ -65,23 +69,23 @@ int	*sort_chunck(int	*chunck, int pushed)
 		{
 			if (cp_stack[j] < cp_stack[min])
 				min = j;
-			j ++;	
+			j ++;
 		}
 		tmp = cp_stack[min];
 		cp_stack[min] = cp_stack[i];
 		cp_stack[i] = tmp;
 		i ++;
 	}
-	return(cp_stack);
+	return (cp_stack);
 }
 
 int	verif_sort_chunck(int *cp_chunck, int pushed)
 {
-	int max_nbr;
+	int	max_nbr;
 	int	i;
 
 	max_nbr = cp_chunck[0];
-	i = 1;	
+	i = 1;
 	while (i < pushed)
 	{
 		if (cp_chunck[i] > max_nbr)
@@ -89,7 +93,7 @@ int	verif_sort_chunck(int *cp_chunck, int pushed)
 		max_nbr = cp_chunck[i];
 		i ++;
 	}
-	return (1);	
+	return (1);
 }
 
 void	copy_chunck(int *cp_chunck, int *stack, int pushed)

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:07:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/16 15:30:40 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 14:25:42 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	verif_tab(stack_a, &count, stack_b);
 }
 
-void	verif_buf(char *buf, int *stack_a, int * stack_b, t_count *count)
+void	verif_buf(char *buf, int *stack_a, int *stack_b, t_count *count)
 {
 	if (buf[count->i] == '\n')
 		end_center(WIN, stack_a, stack_b);

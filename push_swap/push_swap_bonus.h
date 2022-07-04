@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:08:28 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/16 15:09:02 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 14:55:29 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,30 @@ typedef struct s_count
 
 /*Fichier: main_bonus.c*/
 int		main(int argc, char **argv);
-void	verif_buf(char *buf, int *stack_a, int * stack_b, t_count *count);
+void	verif_buf(char *buf, int *stack_a, int *stack_b, t_count *count);
 
 /*          --- Fonctions qui verifient si le tableau est triee ---     */
 
-/*Fichier: check_buffer.c*/
+/*Fichier: verif_tab.c*/
 void	verif_tab(int *stack_a, t_count *count, int *stack_b);
 
 /*          --- Fonctions qui checkent le buffer ---     */
 
 /*Fichier: check_buffer.c*/
-int		check_s(char *buf, int *stack_a, int * stack_b, t_count *count);
-int		check_p(char *buf, int *stack_a, int * stack_b, t_count *count);
-int		check_r(char *buf, int *stack_a, int * stack_b, t_count *count);
-void	check_r2(char *buf, int *stack_a, int * stack_b, t_count *count);
+int		check_s(char *buf, int *stack_a, int *stack_b, t_count *count);
+int		check_p(char *buf, int *stack_a, int *stack_b, t_count *count);
+int		check_r(char *buf, int *stack_a, int *stack_b, t_count *count);
+void	check_r2(char *buf, int *stack_a, int *stack_b, t_count *count);
+void	norm(int *stack_a, int *stack_b, t_count *count);
 
 /*          --- Fonctions qui gerent l'affichage du tableau ---     */
 
 /*Fichier: print_stack.c*/
-void	print_stack(int *stack_a, int * stack_b, t_count *count);
+void	print_stack(int *stack_a, int *stack_b, t_count *count);
 void	utils_stack(void);
-int		print_a(int *stack_a, int * stack_b, t_count *count, int i);
-int		print_b(int * stack_b, t_count *count, int i);
-void	print_a2(int * stack_b, int i);
+int		print_a(int *stack_a, int *stack_b, t_count *count, int i);
+int		print_b(int *stack_b, t_count *count, int i);
+void	print_a2(int *stack_b, int i);
 /*          --- Fonctions qui gere le parsing de MAP ---     */
 
 /*Fichier: arg_parsing.c*/

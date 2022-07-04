@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:25:04 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/22 19:18:02 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 13:48:17 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void	small_algo(t_count *count, t_rec *rec, t_lists *first)
 	}
 	else if (rec->stack_a[0] > rec->stack_a[1])
 	{
-		if (rec->stack_a[0] < rec->stack_a[2] && rec->stack_a[1] < rec->stack_a[2])
+		if (rec->stack_a[0] < rec->stack_a[2]
+			&& rec->stack_a[1] < rec->stack_a[2])
 			call_instructions(SA, rec, count, first);
-		else if (rec->stack_a[0] > rec->stack_a[2] && rec->stack_a[1] < rec->stack_a[2])
+		else if (rec->stack_a[0] > rec->stack_a[2]
+			&& rec->stack_a[1] < rec->stack_a[2])
 			call_instructions(RA, rec, count, first);
 		else
 		{

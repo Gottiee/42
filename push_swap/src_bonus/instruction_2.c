@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:23:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/17 18:02:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/04 14:54:57 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	pb(int *stack_a, int *stack_b, t_count *count)
 	int	tmp_cur;
 	int	i;
 
-	if (count->count_a == 0 )
+	if (count->count_a == 0)
 		return ;
 	if (count->count_b != 0)
 		tmp = stack_b[0];
@@ -58,7 +58,7 @@ void	rra(int *stack_a, t_count *count)
 {
 	int	i;
 	int	tmp;
-	int tmp_cur;
+	int	tmp_cur;
 
 	if (count->count_a == 0)
 		return ;
@@ -78,7 +78,7 @@ void	rrb(int *stack_b, t_count *count)
 {
 	int	i;
 	int	tmp;
-	int tmp_cur;
+	int	tmp_cur;
 
 	if (count->count_b == 0)
 		return ;

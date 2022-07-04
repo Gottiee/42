@@ -17,7 +17,8 @@ list \
 call_instruction \
 small_algo \
 complex_algo \
-complex_algo2
+complex_algo2 \
+split_one
 
 BONUS_SRC_FILES = main_bonus \
 arg_parsing \
