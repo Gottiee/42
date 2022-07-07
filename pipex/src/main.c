@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/06 20:18:22 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/07 13:45:26 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	first_dup(t_cmd *cmd, char **env)
 	}
 	else
 	{
-		wait(0);
+		wait(0);	
 		second_dup(cmd, env, &fd);
 	}
 }
@@ -131,7 +131,7 @@ void	second_dup(t_cmd *cmd, char **env, t_fd *fd)
 	if (id == 0)
 	{
 		/*child process cmd 2*/	
-		fd->fd_file2 = open(cmd->file2, O_WRONLY | O_CREAT, 0666);
+		fd->fd_file2 = open(cmd->file2, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		close(fd->p1[1]);
 		if (fd->fd_file2 == -1)
 		{
@@ -144,6 +144,6 @@ void	second_dup(t_cmd *cmd, char **env, t_fd *fd)
 		execve(cmd->com2, cmd->cmd2, env);
 		close(fd->p1[0]);
 	}
-	else
-		wait(0);
+/*else
+		wait(0);*/	
 }
