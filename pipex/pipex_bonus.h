@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:13:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/07 14:26:45 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/07 15:39:47 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_fd
 int		main(int argc, char **argv, char **env);
 char	*get_path(char **env, char *command);
 char	*find_path(char *env, char *command);
-void	first_dup(t_cmd *cmd, char **env);
+void	first_dup(t_cmd *cmd, char **env, int argc);
 void	second_dup(t_cmd *cmd, char **env, t_fd *fd);
 
 /*          --- Fonctions qui gere la fin du program ---     */
@@ -56,6 +56,7 @@ void	free_malloc(t_cmd *cmd, int bolo);
 /*          --- Fonctions utiles ---     */
 
 /*Fichier: utils.c*/
-int		init_struc(t_cmd *cmd, char **argv, char **env);
+int		init_struc(t_cmd *cmd, char **argv, char **env, int i);
+void	bonus_dup(t_cmd *cmd, char **env, t_fd *fd);
 
 #endif

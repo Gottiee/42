@@ -6,23 +6,27 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/07 14:39:15 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/07 15:48:50 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../pipex_bonus.h"
 
 int	main(int argc, char **argv, char **env)
 {
 	t_cmd	cmd;
+	int		i;
 
-	if (argc != 5)
+	i = 0;
+	if (argc < 5)
 		end_center(ERROR_ARG);
-	if (init_struc(&cmd, argv, env))
+	if (argc == 6)
+		i = 1;
+	if (init_struc(&cmd, argv, env, i))
 		return (1);
-	ft_strlcpy(cmd.file1, argv[1], ft_strlen(argv[1]) + 1);
-	ft_strlcpy(cmd.file2, argv[4], ft_strlen(argv[4]) + 1);
-	first_dup(&cmd, env);
+	ft_strlcpy(cmd.file1, argv[1 + i], ft_strlen(argv[1]) + 1);
+	ft_strlcpy(cmd.file2, argv[4 + i], ft_strlen(argv[4]) + 1);
+	first_dup(&cmd, env, argc);
 	free_malloc(&cmd, 1);
 }
 
@@ -74,7 +78,7 @@ char	*find_path(char *env, char *command)
 	return (NULL);
 }
 
-void	first_dup(t_cmd *cmd, char **env)
+void	first_dup(t_cmd *cmd, char **env, int argc)
 {
 	t_fd	fd;	
 	int		id;
@@ -83,16 +87,21 @@ void	first_dup(t_cmd *cmd, char **env)
 	id = fork();
 	if (id == 0)
 	{
-		fd.fd_file1 = open(cmd->file1, O_RDONLY);
-		close(fd.p1[0]);
-		if (fd.fd_file1 == -1)
-		{
-			close(fd.p1[1]);
-			perror("error ");
-			return ;
-		}
-		dup2(fd.fd_file1, 0);
 		dup2(fd.p1[1], 1);
+		close(fd.p1[0]);
+		if (argc == 6)
+			bonus_dup(cmd, env, &fd);
+		else
+		{
+			fd.fd_file1 = open(cmd->file1, O_RDONLY);
+			if (fd.fd_file1 == -1)
+			{
+				close(fd.p1[1]);
+				perror("error ");
+				return ;
+			}
+			dup2(fd.fd_file1, 0);
+		}
 		execve(cmd->com1, cmd->cmd1, env);
 		close(fd.p1[1]);
 	}

@@ -1,15 +1,18 @@
 NAME  = pipex
 
-BONUS_NAME = checker
+BONUS_NAME = pipex_bonus
 
 SRC_DIR = src/
 
 BONUS_SRC_DIR = src_bonus/
 
 SRC_FILES = main \
-error
+error \
+utils
 
-BONUS_SRC_FILES = main_bonus \
+BONUS_SRC_FILES = main \
+error \
+utils
 
 SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 
