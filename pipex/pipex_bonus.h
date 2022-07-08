@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:13:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/07 15:39:47 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/08 12:47:00 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	free_malloc(t_cmd *cmd, int bolo);
 /*Fichier: utils.c*/
 int		init_struc(t_cmd *cmd, char **argv, char **env, int i);
 void	bonus_dup(t_cmd *cmd, char **env, t_fd *fd);
+int		cmp(char *s1, char *s2);
 
 #endif

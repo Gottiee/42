@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:02:55 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/07 17:32:04 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/08 15:04:22 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,37 @@ int	init_struc(t_cmd *cmd, char **argv, char **env, int i)
 	return (0);
 }
 
+int	cmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i ++;
+	}
+	if (s2[i] == '\n')	
+		return (1);
+	return (0);
+}
+
 void	bonus_dup(t_cmd *cmd, char **env, t_fd *fd)
 {
 	char	buff[2];
 	char	str[100000];
 	int		i;
 	int		k;
+	(void)fd;
 
 	i = 0;
 	k = i;
-	while (!ft_strncmp(cmd->file1, str + k, i))
+	dup2(1, 0);
+	while (!cmp(cmd->file1, str + k) || i == 0)
 	{
 		k = i;
+		buff[0] = '\0';
 		while (buff[0] != '\n')
 		{
 			read(0, buff, 1);
@@ -54,6 +73,6 @@ void	bonus_dup(t_cmd *cmd, char **env, t_fd *fd)
 			i ++;
 		}
 	}
-	write(fd->p1[1], &str, i);
+	write(1, &str, i);
 	execve(cmd->com1, cmd->cmd1, env);
 }

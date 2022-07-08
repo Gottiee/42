@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/07 15:48:50 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/08 13:56:48 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	first_dup(t_cmd *cmd, char **env, int argc)
 	if (id == 0)
 	{
 		dup2(fd.p1[1], 1);
-		close(fd.p1[0]);
 		if (argc == 6)
 			bonus_dup(cmd, env, &fd);
 		else
 		{
+			close(fd.p1[0]);
 			fd.fd_file1 = open(cmd->file1, O_RDONLY);
 			if (fd.fd_file1 == -1)
 			{
