@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:22:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/04 14:21:12 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 18:20:45 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	one(int size_chunck, t_count *count, t_rec *rec, t_lists *first)
 		else
 		{
 			size_chunck = manage_chunck(pushed, count, rec, first);
+			ty_nor(size_chunck);
 			pushed -= size_chunck;
 			one(size_chunck, count, rec, first);
 		}
@@ -43,10 +44,11 @@ void	one(int size_chunck, t_count *count, t_rec *rec, t_lists *first)
 int	manage_chunck(int pushed, t_count *count, t_rec *rec, t_lists *first)
 {
 	int	*cp_chunck;	
-	int	*sort_ck;
 	int	i;
 
 	cp_chunck = malloc(sizeof(int) * (pushed) + 1);
+	if (!cp_chunck)
+		return (-1);
 	copy_chunck(cp_chunck, rec->stack_b, pushed);
 	i = 0;
 	if (verif_sort_chunck(cp_chunck, pushed))
@@ -59,9 +61,8 @@ int	manage_chunck(int pushed, t_count *count, t_rec *rec, t_lists *first)
 	}
 	else
 	{
-		sort_ck = sort_chunck(cp_chunck, pushed);
-		rec->mid_value = sort_ck[pushed / 2 - 1];
-		free(sort_ck);
+		if (manage2(pushed, cp_chunck, rec) == -1)
+			return (-1);
 		i = push_a(pushed, rec, first, count);
 	}
 	free(cp_chunck);

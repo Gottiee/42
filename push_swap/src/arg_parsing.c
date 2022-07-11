@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:12:14 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/04 13:46:56 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 16:11:40 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	*arg_parsing(int argc, char **argv)
 	int	*stack_a;
 
 	stack_a = malloc(sizeof(int) * (argc + 1));
+	if (!stack_a)
+		return (NULL);
 	fill_tab(stack_a, argv, argc);
 	return (stack_a);
 }

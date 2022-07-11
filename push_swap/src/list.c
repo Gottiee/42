@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:06:53 by eedy              #+#    #+#             */
-/*   Updated: 2022/06/22 15:39:24 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 16:24:58 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int	add_new_list(t_lists *first, char *buffer, int malloc_size)
 	t_lists	*tmp;
 
 	new = malloc(sizeof(t_lists));
+	if (!new)
+		return (0);
 	new->move = malloc(sizeof(char) * malloc_size);
+	if (!new->move)
+		return (0);
 	first->count_cout++;
 	ft_strlcpy(new->move, buffer, malloc_size);
 	tmp = first;

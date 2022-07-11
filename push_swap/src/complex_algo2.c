@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:12:54 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/04 13:42:41 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 18:20:56 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ int	*sort_chunck(int	*chunck, int pushed)
 	int	i;	
 	int	j;
 	int	min;
-	int	tmp;
 
 	cp_stack = malloc(sizeof(int) * (pushed + 1));
+	if (!cp_stack)
+		return (NULL);
 	copy_chunck(cp_stack, chunck, pushed);
 	i = 0;
 	while (i < pushed)
@@ -71,9 +72,7 @@ int	*sort_chunck(int	*chunck, int pushed)
 				min = j;
 			j ++;
 		}
-		tmp = cp_stack[min];
-		cp_stack[min] = cp_stack[i];
-		cp_stack[i] = tmp;
+		swap(min, i, cp_stack);
 		i ++;
 	}
 	return (cp_stack);

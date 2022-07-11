@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/04 16:41:15 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 18:19:35 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,10 @@ int		*sort_chunck(int *chunck, int pushed);
 int		verif_sort_chunck(int *cp_chunck, int pushed);
 void	copy_chunck(int *cp_chunck, int *stack, int pushed);
 void	push_2(int count_ra, t_rec *rec, t_lists *first, t_count *count);
+
+/*Fichier: complex_algo3.c*/
+void	ty_nor(int size);
+int		manage2(int pushed, int *cp_chunck, t_rec *rec);
+void	swap(int min, int i, int *cp_stack);
 
 #endif
