@@ -55,7 +55,7 @@ fclean_all: clean_all fclean_lib
 	rm -f $(BONUS_NAME)
 	rm -f $(NAME)
 
-bonus: $(BONUS_NAME)
+bonus: all $(BONUS_NAME)
 
 re : fclean_all all bonus
 

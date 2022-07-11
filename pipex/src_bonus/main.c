@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/08 13:56:48 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 13:44:42 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,20 @@ int	main(int argc, char **argv, char **env)
 	if (argc < 5)
 		end_center(ERROR_ARG);
 	if (argc == 6)
+	{
 		i = 1;
+		if (!verif_arg(argv[1]))
+		{
+			ft_printf("> Arg prb: you wrote %s", argv[1]);
+			ft_printf(", while 'here_doc' is expected.\n");
+			return (1);
+		}
+		cmd.argc = argc;
+	}
 	if (init_struc(&cmd, argv, env, i))
 		return (1);
-	ft_strlcpy(cmd.file1, argv[1 + i], ft_strlen(argv[1]) + 1);
-	ft_strlcpy(cmd.file2, argv[4 + i], ft_strlen(argv[4]) + 1);
+	ft_strlcpy(cmd.file1, argv[1 + i], ft_strlen(argv[1 + 1]) + 1);
+	ft_strlcpy(cmd.file2, argv[4 + i], ft_strlen(argv[4 + 1]) + 1);
 	first_dup(&cmd, env, argc);
 	free_malloc(&cmd, 1);
 }
@@ -92,15 +101,8 @@ void	first_dup(t_cmd *cmd, char **env, int argc)
 			bonus_dup(cmd, env, &fd);
 		else
 		{
-			close(fd.p1[0]);
-			fd.fd_file1 = open(cmd->file1, O_RDONLY);
-			if (fd.fd_file1 == -1)
-			{
-				close(fd.p1[1]);
-				perror("error ");
+			if (!first_fork2(cmd, &fd))
 				return ;
-			}
-			dup2(fd.fd_file1, 0);
 		}
 		execve(cmd->com1, cmd->cmd1, env);
 		close(fd.p1[1]);
@@ -119,7 +121,11 @@ void	second_dup(t_cmd *cmd, char **env, t_fd *fd)
 	id = fork();
 	if (id == 0)
 	{
-		fd->fd_file2 = open(cmd->file2, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (cmd->argc == 5)
+			fd->fd_file2 = open(cmd->file2, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		else
+			fd->fd_file2 = open(cmd->file2, O_WRONLY
+					| O_CREAT | O_APPEND, 0666);
 		close(fd->p1[1]);
 		if (fd->fd_file2 == -1)
 		{
@@ -132,4 +138,5 @@ void	second_dup(t_cmd *cmd, char **env, t_fd *fd)
 		execve(cmd->com2, cmd->cmd2, env);
 		close(fd->p1[0]);
 	}
+	unlink("tmp");
 }
