@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 14:01:13 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 19:30:34 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 5)
 		end_center(ERROR_ARG);
+	cmd.bolo_cmd1 = 1;
+	cmd.bolo_cmd2 = 1;
 	if (init_struc(&cmd, argv, env))
+	{
+		free_malloc(&cmd, 0);
 		return (1);
+	}
 	ft_strlcpy(cmd.file1, argv[1], ft_strlen(argv[1]) + 1);
 	ft_strlcpy(cmd.file2, argv[4], ft_strlen(argv[4]) + 1);
 	first_dup(&cmd, env);
@@ -87,7 +92,7 @@ void	first_dup(t_cmd *cmd, char **env)
 
 	pipe(fd.p1);
 	id = fork();
-	if (id == 0)
+	if (id == 0 && cmd->bolo_cmd1 == 1)
 	{
 		fd.fd_file1 = open(cmd->file1, O_RDONLY);
 		close(fd.p1[0]);
@@ -113,8 +118,9 @@ void	second_dup(t_cmd *cmd, char **env, t_fd *fd)
 {
 	int	id;
 
-	id = fork();
-	if (id == 0)
+	if (cmd->bolo_cmd2 == 1)
+		id = fork();
+	if (cmd->bolo_cmd2 == 1 && id == 0)
 	{
 		fd->fd_file2 = open(cmd->file2, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		close(fd->p1[1]);
@@ -128,5 +134,10 @@ void	second_dup(t_cmd *cmd, char **env, t_fd *fd)
 		dup2(fd->p1[0], 0);
 		execve(cmd->com2, cmd->cmd2, env);
 		close(fd->p1[0]);
+	}
+	else
+	{
+		close(fd->p1[0]);
+		close(fd->p1[1]);
 	}
 }

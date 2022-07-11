@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:02:55 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/07 14:25:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 19:29:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ int	init_struc(t_cmd *cmd, char **argv, char **env)
 	cmd->cmd2 = ft_split(argv[3], ' ');
 	cmd->com1 = get_path(env, cmd->cmd1[0]);
 	cmd->com2 = get_path(env, cmd->cmd2[0]);
-	if (!cmd->com1 || !cmd->com2)
+	if (!cmd->com1) 
 	{
-		ft_printf("Unknow command\n");
-		free_malloc(cmd, 0);
+		ft_printf("%s: command not found\n", argv[2]);
+		cmd->bolo_cmd1 = 0;
+	}
+	if (!cmd->com2) 
+	{
+		ft_printf("%s: command not found\n", argv[3]);
+		cmd->bolo_cmd2 = 0;
 		return (1);
 	}
 	cmd->file1 = malloc(sizeof(char) * (ft_strlen(argv[1]) + 1));

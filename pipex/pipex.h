@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:13:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 14:00:47 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 19:13:32 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_cmd
 	char	*com2;
 	char	*file1;
 	char	*file2;
+	int		bolo_cmd1;
+	int		bolo_cmd2;
 }				t_cmd;
 
 typedef struct s_fd
