@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:02:55 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 13:43:26 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 14:25:25 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	bonus_dup(t_cmd *cmd, char **env, t_fd *fd)
 
 	i = 0;
 	k = i;
-	while (!cmp(cmd->file1, str + k) || i == 0)
+	while (i == 0 || !cmp(cmd->file1, str + k))
 	{
 		k = i;
 		buff[0] = '\0';

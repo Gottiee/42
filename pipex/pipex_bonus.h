@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:13:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 13:41:56 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 14:05:44 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	second_dup(t_cmd *cmd, char **env, t_fd *fd);
 void	end_center(int event, ...);
 void	error_arg(void);
 void	free_malloc(t_cmd *cmd, int bolo);
+void	free_path(char **path);
 
 /*          --- Fonctions utiles ---     */
 

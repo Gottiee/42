@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 13:44:42 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 14:20:07 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv, char **env)
 	int		i;
 
 	i = 0;
+	cmd.argc = argc;
 	if (argc < 5)
 		end_center(ERROR_ARG);
 	if (argc == 6)
@@ -29,12 +30,11 @@ int	main(int argc, char **argv, char **env)
 			ft_printf(", while 'here_doc' is expected.\n");
 			return (1);
 		}
-		cmd.argc = argc;
 	}
 	if (init_struc(&cmd, argv, env, i))
 		return (1);
-	ft_strlcpy(cmd.file1, argv[1 + i], ft_strlen(argv[1 + 1]) + 1);
-	ft_strlcpy(cmd.file2, argv[4 + i], ft_strlen(argv[4 + 1]) + 1);
+	ft_strlcpy(cmd.file1, argv[1 + i], ft_strlen(argv[1 + i]) + 1);
+	ft_strlcpy(cmd.file2, argv[4 + i], ft_strlen(argv[4 + i]) + 1);
 	first_dup(&cmd, env, argc);
 	free_malloc(&cmd, 1);
 }
@@ -80,10 +80,16 @@ char	*find_path(char *env, char *command)
 		ft_strlcpy(path, all_path[i], ft_strlen(all_path[i]) + 1);
 		ft_strlcat(path, command, malloc_size + 1);
 		if (access(path, X_OK) == 0)
+		{
+			free_path(all_path);
+			free(command);
 			return (path);
+		}
 		i ++;
 		free(path);
 	}
+	free_path(all_path);
+	free(command);
 	return (NULL);
 }
 

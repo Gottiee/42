@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/07 14:39:15 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 14:01:13 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,16 @@ char	*find_path(char *env, char *command)
 		ft_strlcpy(path, all_path[i], ft_strlen(all_path[i]) + 1);
 		ft_strlcat(path, command, malloc_size + 1);
 		if (access(path, X_OK) == 0)
+		{
+			free_path(all_path);
+			free(command);
 			return (path);
+		}
 		i ++;
 		free(path);
 	}
+	free_path(all_path);
+	free(command);
 	return (NULL);
 }
 

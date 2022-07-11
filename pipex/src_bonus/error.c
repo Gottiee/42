@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:18:22 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/07 14:40:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/11 14:22:49 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,19 @@ void	free_malloc(t_cmd *cmd, int bolo)
 		free(cmd->file1);
 		free(cmd->file2);
 	}
+	free(cmd->com1);
+	free(cmd->com2);
+}
+
+void	free_path(char **path)
+{
+	int	i;
+
+	i = 0;
+	while (path[i])
+	{
+		free(path[i]);
+		i ++;
+	}
+	free(path);
 }
