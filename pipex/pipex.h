@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:13:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/18 18:21:33 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/18 19:31:19 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_fd
 
 /*Fichier: main.c*/
 int		main(int argc, char **argv, char **env);
-char	*get_path(char **env, char *command, t_cmd *cmd);
+char	*get_path(char **env, char *command);
 char	*find_path(char *env, char *command);
 void	first_dup(t_cmd *cmd, char **env);
 void	second_dup(t_cmd *cmd, char **env, t_fd *fd);

@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/18 19:13:36 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/18 19:51:17 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,11 @@ int	main(int argc, char **argv, char **env)
 	free_malloc(&cmd, 1);
 }
 
-char	*get_path(char **env, char *command, t_cmd *struc)
+char	*get_path(char **env, char *command)
 {
 	int		i;
 	int		max;
 	char	*cmd;
-	char	**path;
-	(void)path;
-	(void)struc;
 
 	i = 0;
 	max = 0;
@@ -52,9 +49,12 @@ char	*get_path(char **env, char *command, t_cmd *struc)
 	}
 	else
 		cmd[0] = '\0';
-	ft_strlcat(cmd, command, ft_strlen(command) + 2);
+	cmd = ft_strjoin(cmd, command);
 	if (access(cmd, X_OK) == 0)
+	{
+	"free cnd et return une chaine de caractere a stocker"	
 		return (cmd);
+	}
 	while (env[i])
 	{
 		if (!ft_strncmp("PATH=", env[i], 4))
