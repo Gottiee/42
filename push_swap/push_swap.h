@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 18:19:35 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/18 19:21:07 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	fill_tab(int *stack, char **argv, int argc);
 
 /*Fichier: main.c*/
 int		main(int argc, char **argv);
-void	main2(int argc, t_count *count, t_rec *rec, t_lists *first);
+int		main2(int argc, t_count *count, t_rec *rec, t_lists *first);
 
 /*          --- Fonctions qui verifient le si le tableau est trie ---     */
 

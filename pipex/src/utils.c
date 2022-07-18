@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:02:55 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 19:29:43 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/18 18:23:19 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	init_struc(t_cmd *cmd, char **argv, char **env)
 {
 	cmd->cmd1 = ft_split(argv[2], ' ');
 	cmd->cmd2 = ft_split(argv[3], ' ');
-	cmd->com1 = get_path(env, cmd->cmd1[0]);
-	cmd->com2 = get_path(env, cmd->cmd2[0]);
+	cmd->com1 = get_path(env, cmd->cmd1[0], cmd);
+	cmd->com2 = get_path(env, cmd->cmd2[0], cmd);
 	if (!cmd->com1) 
 	{
 		ft_printf("%s: command not found\n", argv[2]);

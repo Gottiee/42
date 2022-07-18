@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 19:30:34 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/18 19:13:36 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,30 @@ int	main(int argc, char **argv, char **env)
 	free_malloc(&cmd, 1);
 }
 
-char	*get_path(char **env, char *command)
+char	*get_path(char **env, char *command, t_cmd *struc)
 {
 	int		i;
 	int		max;
 	char	*cmd;
+	char	**path;
+	(void)path;
+	(void)struc;
 
 	i = 0;
 	max = 0;
-	cmd = malloc(sizeof(char) * 1 + sizeof(command));
+	cmd = malloc(sizeof(char) * (1 + sizeof(command)));
 	if (!cmd)
 		return (NULL);
-	cmd[0] = '/';
-	cmd[1] = '\0';
+	if (command[0] != '/')
+	{
+		cmd[0] = '/';
+		cmd[1] = '\0';
+	}
+	else
+		cmd[0] = '\0';
 	ft_strlcat(cmd, command, ft_strlen(command) + 2);
+	if (access(cmd, X_OK) == 0)
+		return (cmd);
 	while (env[i])
 	{
 		if (!ft_strncmp("PATH=", env[i], 4))
@@ -52,7 +62,11 @@ char	*get_path(char **env, char *command)
 		i ++;
 	}
 	if (max == 0)
+	{
+		free(cmd);
+		printf("merci shelckok\n");
 		return (NULL);
+	}
 	return (find_path(env[max] + 5, cmd));
 }
 
@@ -104,12 +118,13 @@ void	first_dup(t_cmd *cmd, char **env)
 		}
 		dup2(fd.fd_file1, 0);
 		dup2(fd.p1[1], 1);
+		printf("ok\n");
 		execve(cmd->com1, cmd->cmd1, env);
 		close(fd.p1[1]);
 	}
 	else
 	{
-		wait(0);
+	/*wait(0);*/	
 		second_dup(cmd, env, &fd);
 	}
 }
@@ -139,5 +154,6 @@ void	second_dup(t_cmd *cmd, char **env, t_fd *fd)
 	{
 		close(fd->p1[0]);
 		close(fd->p1[1]);
+		wait(0);	
 	}
 }

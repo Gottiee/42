@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:56:08 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/11 17:50:21 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/18 19:21:46 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,24 @@ int	main(int argc, char **argv)
 	count.count_a = argc - 1;
 	count.count_b = 0;
 	if (verif_tab(rec.stack_a, &count))
-		return (0);
-	first = init_list();
-	rec.stack_b = malloc(sizeof(int) * (argc + 1));
-	if (!first || !rec.stack_b)
 	{
-		free(rec.stack_b);
 		free(rec.stack_a);
 		return (0);
 	}
-	main2(argc, &count, &rec, first);
+	first = init_list();
+	rec.stack_b = malloc(sizeof(int) * (argc + 1));
+	if (main2(argc, &count, &rec, first))
+		return (1);
 }
 
-void	main2(int argc, t_count *count, t_rec *rec, t_lists *first)
+int	main2(int argc, t_count *count, t_rec *rec, t_lists *first)
 {
+	if (!first || !rec->stack_b)
+	{
+		free(rec->stack_b);
+		free(rec->stack_a);
+		return (0);
+	}
 	if (argc <= 4)
 		small_algo(count, rec, first);
 	else
@@ -50,4 +54,5 @@ void	main2(int argc, t_count *count, t_rec *rec, t_lists *first)
 	free(rec->stack_b);
 	print_solution(first);
 	de_list(first);
+	return (1);
 }
