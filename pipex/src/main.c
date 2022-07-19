@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:18:21 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/18 19:51:17 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/19 17:43:24 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*get_path(char **env, char *command)
 	int		i;
 	int		max;
 	char	*cmd;
+	char	*copy;
 
 	i = 0;
 	max = 0;
@@ -64,7 +65,6 @@ char	*get_path(char **env, char *command)
 	if (max == 0)
 	{
 		free(cmd);
-		printf("merci shelckok\n");
 		return (NULL);
 	}
 	return (find_path(env[max] + 5, cmd));
