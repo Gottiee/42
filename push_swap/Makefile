@@ -54,32 +54,23 @@ $(NAME) : $(OBJ)
 
 clean :
 	rm -f $(OBJ)
-
-fclean_lib: fclean
-	$(MAKE) fclean -C ./libft.a
+	rm -f $(BONUS_OBJ)
 
 re_lib:
 	$(MAKE) re -C ./libft.a
 	$(MAKE) clean -C ./libft.a
 
-fclean : clean
+fclean : clean fclean_lib
 	rm -f $(NAME)
-
-clean_all: clean
-	rm -f $(BONUS_OBJ)
-
-fclean_all: clean_all fclean_lib
 	rm -f $(BONUS_NAME)
-	rm -f $(NAME)
 
 bonus: $(BONUS_NAME)
 
-re : fclean_all all bonus
-
+re : fclean all bonus
 
 $(BONUS_NAME) : $(BONUS_OBJ)
 	$(MAKE) -C ./libft.a
 	$(CC) $(BONUS_OBJ) -Llibft.a -lft -o $(BONUS_NAME)
 
 
-.PHONY: all clean fclean_all re_lib return phony bonus
+.PHONY: all clean re_lib re fclean phony bonus
