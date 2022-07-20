@@ -8,7 +8,8 @@ BONUS_SRC_DIR = src_bonus/
 
 SRC_FILES = main \
 error \
-utils
+utils \
+struc
 
 BONUS_SRC_FILES = 
 

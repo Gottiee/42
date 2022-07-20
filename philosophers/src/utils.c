@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 18:08:01 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/19 18:27:33 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/20 17:01:38 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ long	ft_atoi(const char *str)
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-		{
 			error(ATOY);
-		}
 		i ++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
@@ -36,5 +34,7 @@ long	ft_atoi(const char *str)
 	}
 	if (nbr == 0 || str[i] == '.' || str[i] == ',')
 		error(ATOY);
+	if (nbr > 2147483647 || nbr < -2147483648)
+		error(ATOY_INTEGER);
 	return (nbr);
 }

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/19 18:27:54 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/20 17:08:05 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@
 
 # define ARG_PRB 1
 # define ATOY 2
+# define ATOY_INTEGER 3
+
+typedef struct s_philo
+{
+	int				getime;
+	pthread_t		*philo;
+	pthread_mutex_t	*fork;
+	int				dead;
+	int				time_to_eat;
+	int				time_to_die;
+	int				nbr_philo;
+	int				nbr_eaten_meal;
+
+}				t_philo;
 
 /*          --- Fonctions principals ---     */
 
@@ -36,4 +50,11 @@ void	error(int err);
 
 /*Fichier: utils.c*/
 long	ft_atoi(const char *str);
+
+/*          --- Fonctions qui gere les structures ---     */
+
+/*Fichier: struc.c*/
+void	destroy_mutex(t_philo *philo);
+void	init_struc(t_philo *philo, char **argv);	
+t_philo	*get_struct(void);
 #endif

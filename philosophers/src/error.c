@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:59:24 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/19 18:25:25 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/20 17:03:00 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,9 @@ void	error(int err)
 	{
 		printf("Can't accept negativ, null or float value\n");
 		exit(1);
+	}
+	if (err == ATOY_INTEGER)
+	{
+		printf("Out of the integer range");
 	}
 }
