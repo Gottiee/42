@@ -12,7 +12,8 @@ utils
 
 BONUS_SRC_FILES = main \
 error \
-utils
+utils \
+utils2
 
 SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 

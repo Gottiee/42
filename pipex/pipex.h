@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:13:32 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/18 19:31:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/20 12:31:11 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_fd
 int		main(int argc, char **argv, char **env);
 char	*get_path(char **env, char *command);
 char	*find_path(char *env, char *command);
-void	first_dup(t_cmd *cmd, char **env);
+void	first_dup(t_cmd *cmd, char **env, char **argv);
 void	second_dup(t_cmd *cmd, char **env, t_fd *fd);
 
 /*          --- Fonctions qui gere la fin du program ---     */
@@ -60,5 +60,6 @@ void	free_path(char **path);
 
 /*Fichier: utils.c*/
 int		init_struc(t_cmd *cmd, char **argv, char **env);
+char	*get_path2(char *copy, char *command);
 
 #endif
