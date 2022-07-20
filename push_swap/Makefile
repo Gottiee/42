@@ -56,6 +56,9 @@ clean :
 	rm -f $(OBJ)
 	rm -f $(BONUS_OBJ)
 
+fclean_lib: fclean
+	$(MAKE) fclean -C ./libft.a
+
 re_lib:
 	$(MAKE) re -C ./libft.a
 	$(MAKE) clean -C ./libft.a
@@ -73,4 +76,4 @@ $(BONUS_NAME) : $(BONUS_OBJ)
 	$(CC) $(BONUS_OBJ) -Llibft.a -lft -o $(BONUS_NAME)
 
 
-.PHONY: all clean re_lib re fclean phony bonus
+.PHONY: all clean re_lib re fclean phony bonus fclean_lib
