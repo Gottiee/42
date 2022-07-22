@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/22 11:12:41 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/22 15:12:25 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_philo
 
 /*Fichier: main.c*/
 int			main(int argc, char **argv);
+int			manage_philo(t_philo *philo);
+void		*routine(void *arg);
 
 /*          --- Fonctions qui gere les erreurs ---     */
 

@@ -23,12 +23,12 @@ BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -pthread -g -c $< -o $@
+FLAGS = -Wall -Wextra -Werror -g -c $< -o $@
 
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) -pthread -o $(NAME)
 
 %.o: %.c
 	$(CC) $(FLAGS)
