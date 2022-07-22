@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:46 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/21 15:17:36 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/22 12:42:17 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void	init_struc(t_philo *philo, char **argv)
 	i = -1;
 	philo->time_to_die = ft_atoi(argv[2]);
 	philo->time_to_eat = ft_atoi(argv[3]);
-	if (argv[4])
-		philo->nbr_eaten_meal = ft_atoi(argv[4]);
+	philo->time_to_sleep = ft_atoi(argv[4]);
+	if (argv[5])
+		philo->nbr_eaten_meal = ft_atoi(argv[5]);
 	while (++i < philo->nbr_philo)
 		pthread_mutex_init(philo->fork + i, NULL);
 	i = -1;

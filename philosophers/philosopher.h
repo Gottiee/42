@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/21 15:17:16 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/22 11:12:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_philo
 	int				time_to_die;
 	int				nbr_philo;
 	int				nbr_eaten_meal;
-
+	int				time_to_sleep;
 }				t_philo;
 
 /*          --- Fonctions principals ---     */
