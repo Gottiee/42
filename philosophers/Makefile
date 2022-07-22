@@ -43,7 +43,7 @@ fclean : clean
 
 bonus: $(BONUS_NAME)
 
-re : fclean all bonus
+re : fclean all
 
 
 $(BONUS_NAME) : $(BONUS_OBJ)

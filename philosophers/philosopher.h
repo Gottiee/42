@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/20 17:08:05 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/21 15:17:16 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 
 typedef struct s_philo
 {
-	int				getime;
+	int				stop;
+	long long		getime;
 	pthread_t		*philo;
 	pthread_mutex_t	*fork;
-	int				dead;
+	int				*dead;
 	int				time_to_eat;
 	int				time_to_die;
 	int				nbr_philo;
@@ -39,22 +40,23 @@ typedef struct s_philo
 /*          --- Fonctions principals ---     */
 
 /*Fichier: main.c*/
-int		main(int argc, char **argv);
+int			main(int argc, char **argv);
 
 /*          --- Fonctions qui gere les erreurs ---     */
 
 /*Fichier: error.c*/
-void	error(int err);
+void		error(int err);
 
 /*          --- Fonctions utils---     */
 
 /*Fichier: utils.c*/
-long	ft_atoi(const char *str);
+long		ft_atoi(const char *str);
+long long	get_mili(void);
 
 /*          --- Fonctions qui gere les structures ---     */
 
 /*Fichier: struc.c*/
-void	destroy_mutex(t_philo *philo);
-void	init_struc(t_philo *philo, char **argv);	
-t_philo	*get_struct(void);
+void		destroy_mutex(t_philo *philo);
+void		init_struc(t_philo *philo, char **argv);	
+t_philo		*get_struct(void);
 #endif

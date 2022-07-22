@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 18:08:01 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/20 17:01:38 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/21 13:07:44 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,15 @@ long	ft_atoi(const char *str)
 	if (nbr > 2147483647 || nbr < -2147483648)
 		error(ATOY_INTEGER);
 	return (nbr);
+}
+
+long long	get_mili(void)
+{
+	struct timeval	te;
+	long long		mili;
+
+	gettimeofday(&te, NULL);
+	mili = te.tv_sec * 1000LL + te.tv_usec / 1000;
+	printf("miliseconds: %lld\n", mili);
+	return (mili);
 }
