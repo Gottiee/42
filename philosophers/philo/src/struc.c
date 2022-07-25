@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:46 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/25 12:57:55 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/25 17:28:02 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_struc(char **argv)
 	while (++i < philo->nbr_philo)
 		philo->dead[i] = 1;
 	philo->stop = 1;
+	
 }
 
 t_philo	*get_struct(void)

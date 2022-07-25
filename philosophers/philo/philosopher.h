@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/25 12:57:30 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/25 17:52:39 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <string.h>
 
 # define ARG_PRB 1
 # define ATOY 2
@@ -36,13 +37,14 @@ typedef struct s_philo
 	int				nbr_philo;
 	int				nbr_eaten_meal;
 	int				time_to_sleep;
+	int				arg;
 }				t_philo;
 
 /*          --- Fonctions principals ---     */
 
 /*Fichier: main.c*/
 int			main(int argc, char **argv);
-int			manage_philo(t_philo *philo);
+int			manage_philo(void) ;
 void		*routine(void *arg);
 
 /*          --- Fonctions qui gere les erreurs ---     */
