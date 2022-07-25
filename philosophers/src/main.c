@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:44:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/22 15:19:22 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/25 13:35:03 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		free(philo->dead);
 		return (1);
 	}
-	init_struc(philo, argv);
+	init_struc(argv);
 	philo->philo = malloc(sizeof(pthread_t) * (philo->nbr_philo + 1));
 	if (!philo->philo)
 	{
@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
 	destroy_mutex(philo);
 	free(philo->fork);
 	free(philo->philo);
+	free(philo->dead);
 }
 
 int	manage_philo(t_philo *philo)
@@ -57,6 +58,7 @@ int	manage_philo(t_philo *philo)
 		return (0);
 
 	//creation
+	philo->first_time = get_mili();
 	i = -1;
 	while (++i < philo->nbr_philo)
 	{
@@ -99,26 +101,23 @@ void	*routine(void *arg)
 	//tant que mon main n'a pas passer la valeur de stop a 0 ou que notre current philo est encore en vie
 	while (philo->stop && philo->dead[philo_th])
 	{
-		//les philos manges les impaire d'abord
-		if (philo_th % 2 != 0 && (get_mili() < getime))
-		{
-			pthread_mutex_lock(philo->fork + philo_th);
-			pthread_mutex_lock(philo->fork + philo_th - 1);
-			printf("%lld %d has taken a fork\n", get_mili(), philo_th);
-			printf("%lld %d is eating\n", get_mili(), philo_th);
-			usleep(philo->time_to_eat * 1000);
-			pthread_mutex_unlock(philo->fork + philo_th);
-			pthread_mutex_unlock(philo->fork + philo_th - 1);
-		}
-		else if (philo_th % 2 == 0 && (get_mili() < getime))
+		//les philos manges les paire d'abord
+		
+		if (philo_th % 2 == 0 && (get_mili() < getime))
 		{
 			pthread_mutex_lock(philo->fork + philo_th);
 			if (philo_th != 0)
 				pthread_mutex_lock(philo->fork + philo_th - 1);
 			else
 				pthread_mutex_lock(philo->fork + philo->nbr_philo);
-			printf("%lld %d has taken a fork\n", get_mili(), philo_th);
-			printf("%lld %d is eating\n", get_mili(), philo_th);
+			if (get_mili() > getime)
+			{
+				philo->dead[philo_th] = 0;
+				printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
+				return (NULL);
+			}
+			printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
+			printf("%lld %d is eating\n", get_mili() - philo->first_time , philo_th);
 			usleep(philo->time_to_eat * 1000);
 			pthread_mutex_unlock(philo->fork + philo_th);
 			if (philo_th != 0)
@@ -126,33 +125,42 @@ void	*routine(void *arg)
 			else
 				pthread_mutex_unlock(philo->fork + philo->nbr_philo);
 		}
-		// le philo a pas eu le temps de manger et est mort
-		else
+		else if (philo_th % 2 != 0 && (get_mili() < getime))
 		{
-			philo->dead[philo_th] = 0;
-			printf("%lld %d died\n", get_mili(), philo_th);
-			return (NULL);
+			pthread_mutex_lock(philo->fork + philo_th - 1);
+			pthread_mutex_lock(philo->fork + philo_th);
+			if (get_mili() > getime)
+			{
+				philo->dead[philo_th] = 0;
+				printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
+				return (NULL);
+			}
+			printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
+			printf("%lld %d is eating\n", get_mili() - philo->first_time , philo_th);
+			usleep(philo->time_to_eat * 1000);
+			pthread_mutex_unlock(philo->fork + philo_th);
+			pthread_mutex_unlock(philo->fork + philo_th - 1);
 		}
 		//reset du temps de vie
-		if (get_mili() > getime)
+	/*if (get_mili() > getime)
 		{
 			philo->dead[philo_th] = 0;
-			printf("%lld %d died\n", get_mili(), philo_th);
+			printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
 			return (NULL);
-		}
+		}*/	
 		getime = get_mili() + (long long)philo->time_to_die;
 		//printf("le philo %d: il est %lld et il meurt dans %lld\n",philo_th, get_mili(),getime);
 
 		//les philos dorment
-		printf("%lld %d is sleeping\n", get_mili(), philo_th);
+		printf("%lld %d is sleeping\n", get_mili() - philo->first_time , philo_th);
 		usleep(philo->time_to_sleep * 1000);
 		//printf("le philo %d get mili = %lld getime = %lld\n",philo_th, get_mili(), getime);
 		if (get_mili() < getime)
-			printf("%lld %d is thinking\n", get_mili(), philo_th);
+			printf("%lld %d is thinking\n", get_mili() - philo->first_time , philo_th);
 		else
 		{
 			philo->dead[philo_th] = 0;
-			printf("%lld %d died\n", get_mili(), philo_th);
+			printf("%lld %d died\n", get_mili() - philo->first_time, philo_th);
 			return (NULL);
 		}
 	}

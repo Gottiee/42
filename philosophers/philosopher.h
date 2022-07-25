@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/22 15:12:25 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/25 12:57:30 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 typedef struct s_philo
 {
+	long long		first_time;
 	int				stop;
 	long long		getime;
 	pthread_t		*philo;
@@ -59,6 +60,6 @@ long long	get_mili(void);
 
 /*Fichier: struc.c*/
 void		destroy_mutex(t_philo *philo);
-void		init_struc(t_philo *philo, char **argv);	
+void		init_struc(char **argv);	
 t_philo		*get_struct(void);
 #endif
