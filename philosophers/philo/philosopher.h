@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/27 17:33:52 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/27 18:06:53 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		error(int err);
 /*Fichier: utils.c*/
 long		ft_atoi(const char *str);
 long long	get_mili(void);
+void		ft_bzero(int *s, int n);	
 
 /*          --- Fonctions qui gere les structures ---     */
 

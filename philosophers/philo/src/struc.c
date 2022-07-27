@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:46 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/27 17:34:09 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/27 18:01:13 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_struc(char **argv)
 		philo->nbr_eaten_meal = ft_atoi(argv[5]);
 	else
 	philo->nbr_eaten_meal = -1;
-	memset((void *)philo->eat, 0, philo->nbr_philo);
+	ft_bzero(philo->eat, philo->nbr_philo);
 	philo->count_eat = 0;
 }
 
