@@ -30,6 +30,12 @@ all: $(NAME)
 $(NAME) : $(OBJ)
 	$(CC) $(OBJ) -pthread -o $(NAME)
 
+debug: $(NAME_DEBUG)
+
+$(NAME_DEBUG) : $(OBJ)
+	$(CC) $(OBJ) -pthread -fsanitize=thread -o $(NAME)
+
+
 %.o: %.c
 	$(CC) $(FLAGS)
 
@@ -50,4 +56,4 @@ $(BONUS_NAME) : $(BONUS_OBJ)
 	$(CC) $(BONUS_OBJ) -o $(BONUS_NAME)
 
 
-.PHONY: all clean fclean phony bonus re
+.PHONY: all clean fclean phony bonus re debug

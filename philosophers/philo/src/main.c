@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:44:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/25 19:37:18 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/27 13:50:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,24 +92,6 @@ int	manage_philo(void)
 			break ;
 		}
 	}
-	int test = 0;
-	while (1)
-	{
-		test ++;
-		i = -1;
-		bolo = 1;
-		while (++i < philo->nbr_philo)
-			if (philo->dead[i] != 0)
-			{
-				printf("j'attend le trhread n: %d, au %d tour\n", i, test);
-				bolo = 0;
-			}
-		if (bolo)
-		{
-			philo->stop = 0;
-			break ;
-		}
-	}
 
 	//attente et destuction du thread
 	i = -1;
@@ -134,14 +116,44 @@ void	*routine(void *arg)
 	{
 		//les philos manges les paire d'abord
 		
-		if (philo_th % 2 == 0 && (get_mili() < getime))
+		if (philo_th % 2 == 0 && (get_mili() < getime) && philo->stop)
 		{
 			pthread_mutex_lock(philo->fork + philo_th);
+			if (!philo->stop || get_mili() > getime)
+			{
+					pthread_mutex_unlock(philo->fork + philo_th);
+					printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
+					philo->dead[philo_th] = 0;
+					return (NULL);
+			}
+			printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
 			if (philo_th != 0)
+			{
 				pthread_mutex_lock(philo->fork + philo_th - 1);
-			else
+				if (!philo->stop || get_mili() > getime)
+				{
+					pthread_mutex_unlock(philo->fork + philo_th);
+					printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
+					pthread_mutex_unlock(philo->fork + philo_th - 1);
+					philo->dead[philo_th] = 0;
+					return (NULL);
+				}
+				printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
+			}
+			else 
+			{
 				pthread_mutex_lock(philo->fork + philo->nbr_philo - 1);
-			if (get_mili() > getime)
+				if (!philo->stop || get_mili() > getime)
+				{
+					pthread_mutex_unlock(philo->fork + philo_th);
+					pthread_mutex_unlock(philo->fork + philo->nbr_philo - 1);
+					printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
+					philo->dead[philo_th] = 0;
+					return (NULL);
+				}
+				printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
+			}
+			if (get_mili() > getime || !philo->stop)
 			{
 				philo->dead[philo_th] = 0;
 				printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
@@ -151,7 +163,6 @@ void	*routine(void *arg)
 					pthread_mutex_unlock(philo->fork + philo->nbr_philo - 1);
 				return (NULL);
 			}
-			printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
 			printf("%lld %d is eating\n", get_mili() - philo->first_time , philo_th);
 			usleep(philo->time_to_eat * 1000);
 			pthread_mutex_unlock(philo->fork + philo_th);
@@ -160,11 +171,30 @@ void	*routine(void *arg)
 			else
 				pthread_mutex_unlock(philo->fork + philo->nbr_philo - 1);
 		}
-		else if (philo_th % 2 != 0 && (get_mili() < getime))
+
+		//les impaires mangent
+		else if (philo_th % 2 != 0 && (get_mili() < getime) && philo->stop)
 		{
 			pthread_mutex_lock(philo->fork + philo_th - 1);
+			if (!philo->stop || get_mili() > getime)
+			{
+				pthread_mutex_unlock(philo->fork + philo_th - 1);
+				philo->dead[philo_th] = 0;
+				printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
+				return (NULL);
+			}
+			printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
 			pthread_mutex_lock(philo->fork + philo_th);
-			if (get_mili() > getime)
+			if (!philo->stop || get_mili() > getime)
+			{
+				pthread_mutex_unlock(philo->fork + philo_th - 1);
+				pthread_mutex_unlock(philo->fork + philo_th);
+				printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
+				philo->dead[philo_th] = 0;
+				return (NULL);
+			}
+			printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
+			if (get_mili() > getime || !philo->stop)
 			{
 				philo->dead[philo_th] = 0;
 				printf("%lld %d died\n", get_mili() - philo->first_time , philo_th);
@@ -172,7 +202,6 @@ void	*routine(void *arg)
 				pthread_mutex_unlock(philo->fork + philo_th - 1);
 				return (NULL);
 			}
-			printf("%lld %d has taken a fork\n", get_mili() - philo->first_time , philo_th);
 			printf("%lld %d is eating\n", get_mili() - philo->first_time , philo_th);
 			usleep(philo->time_to_eat * 1000);
 			pthread_mutex_unlock(philo->fork + philo_th);
@@ -186,7 +215,6 @@ void	*routine(void *arg)
 		{
 			printf("%lld %d is sleeping\n", get_mili() - philo->first_time , philo_th);
 			usleep(philo->time_to_sleep * 1000);
-			printf("finis de dormir pour le tread %d\n", philo_th);
 		}
 		if (philo->stop)
 		{
@@ -200,7 +228,6 @@ void	*routine(void *arg)
 			}
 		}
 	}
-	printf("                             le thread me quitte a la fin: %d\n", philo_th);
 	philo->dead[philo_th] = 0;
 	return (NULL);
 }
