@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:44:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/27 13:50:41 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/27 17:35:48 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int	main(int argc, char **argv)
 	philo->nbr_philo = ft_atoi(argv[1]);
 	philo->fork = malloc(sizeof(pthread_mutex_t) * (philo->nbr_philo + 1));
 	philo->dead = malloc(sizeof(int) * (philo->nbr_philo + 1));
-	if (!philo->fork || !philo->dead)
+	philo->eat = malloc(sizeof(int) * (philo->nbr_philo + 1));
+	if (!philo->fork || !philo->dead || !philo->eat)
 	{
 		free(philo->fork);
+		free(philo->eat);
 		free(philo->dead);
 		return (1);
 	}
@@ -34,6 +36,7 @@ int	main(int argc, char **argv)
 	{
 		free(philo->fork);
 		free(philo->dead);
+		free(philo->eat);
 		return (2);
 	}
 	// gerer la valeur de renvoie de manage philo
@@ -44,6 +47,7 @@ int	main(int argc, char **argv)
 	free(philo->fork);
 	free(philo->philo);
 	free(philo->dead);
+	free(philo->eat);
 }
 
 int	manage_philo(void)
@@ -84,13 +88,19 @@ int	manage_philo(void)
 	{
 		i = -1;
 		while (++i < philo->nbr_philo)
+		{
 			if (philo->dead[i] == 0)
 				bolo = 1;
+			if (philo->eat[i] == philo->nbr_eaten_meal)
+				philo->count_eat++;		
+		}
 		if (bolo)
 		{
 			philo->stop = 0;
 			break ;
 		}
+		if (philo->count_eat == philo ->nbr_philo)
+			break;
 	}
 
 	//attente et destuction du thread
@@ -164,12 +174,18 @@ void	*routine(void *arg)
 				return (NULL);
 			}
 			printf("%lld %d is eating\n", get_mili() - philo->first_time , philo_th);
+			philo->eat[philo_th] += 1;
+			getime = get_mili() + (long long)philo->time_to_die + 1; 
 			usleep(philo->time_to_eat * 1000);
 			pthread_mutex_unlock(philo->fork + philo_th);
 			if (philo_th != 0)
 				pthread_mutex_unlock(philo->fork + philo_th - 1);
 			else
 				pthread_mutex_unlock(philo->fork + philo->nbr_philo - 1);
+			if (philo->eat[philo_th] == philo->nbr_eaten_meal)
+			{
+				return (NULL);
+			}
 		}
 
 		//les impaires mangent
@@ -203,12 +219,18 @@ void	*routine(void *arg)
 				return (NULL);
 			}
 			printf("%lld %d is eating\n", get_mili() - philo->first_time , philo_th);
+			philo->eat[philo_th] += 1;
+			getime = get_mili() + (long long)philo->time_to_die + 1;
+		/*printf("le philo meurt %d dans %lld temps !\n", philo_th,getime - philo->first_time);*/	
 			usleep(philo->time_to_eat * 1000);
 			pthread_mutex_unlock(philo->fork + philo_th);
 			pthread_mutex_unlock(philo->fork + philo_th - 1);
+			if (philo->eat[philo_th] == philo->nbr_eaten_meal)
+			{
+				return (NULL);
+			}
 		}
 		//reset du temps de vie
-		getime = get_mili() + (long long)philo->time_to_die;
 
 		//les philos dorment
 		if (philo->stop)

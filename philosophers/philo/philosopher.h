@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/25 17:52:39 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/27 17:33:52 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ typedef struct s_philo
 	pthread_t		*philo;
 	pthread_mutex_t	*fork;
 	int				*dead;
+	int				*eat;
 	int				time_to_eat;
 	int				time_to_die;
 	int				nbr_philo;
 	int				nbr_eaten_meal;
 	int				time_to_sleep;
 	int				arg;
+	int				count_eat;
 }				t_philo;
 
 /*          --- Fonctions principals ---     */
