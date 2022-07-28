@@ -9,11 +9,7 @@ BONUS_SRC_DIR = src_bonus/
 SRC_FILES = main \
 error \
 utils \
-struc \
-routine_even \
-routine_even2 \
-routine_odd
-
+struc
 
 BONUS_SRC_FILES = 
 
