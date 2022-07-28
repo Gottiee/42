@@ -37,7 +37,7 @@ $(NAME) : $(OBJ)
 debug: $(NAME_DEBUG)
 
 $(NAME_DEBUG) : $(OBJ)
-	$(CC) $(OBJ) -pthread -fsanitize=thread -o $(NAME)
+	$(CC) $(OBJ) -pthread --fsanitize=leak -fsanitize=thread fsanitize=thread -o $(NAME)
 
 
 %.o: %.c

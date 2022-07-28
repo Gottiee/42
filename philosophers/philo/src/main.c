@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:44:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/28 17:48:46 by eedy             ###   ########.fr       */
+/*   Updated: 2022/07/28 19:09:53 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ int	init_manage(void)
 	while (++i < philo->nbr_philo)
 	{
 		index[i] = i;
-		pthread_create(philo->philo + i, NULL, &routine, index + i);
+			pthread_create(philo->philo + i, NULL, &routine, index + i);
 	}
+	usleep(1000);
 	free(index);
 	return (0);
 }
@@ -89,9 +90,12 @@ void	manage_philo(void)
 	int		bolo;
 	t_philo	*philo;
 	int		i;
+	int		j;
+	int		bolo2;
 
 	philo = get_struct();
 	bolo = 0;
+	bolo2= 0;
 	if (init_manage() == -1)
 		return ;
 	while (1)
@@ -101,23 +105,30 @@ void	manage_philo(void)
 		{
 			if (philo->dead[i] == 0)
 				bolo = 1;
-			if (philo->eat[i] == philo->nbr_eaten_meal)
-				philo->count_eat++;		
+			j = -1;
+			while (philo->eat[++j] >= philo->nbr_eaten_meal)
+			{
+				philo->count_eat++;	
+				if (philo->count_eat == philo->nbr_philo)
+					bolo2 = 1;
+			}
 		}
 		if (bolo)
 		{
 			philo->stop = 0;
 			break ;
 		}
-		if (philo->count_eat == philo ->nbr_philo)
-			break;
+		if (bolo2)
+			break ;
+		printf("la valeur de count_eat: %d\n", philo->count_eat);
 	}
-	if (philo->nbr_philo > 5000 || philo->nbr_eaten_meal == 1)
+	printf("je suis sortie\n");
+	if (philo->nbr_philo > 5000)
 		usleep(7000 * 1000);
-	else if (philo->nbr_philo > 50)
+	else if (philo->nbr_philo > 50/* || philo->nbr_eaten_meal == 1*/)
 		usleep(2000 * 1000);
-
-	printf("finis de dormir\n");
+	
+//printf("finis de dormir\n");
 	//attente et destuction du thread
 	i = -1;
 	while (++i < philo->nbr_philo)
