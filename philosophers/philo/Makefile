@@ -12,7 +12,8 @@ utils \
 struc \
 routine_even \
 routine_even2 \
-routine_odd
+routine_odd \
+manage_philo
 
 
 BONUS_SRC_FILES = 

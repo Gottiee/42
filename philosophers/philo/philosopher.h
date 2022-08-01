@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/28 17:28:37 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/01 17:12:17 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,23 @@ typedef struct s_philo
 	int				time_to_sleep;
 	int				arg;
 	int				count_eat;
+	pthread_mutex_t	*mutex_eat;
+	pthread_mutex_t	print;
 }				t_philo;
 
 /*          --- Fonctions principals ---     */
 
 /*Fichier: main.c*/
 int			main(int argc, char **argv);
-void			manage_philo(void);
+void		manage_philo(void);
 void		*routine(void *arg);
+void		while_philo(int bolo, int i, int j, int bolo2);
+void		init_while(void);
+
+/*Fichier: manage_philo.c*/
+int			reduce_while(void);
+int			main2(void);
+int			init_manage(void);
 
 /*          --- Fonctions qui gere les erreurs ---     */
 
@@ -68,7 +77,6 @@ void		destroy_mutex(t_philo *philo);
 void		init_struc(char **argv);	
 t_philo		*get_struct(void);
 
-
 /*          --- Fonctions qui gere la routine des threads---     */
 
 /*Fichier: routine_even.c*/
@@ -76,15 +84,15 @@ int			end_unlock_next_fork(int philo_th);
 int			end_unlock_next_previous_forks(int philo_th);	
 int			even_none_egual_zero(int philo_th, long long getime);
 int			even_thread(int philo_th, long long *getime);
-int			even_egual_zero(int	philo_th, long long getime);
+int			even_egual_zero(int philo_th, long long getime);
 
 /*Fichier: routine_even2.c*/
-int			end_unlock_both(int	philo_th);
+int			end_unlock_both(int philo_th);
 int			reset_time(int philo_th, long long *getime);
 
 /*Fichier: routine_odd.c*/
 int			odd_thread(int philo_th, long long *getime);
 int			end_unlock_previous_fork(int philo_th);
-int			sleep_and_think(int	philo_th, long long *getime);
+int			sleep_and_think(int philo_th, long long *getime);
 
 #endif

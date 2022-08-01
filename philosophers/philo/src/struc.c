@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:46 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/27 18:01:13 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/01 20:06:57 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ void	destroy_mutex(t_philo *philo)
 	i = -1;
 	while (++i < philo->nbr_philo)
 		pthread_mutex_destroy(philo->fork + i);
+	i = -1;
+	while (++i < philo->nbr_philo)
+		pthread_mutex_destroy(philo->mutex_eat + i);
+	pthread_mutex_destroy(&(philo->print));
 }
 
 void	init_struc(char **argv)
@@ -45,6 +49,10 @@ void	init_struc(char **argv)
 	philo->nbr_eaten_meal = -1;
 	ft_bzero(philo->eat, philo->nbr_philo);
 	philo->count_eat = 0;
+	i = -1;
+	while (++i < philo->nbr_philo)
+		pthread_mutex_init(philo->mutex_eat + i, NULL);
+	pthread_mutex_init(&(philo->print), NULL);
 }
 
 t_philo	*get_struct(void)

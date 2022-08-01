@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:44:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/28 19:09:53 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/01 19:58:01 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_philo		*philo;
 
-	if (argc < 5 || argc > 6)		
+	if (argc < 5 || argc > 6)
 		error(ARG_PRB);
 	philo = get_struct();
 	philo->nbr_philo = ft_atoi(argv[1]);
@@ -28,76 +28,39 @@ int	main(int argc, char **argv)
 	philo->fork = malloc(sizeof(pthread_mutex_t) * (philo->nbr_philo + 1));
 	philo->dead = malloc(sizeof(int) * (philo->nbr_philo + 1));
 	philo->eat = malloc(sizeof(int) * (philo->nbr_philo + 1));
-	if (!philo->fork || !philo->dead || !philo->eat)
+	philo->mutex_eat = malloc(sizeof(pthread_mutex_t) * (philo->nbr_philo + 1));
+	if (!philo->fork || !philo->dead || !philo->eat || !philo->mutex_eat)
 	{
 		free(philo->fork);
+		free(philo->mutex_eat);
 		free(philo->eat);
 		free(philo->dead);
 		return (1);
 	}
 	init_struc(argv);
-	philo->philo = malloc(sizeof(pthread_t) * (philo->nbr_philo + 1));
-	if (!philo->philo)
-	{
-		free(philo->fork);
-		free(philo->dead);
-		free(philo->eat);
+	if (main2() == -1)
 		return (2);
-	}
-	// gerer la valeur de renvoie de manage philo
-
-	manage_philo();
-		
-
-	/*fin du program apres ce commentaire*/	
-	destroy_mutex(philo);
-	free(philo->fork);
-	free(philo->philo);
-	free(philo->dead);
-	free(philo->eat);
 }
 
-int	init_manage(void)
+void	init_while(void)
 {
-	t_philo	*philo;
-	int		i;
-	int		*index;
+	int	bolo;	
+	int	i;
+	int	j;
+	int	bolo2;
 
-	philo = get_struct();
-	philo->f_t = get_mili();
-	if (philo->nbr_philo == 1)
-	{
-		usleep(philo->time_to_die * 1000);
-		printf("%lld %d died\n", get_mili() - philo->f_t , 0);
-		return (-1);
-	}
-	index = malloc(sizeof(int) * (philo->nbr_philo + 1));
-	if (!index)
-		return (-1);
-	i = -1;
-	while (++i < philo->nbr_philo)
-	{
-		index[i] = i;
-			pthread_create(philo->philo + i, NULL, &routine, index + i);
-	}
-	usleep(1000);
-	free(index);
-	return (0);
-}
-
-void	manage_philo(void)
-{
-	int		bolo;
-	t_philo	*philo;
-	int		i;
-	int		j;
-	int		bolo2;
-
-	philo = get_struct();
 	bolo = 0;
-	bolo2= 0;
-	if (init_manage() == -1)
-		return ;
+	bolo2 = 0;
+	i = -1;
+	j = -1;
+	while_philo(bolo, i, j, bolo2);
+}
+
+void	while_philo(int bolo, int i, int j, int bolo2)
+{
+	t_philo	*philo;
+
+	philo = get_struct();
 	while (1)
 	{
 		i = -1;
@@ -105,13 +68,18 @@ void	manage_philo(void)
 		{
 			if (philo->dead[i] == 0)
 				bolo = 1;
-			j = -1;
-			while (philo->eat[++j] >= philo->nbr_eaten_meal)
+		} j = -1;
+		philo->count_eat = 0;
+
+		while(++j < philo->nbr_philo)
+		{
+			pthread_mutex_lock(philo->mutex_eat + j);
+			if (philo->eat[j] >= philo->nbr_eaten_meal)
 			{
-				philo->count_eat++;	
-				if (philo->count_eat == philo->nbr_philo)
-					bolo2 = 1;
+				philo->count_eat++;
+				bolo2 = reduce_while();
 			}
+			pthread_mutex_unlock(philo->mutex_eat + j);
 		}
 		if (bolo)
 		{
@@ -120,16 +88,22 @@ void	manage_philo(void)
 		}
 		if (bolo2)
 			break ;
-		printf("la valeur de count_eat: %d\n", philo->count_eat);
 	}
-	printf("je suis sortie\n");
+}
+
+void	manage_philo(void)
+{
+	t_philo	*philo;
+	int		i;
+
+	philo = get_struct();
+	if (init_manage() == -1)
+		return ;
+	init_while();
 	if (philo->nbr_philo > 5000)
 		usleep(7000 * 1000);
-	else if (philo->nbr_philo > 50/* || philo->nbr_eaten_meal == 1*/)
+	else if (philo->nbr_philo > 50)
 		usleep(2000 * 1000);
-	
-//printf("finis de dormir\n");
-	//attente et destuction du thread
 	i = -1;
 	while (++i < philo->nbr_philo)
 		pthread_join(philo->philo[i], NULL);
