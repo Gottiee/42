@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:52:44 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/01 20:02:38 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/02 14:20:18 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main2(void)
 		free(philo->fork);
 		free(philo->dead);
 		free(philo->eat);
+		free(philo->mutex_eat);
+		free(philo->m_dead);
 		return (-1);
 	}
 	manage_philo();
@@ -42,6 +44,7 @@ int	main2(void)
 	free(philo->dead);
 	free(philo->eat);
 	free(philo->mutex_eat);
+	free(philo->m_dead);
 	return (0);
 }
 

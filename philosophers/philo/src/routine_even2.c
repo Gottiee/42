@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:20:56 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/01 20:11:10 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/02 13:18:36 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	end_unlock_both(int philo_th)
 	t_philo	*philo;
 
 	philo = get_struct();
+	pthread_mutex_lock(philo->m_dead + philo_th);
 	philo->dead[philo_th] = 0;
+	pthread_mutex_unlock(philo->m_dead + philo_th);
 	pthread_mutex_lock(&(philo->print));
 	printf("%lld %d died\n", get_mili() - philo->f_t, philo_th);
 	pthread_mutex_unlock(&(philo->print));
@@ -74,7 +76,9 @@ int	sleep_and_think(int philo_th, long long *getime)
 		}
 		else
 		{
+			pthread_mutex_lock(philo->m_dead + philo_th);
 			philo->dead[philo_th] = 0;
+			pthread_mutex_unlock(philo->m_dead + philo_th);
 			pthread_mutex_lock(&(philo->print));
 			printf("%lld %d died\n", get_mili() - philo->f_t, philo_th);
 			pthread_mutex_unlock(&(philo->print));

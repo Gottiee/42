@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/01 17:12:17 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/02 13:27:02 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_philo
 	int				count_eat;
 	pthread_mutex_t	*mutex_eat;
 	pthread_mutex_t	print;
+	pthread_mutex_t	*m_dead;
+	pthread_mutex_t	m_stop;
 }				t_philo;
 
 /*          --- Fonctions principals ---     */

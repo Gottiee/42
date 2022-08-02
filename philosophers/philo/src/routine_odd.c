@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:45:13 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/01 20:11:07 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/02 13:38:44 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int	end_unlock_previous_fork(int philo_th)
 
 	philo = get_struct();
 	pthread_mutex_unlock(philo->fork + philo_th - 1);
+	pthread_mutex_lock(philo->m_dead + philo_th);
 	philo->dead[philo_th] = 0;
+	pthread_mutex_unlock(philo->m_dead + philo_th);
 	pthread_mutex_lock(&(philo->print));
 	printf("%lld %d died\n", get_mili() - philo->f_t, philo_th);
 	pthread_mutex_unlock(&(philo->print));
@@ -31,19 +33,34 @@ int	odd_thread(int philo_th, long long *getime)
 
 	philo = get_struct();
 	pthread_mutex_lock(philo->fork + philo_th - 1);
+	pthread_mutex_lock(&(philo->m_stop));
 	if (!philo->stop || get_mili() > *getime)
+	{
+		pthread_mutex_unlock(&(philo->m_stop));
 		return (end_unlock_previous_fork(philo_th));
+	}
+	pthread_mutex_unlock(&(philo->m_stop));
 	pthread_mutex_lock(&(philo->print));
 	printf("%lld %d has taken a fork\n", get_mili() - philo->f_t, philo_th);
 	pthread_mutex_unlock(&(philo->print));
 	pthread_mutex_lock(philo->fork + philo_th);
+	pthread_mutex_lock(&(philo->m_stop));
 	if (!philo->stop || get_mili() > *getime)
+	{
+		pthread_mutex_unlock(&(philo->m_stop));
 		return (end_unlock_next_previous_forks(philo_th));
+	}
+	pthread_mutex_unlock(&(philo->m_stop));
 	pthread_mutex_lock(&(philo->print));
 	printf("%lld %d has taken a fork\n", get_mili() - philo->f_t, philo_th);
 	pthread_mutex_unlock(&(philo->print));
+	pthread_mutex_lock(&(philo->m_stop));
 	if (get_mili() > *getime || !philo->stop)
+	{
+		pthread_mutex_unlock(&(philo->m_stop));
 		return (end_unlock_next_previous_forks(philo_th));
+	}
+	pthread_mutex_unlock(&(philo->m_stop));
 	pthread_mutex_lock(&(philo->print));
 	printf("%lld %d is eating\n", get_mili() - philo->f_t, philo_th);
 	pthread_mutex_unlock(&(philo->print));
@@ -54,7 +71,9 @@ int	odd_thread(int philo_th, long long *getime)
 	usleep(philo->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->fork + philo_th);
 	pthread_mutex_unlock(philo->fork + philo_th - 1);
+	pthread_mutex_lock(philo->mutex_eat + philo_th);
 	if (philo->eat[philo_th] == philo->nbr_eaten_meal)
 		return (-1);
+	pthread_mutex_unlock(philo->mutex_eat + philo_th);
 	return (0);
 }
