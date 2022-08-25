@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:20:56 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/02 13:18:36 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/25 17:08:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int	end_unlock_both(int philo_th)
 	t_philo	*philo;
 
 	philo = get_struct();
+	pthread_mutex_unlock(&(philo->m_stop));
 	pthread_mutex_lock(philo->m_dead + philo_th);
 	philo->dead[philo_th] = 0;
 	pthread_mutex_unlock(philo->m_dead + philo_th);
 	pthread_mutex_lock(&(philo->print));
-	printf("%lld %d died\n", get_mili() - philo->f_t, philo_th);
+	pthread_mutex_unlock(philo->fork + philo_th);
+	printf("%lld %d died\n", get_mili() - philo->f_t, philo_th + 1);
 	pthread_mutex_unlock(&(philo->print));
 	if (philo_th != 0)
 		pthread_mutex_unlock(philo->fork + philo_th - 1);
@@ -36,7 +38,7 @@ int	reset_time(int philo_th, long long *getime)
 
 	philo = get_struct();
 	pthread_mutex_lock(&(philo->print));
-	printf("%lld %d is eating\n", get_mili() - philo->f_t, philo_th);
+	printf("%lld %d is eating\n", get_mili() - philo->f_t, philo_th + 1);
 	pthread_mutex_unlock(&(philo->print));
 
 	//lock le eat
@@ -59,19 +61,25 @@ int	sleep_and_think(int philo_th, long long *getime)
 	t_philo	*philo;
 
 	philo = get_struct();
+	pthread_mutex_lock(&(philo->m_stop));
 	if (philo->stop)
 	{
+		pthread_mutex_unlock(&(philo->m_stop));
 		pthread_mutex_lock(&(philo->print));
-		printf("%lld %d is sleeping\n", get_mili() - philo->f_t, philo_th);
+		printf("%lld %d is sleeping\n", get_mili() - philo->f_t, philo_th + 1);
 		pthread_mutex_unlock(&(philo->print));
 		usleep(philo->time_to_sleep * 1000);
 	}
+	else
+		pthread_mutex_unlock(&(philo->m_stop));
+	pthread_mutex_lock(&(philo->m_stop));
 	if (philo->stop)
 	{
+		pthread_mutex_unlock(&(philo->m_stop));
 		if (get_mili() < *getime)
 		{
 			pthread_mutex_lock(&(philo->print));
-			printf("%lld %d is thinking\n", get_mili() - philo->f_t, philo_th);
+			printf("%lld %d is thinking\n", get_mili() - philo->f_t, philo_th + 1);
 			pthread_mutex_unlock(&(philo->print));
 		}
 		else
@@ -80,10 +88,12 @@ int	sleep_and_think(int philo_th, long long *getime)
 			philo->dead[philo_th] = 0;
 			pthread_mutex_unlock(philo->m_dead + philo_th);
 			pthread_mutex_lock(&(philo->print));
-			printf("%lld %d died\n", get_mili() - philo->f_t, philo_th);
+			printf("%lld %d died\n", get_mili() - philo->f_t, philo_th + 1);
 			pthread_mutex_unlock(&(philo->print));
 			return (-1);
 		}
 	}
+	else
+		pthread_mutex_unlock(&(philo->m_stop));
 	return (0);
 }

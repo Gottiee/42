@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:44:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/02 14:15:12 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/25 17:07:26 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	t_philo		*philo;
-
 	if (argc < 5 || argc > 6)
 		error(ARG_PRB);
 	philo = get_struct();
@@ -80,12 +79,13 @@ void	while_philo(int bolo, int i, int j, int bolo2)
 		while(++j < philo->nbr_philo)
 		{
 			pthread_mutex_lock(philo->mutex_eat + j);
-			if (philo->eat[j] >= philo->nbr_eaten_meal)
+			if (philo->nbr_eaten_meal != -1 && philo->eat[j] >= philo->nbr_eaten_meal)
 			{
 				philo->count_eat++;
 				bolo2 = reduce_while();
 			}
 			pthread_mutex_unlock(philo->mutex_eat + j);
+			usleep(100);
 		}
 		if (bolo)
 		{
@@ -130,12 +130,24 @@ void	*routine(void *arg)
 	getime = get_mili() + (long long)philo->time_to_die;
 	while (1)
 	{
+		pthread_mutex_lock(&(philo->m_stop));
 		if (philo_th % 2 == 0 && (get_mili() < getime) && philo->stop)
+		{
+			pthread_mutex_unlock(&(philo->m_stop));
 			if (even_thread(philo_th, &getime) == -1)
 				return (NULL);
+		}
+		else
+			pthread_mutex_unlock(&(philo->m_stop));
+		pthread_mutex_lock(&(philo->m_stop));
 		if (philo_th % 2 != 0 && (get_mili() < getime) && philo->stop)
+		{
+			pthread_mutex_unlock(&(philo->m_stop));
 			if (odd_thread(philo_th, &getime) == -1)
 				return (NULL);
+		}
+		else 
+			pthread_mutex_unlock(&(philo->m_stop));
 		if (sleep_and_think(philo_th, &getime) == -1)
 			return (NULL);
 		pthread_mutex_lock(philo->m_dead + philo_th);
@@ -144,14 +156,18 @@ void	*routine(void *arg)
 			pthread_mutex_unlock(philo->m_dead + philo_th);
 			break ;
 		}
-		pthread_mutex_unlock(philo->m_dead + philo_th);
+		else
+			pthread_mutex_unlock(philo->m_dead + philo_th);
 		pthread_mutex_lock(&(philo->m_stop));
 		if (!philo->stop)
 		{
 			pthread_mutex_unlock(&(philo->m_stop));
 			break ;
 		}
-		pthread_mutex_unlock(&(philo->m_stop));
+		else
+		{
+			pthread_mutex_unlock(&(philo->m_stop));
+		}
 	}
 	pthread_mutex_lock(philo->m_dead + philo_th);
 	philo->dead[philo_th] = 0;
