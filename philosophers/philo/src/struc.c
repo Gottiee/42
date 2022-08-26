@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:46 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/25 15:30:27 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/26 12:58:49 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_struc(char **argv)
 	while (++i < philo->nbr_philo)
 		pthread_mutex_init(philo->m_dead + i, NULL);
 	pthread_mutex_init(&(philo->m_stop), NULL);
+	philo->stop_print = 0;
 }
 
 t_philo	*get_struct(void)

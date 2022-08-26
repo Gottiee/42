@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/02 15:47:38 by eedy             ###   ########.fr       */
+/*   Updated: 2022/08/26 13:01:17 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ARG_PRB 1
 # define ATOY 2
 # define ATOY_INTEGER 3
+# define DEAD 4
 
 typedef struct s_philo
 {
@@ -44,6 +45,7 @@ typedef struct s_philo
 	pthread_mutex_t	print;
 	pthread_mutex_t	*m_dead;
 	pthread_mutex_t	m_stop;
+	int				stop_print;
 }				t_philo;
 
 /*          --- Fonctions principals ---     */
@@ -96,5 +98,6 @@ int			reset_time(int philo_th, long long *getime);
 int			odd_thread(int philo_th, long long *getime);
 int			end_unlock_previous_fork(int philo_th);
 int			sleep_and_think(int philo_th, long long *getime);
+int			tchek_print(int status);
 
 #endif
