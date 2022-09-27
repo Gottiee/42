@@ -6,11 +6,24 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 18:08:01 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/27 18:07:01 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/27 16:45:09 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosopher.h"
+
+int	free_philo(void)
+{
+	t_philo		*philo;
+
+	philo = get_struct();
+	free(philo->fork);
+	free(philo->mutex_eat);
+	free(philo->eat);
+	free(philo->dead);
+	free(philo->m_dead);
+	return (1);
+}
 
 long	ft_atoi(const char *str)
 {

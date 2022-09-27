@@ -1,64 +1,135 @@
-NAME  = philo
+# VARIABLES
 
-BONUS_NAME = philo_bonus
+NAME		= philo
+NAME_BONUS	= 
 
-SRC_DIR = src/
+SRC_DIR		= src/
+OBJ_DIR		= obj/
+SUBDIR		= 
+BONUS_DIR	= src_bonus/
 
-BONUS_SRC_DIR = src_bonus/
+ADDFLAGS	= -pthread
 
-SRC_FILES = main \
+# SOURCES
+
+SRC_FILES 		= main \
 error \
+while \
 utils \
 struc \
+even \
 routine_even \
 routine_even2 \
 routine_odd \
 manage_philo
 
+SRC_FILES_BONUS	=
 
-BONUS_SRC_FILES = 
+# SOURCES SET UP
 
-SRC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+C_FILES		=	$(addsuffix .c, $(SRC_FILES))
+SRCS		=	$(addprefix $(SRC_DIR), $(C_FILES))
+OBJS		=	$(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
+DEPS		=	$(OBJS:.o=.d)
 
-BONUS_SRC = $(addprefix $(BONUS_SRC_DIR), $(addsuffix .c, $(BONUS_SRC_FILES)))
+C_BONUS			=	$(addsuffix _bonus.c, $(SRC_FILES_BONUS))
+SRCS_BONUS		=	$(addprefix $(BONUS_DIR), $(C_BONUS))
+OBJS_BONUS		=	$(addprefix $(OBJ_DIR), $(C_BONUS:.c=.o))
+DEPS_BONUS		=	$(OBJS_BONUS:.o=.d)
 
-OBJ = $(SRC:.c=.o)
+# FLAGS & UTILS
+CC			= gcc
+CFLAGS		= -Wall -Werror -Wextra -g -I./srcs/includes -MMD -MP
+RM			= rm -rf
+AR			= ar rcs
+SAN			= -fsanitize=address
 
-BONUS_OBJ = $(BONUS_SRC:.c=.o)
+#	LOAD BAR
 
-CC = gcc
+COUNT	:= $(words $(SRC_FILES))
+LOAD	= 0
+DIVIDE	= 0
+SPACE = $(COUNT)
 
-FLAGS = -Wall -Wextra -Werror -g -c $< -o $@
+#	 MANDATORY
+all:		 obj $(NAME)
+			
 
-all: $(NAME)
+$(NAME):	$(OBJS)
+			@$(CC) $(CFLAGS) $^ -o $@ $(ADDFLAGS) 
+			@echo "\e[1A\e[K$(FONT_BOLD)FILES LOADED ! $(FONT_RESET)    $(COUNT)/($(COUNT))"
+			@echo " " 
+			@echo "$(RED)$(NAME) compiled !$(DEF_COLOR)"
 
-$(NAME) : $(OBJ)
-	$(CC) $(OBJ) -pthread -o $(NAME)
+$(OBJ_DIR)%.o:	 $(SRC_DIR)%.c 
+			@$(CC) $(CFLAGS) $(ADDFLAGS) -c -o $@ $< 
+			@$(eval LOAD=$(shell echo $$(($(LOAD)+1))))
+			@$(eval SPACE=$(shell echo $$(($(SPACE)-1)))) 
+			@echo "\e[2A\e[K$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(RED)[Done]$(NOC)"
+			@/bin/echo -n "$(FONT_BOLD)Load Files |$(FONT_RESET)" 
+			@load=$(LOAD) ; while [ $${load} -gt 0 ] ; do\
+				/bin/echo -n "=" ;\
+				load=`expr $$load - 1`; \
+			done; \
+			true
+			@space=$(SPACE) ; while [ $${space} -gt 0 ] ; do\
+				/bin/echo -n " " ;\
+				space=`expr $$space - 1`; \
+			done; \
+			true
+			@/bin/echo -n "$(FONT_BOLD)|$(FONT_RESET)"
+			@echo "    $(RED)$(LOAD)/($(COUNT))"
 
-debug: $(NAME_DEBUG)
+#	BONUS
+bonus:		$(LIB) $(NAME_BONUS)
 
-$(NAME_DEBUG) : $(OBJ)
-	$(CC) $(OBJ) -pthread --fsanitize=leak -fsanitize=thread -o $(NAME)
+$(NAME_BONUS): $(OBJS_BONUS)
+			@$(CC) $(CFLAGS) $(ADDFLAGS) $^ -o $(NAME_BONUS) $(LIB)
+			@echo "$(RED)$(NAME_BONUS) BONUS compiled !$(CYAN)"
 
+$(OBJ_DIR)%.o:	 $(BONUS_DIR)%.c 
+			@mkdir -p $(OBJ_DIR)
+			@$(CC) $(CFLAGS) -c -o $@ $< 
+			@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(RED)[Done]$(NOC)"
 
-%.o: %.c
-	$(CC) $(FLAGS)
+#	 RULES
+obj:
+			@mkdir -p $(OBJ_DIR)
+			#@mkdir -p $(SUBDIR)
 
-clean :
-	rm -f $(OBJ)
-	rm -f $(BONUS_OBJ)
+clean:
+			@$(RM) $(OBJ_DIR) $(DEPS_DIR)
+			@echo "$(BLUE)$(NAME) object files cleaned!$(DEF_COLOR)"
 
-fclean : clean
-	rm -f $(NAME)
-	rm -f $(BONUS_NAME)
+fclean:		clean
+			@$(RM) -f $(NAME)
+			@$(RM) -f $(NAME_BONUS)
 
-bonus: $(BONUS_NAME)
+re:			fclean
+			@make --no-print-directory all
+			@echo "$(GREEN)Cleaned and rebuilt everything for $(NAME)!$(DEF_COLOR)"
 
-re : fclean all
+.PHONY: all clean fclean re	
 
+.SILENT: lib
 
-$(BONUS_NAME) : $(BONUS_OBJ)
-	$(CC) $(BONUS_OBJ) -o $(BONUS_NAME)
+-include $(DEPS)
 
+# COLORS
 
-.PHONY: all clean fclean phony bonus re debug
+NOC = \033[0m
+BOLD = \033[1m
+UNDERLINE = \033[4m
+DEF_COLOR = \033[0;39m
+GRAY = \033[0;90m
+RED = \033[0;91m
+GREEN = \033[0;92m
+YELLOW = \033[0;93m
+BLUE = \033[0;94m
+MAGENTA = \033[0;95m
+CYAN = \033[0;96m
+WHITE = \033[0;97m
+FONT_BOLD := $(shell tput bold)
+FONT_RED := $(shell tput setaf 1)
+FONT_RESET := $(shell tput sgr0)
+FONT_CYAN := $(shell tput setaf 6)

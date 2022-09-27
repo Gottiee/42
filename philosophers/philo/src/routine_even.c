@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:47:49 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/26 13:02:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/27 16:36:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	even_egual_zero(int philo_th, long long getime)
 	pthread_mutex_unlock(&(philo->m_stop));
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(0))
-		printf("%lld %d has taken a fork\n", get_mili() - philo->f_t, philo_th + 1);
+		printf("%lld %d has taken a fork\n", \
+get_mili() - philo->f_t, philo_th + 1);
 	pthread_mutex_unlock(&(philo->print));
 	return (0);
 }
@@ -102,7 +103,8 @@ int	even_thread(int philo_th, long long *getime)
 	pthread_mutex_unlock(&(philo->m_stop));
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(0))
-		printf("%lld %d has taken a fork\n", get_mili() - philo->f_t, philo_th + 1);
+		printf("%lld %d has taken a fork\n", \
+get_mili() - philo->f_t, philo_th + 1);
 	pthread_mutex_unlock(&(philo->print));
 	if (philo_th != 0)
 		if (even_none_egual_zero(philo_th, *getime) == -1)
@@ -111,12 +113,5 @@ int	even_thread(int philo_th, long long *getime)
 		if (even_egual_zero(philo_th, *getime) == -1)
 			return (-1);
 	pthread_mutex_lock(&(philo->m_stop));
-	if (get_mili() > *getime || !philo->stop)
-		return (end_unlock_both(philo_th));
-	pthread_mutex_unlock(&(philo->m_stop));
-	if (reset_time(philo_th, getime) == -1)
-		return (-1);
-	if (philo->eat[philo_th] == philo->nbr_eaten_meal)
-		return (-1);
-	return (0);
+	return (even_thread2(philo_th, getime));
 }

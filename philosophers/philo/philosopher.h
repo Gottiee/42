@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/26 13:01:17 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/27 18:09:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		error(int err);
 long		ft_atoi(const char *str);
 long long	get_mili(void);
 void		ft_bzero(int *s, int n);	
+int			free_philo(void);
 
 /*          --- Fonctions qui gere les structures ---     */
 
@@ -89,6 +90,17 @@ int			end_unlock_next_previous_forks(int philo_th);
 int			even_none_egual_zero(int philo_th, long long getime);
 int			even_thread(int philo_th, long long *getime);
 int			even_egual_zero(int philo_th, long long getime);
+
+/*Fichier: even.c*/
+int			even_thread2(int philo_th, long long *getime);
+int			routine2(int philo_th, long long *getime);
+int			expend_routine(int philo_th, long long *getime);
+
+/*Fichier: while.c*/
+int			stop_philo(void);
+void		count_eat(int j, int *bolo2);
+void		sleep2(int philo_th);
+int			sleep3(int philo_th, long long *getime);
 
 /*Fichier: routine_even2.c*/
 int			end_unlock_both(int philo_th);
