@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:45:13 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/27 17:50:05 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/28 11:05:19 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	odd_expend(int philo_th, long long *getime)
 	philo = get_struct();
 	pthread_mutex_lock(philo->fork + philo_th - 1);
 	pthread_mutex_lock(&(philo->m_stop));
-	if (!philo->stop || get_mili() > *getime)
+	if (!philo->stop || get_mili() >= *getime)
 	{
 		pthread_mutex_unlock(&(philo->m_stop));
 		return (end_unlock_previous_fork(philo_th));
@@ -48,7 +48,7 @@ get_mili() - philo->f_t, philo_th + 1);
 	pthread_mutex_unlock(&(philo->print));
 	pthread_mutex_lock(philo->fork + philo_th);
 	pthread_mutex_lock(&(philo->m_stop));
-	if (!philo->stop || get_mili() > *getime)
+	if (!philo->stop || get_mili() >= *getime)
 	{
 		pthread_mutex_unlock(&(philo->m_stop));
 		return (-1);
@@ -68,7 +68,7 @@ int	odd_expend2(int philo_th, long long *getime)
 get_mili() - philo->f_t, philo_th + 1);
 	pthread_mutex_unlock(&(philo->print));
 	pthread_mutex_lock(&(philo->m_stop));
-	if (get_mili() > *getime || !philo->stop)
+	if (get_mili() >= *getime || !philo->stop)
 	{
 		pthread_mutex_unlock(&(philo->m_stop));
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:47:49 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/27 16:36:41 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/28 11:04:59 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	even_none_egual_zero(int philo_th, long long getime)
 	philo = get_struct();
 	pthread_mutex_lock(philo->fork + philo_th - 1);
 	pthread_mutex_lock(&(philo->m_stop));
-	if (!philo->stop || get_mili() > getime)
+	if (!philo->stop || get_mili() >= getime)
 	{
 		pthread_mutex_unlock(&(philo->m_stop));
 		return (end_unlock_next_previous_forks(philo_th));
@@ -75,7 +75,7 @@ int	even_egual_zero(int philo_th, long long getime)
 	philo = get_struct();
 	pthread_mutex_lock(philo->fork + philo->nbr_philo - 1);
 	pthread_mutex_lock(&(philo->m_stop));
-	if (!philo->stop || get_mili() > getime)
+	if (!philo->stop || get_mili() >= getime)
 	{
 		pthread_mutex_unlock(&(philo->m_stop));
 		pthread_mutex_unlock(philo->fork + philo->nbr_philo - 1);
@@ -98,7 +98,7 @@ int	even_thread(int philo_th, long long *getime)
 	philo = get_struct();
 	pthread_mutex_lock(philo->fork + philo_th);
 	pthread_mutex_lock(&(philo->m_stop));
-	if (!philo->stop || get_mili() > *getime)
+	if (!philo->stop || get_mili() >= *getime)
 		return (end_unlock_next_fork(philo_th));
 	pthread_mutex_unlock(&(philo->m_stop));
 	pthread_mutex_lock(&(philo->print));

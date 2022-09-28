@@ -95,6 +95,7 @@ $(OBJ_DIR)%.o:	 $(BONUS_DIR)%.c
 #	 RULES
 obj:
 			@mkdir -p $(OBJ_DIR)
+			@echo test
 			#@mkdir -p $(SUBDIR)
 
 clean:
