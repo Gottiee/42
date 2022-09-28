@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:44:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/02 14:15:12 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/27 17:37:38 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,9 @@ int	main(int argc, char **argv)
 	philo->eat = malloc(sizeof(int) * (philo->nbr_philo + 1));
 	philo->mutex_eat = malloc(sizeof(pthread_mutex_t) * (philo->nbr_philo + 1));
 	philo->m_dead = malloc(sizeof(pthread_mutex_t) * (philo->nbr_philo + 1));
-	if (!philo->fork || !philo->dead || !philo->eat || !philo->mutex_eat ||
-		!philo->m_dead)
-	{
-		free(philo->fork);
-		free(philo->mutex_eat);
-		free(philo->eat);
-		free(philo->dead);
-		free(philo->m_dead);
-		return (1);
-	}
+	if (!philo->fork || !philo->dead || !philo->eat || !philo->mutex_eat
+		|| !philo->m_dead)
+		return (free_philo());
 	init_struc(argv);
 	if (main2() == -1)
 		return (2);
@@ -73,28 +66,14 @@ void	while_philo(int bolo, int i, int j, int bolo2)
 			if (philo->dead[i] == 0)
 				bolo = 1;
 			pthread_mutex_unlock(philo->m_dead + i);
-		} 
+		}
 		j = -1;
 		philo->count_eat = 0;
-
-		while(++j < philo->nbr_philo)
-		{
-			pthread_mutex_lock(philo->mutex_eat + j);
-			if (philo->eat[j] >= philo->nbr_eaten_meal)
-			{
-				philo->count_eat++;
-				bolo2 = reduce_while();
-			}
-			pthread_mutex_unlock(philo->mutex_eat + j);
-		}
+		while (++j < philo->nbr_philo)
+			count_eat(j, &bolo2);
 		if (bolo)
-		{
-			pthread_mutex_lock(&(philo->m_stop));
-			philo->stop = 0;
-			pthread_mutex_unlock(&(philo->m_stop));
-			usleep(100);
-			break ;
-		}
+			if (stop_philo() == -1)
+				break ;
 		if (bolo2)
 			break ;
 	}
@@ -124,34 +103,20 @@ void	*routine(void *arg)
 	t_philo		*philo;
 	int			philo_th;
 	long long	getime;
+	int			status;
 
 	philo_th = *(int *)arg;
 	philo = get_struct();
 	getime = get_mili() + (long long)philo->time_to_die;
 	while (1)
 	{
-		if (philo_th % 2 == 0 && (get_mili() < getime) && philo->stop)
-			if (even_thread(philo_th, &getime) == -1)
-				return (NULL);
-		if (philo_th % 2 != 0 && (get_mili() < getime) && philo->stop)
-			if (odd_thread(philo_th, &getime) == -1)
-				return (NULL);
-		if (sleep_and_think(philo_th, &getime) == -1)
+		if (expend_routine(philo_th, &getime) == -1)
 			return (NULL);
-		pthread_mutex_lock(philo->m_dead + philo_th);
-		if (!philo->dead[philo_th])
-		{
-			pthread_mutex_unlock(philo->m_dead + philo_th);
+		status = routine2(philo_th, &getime);
+		if (status == -1)
 			break ;
-		}
-		pthread_mutex_unlock(philo->m_dead + philo_th);
-		pthread_mutex_lock(&(philo->m_stop));
-		if (!philo->stop)
-		{
-			pthread_mutex_unlock(&(philo->m_stop));
-			break ;
-		}
-		pthread_mutex_unlock(&(philo->m_stop));
+		else if (status == -2)
+			return (NULL);
 	}
 	pthread_mutex_lock(philo->m_dead + philo_th);
 	philo->dead[philo_th] = 0;

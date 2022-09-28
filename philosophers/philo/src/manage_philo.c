@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:52:44 by eedy              #+#    #+#             */
-/*   Updated: 2022/08/02 14:20:18 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/28 17:32:50 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	init_manage(void)
 	if (philo->nbr_philo == 1)
 	{
 		usleep(philo->time_to_die * 1000);
-		printf("%lld %d died\n", get_mili() - philo->f_t, 0);
+		printf("%lld %d died\n", get_mili() - philo->f_t, 1);
 		return (-1);
 	}
 	index = malloc(sizeof(int) * (philo->nbr_philo + 1));

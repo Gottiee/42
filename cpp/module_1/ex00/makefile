@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= philo
+NAME		= megaphone
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -8,38 +8,28 @@ OBJ_DIR		= obj/
 SUBDIR		= 
 BONUS_DIR	= src_bonus/
 
-ADDFLAGS	= -pthread
+ADDFLAGS	= 
 
 # SOURCES
 
-SRC_FILES 		= main \
-error \
-while \
-utils \
-struc \
-even \
-routine_even \
-routine_even2 \
-routine_odd \
-manage_philo
-
+SRC_FILES 		= test
 SRC_FILES_BONUS	=
 
 # SOURCES SET UP
 
-C_FILES		=	$(addsuffix .c, $(SRC_FILES))
+C_FILES		=	$(addsuffix .cpp, $(SRC_FILES))
 SRCS		=	$(addprefix $(SRC_DIR), $(C_FILES))
-OBJS		=	$(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
+OBJS		=	$(addprefix $(OBJ_DIR), $(C_FILES:.cpp=.o))
 DEPS		=	$(OBJS:.o=.d)
 
-C_BONUS			=	$(addsuffix _bonus.c, $(SRC_FILES_BONUS))
+C_BONUS			=	$(addsuffix _bonus.cpp, $(SRC_FILES_BONUS))
 SRCS_BONUS		=	$(addprefix $(BONUS_DIR), $(C_BONUS))
-OBJS_BONUS		=	$(addprefix $(OBJ_DIR), $(C_BONUS:.c=.o))
+OBJS_BONUS		=	$(addprefix $(OBJ_DIR), $(C_BONUS:.cpp=.o))
 DEPS_BONUS		=	$(OBJS_BONUS:.o=.d)
 
 # FLAGS & UTILS
-CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -g -I./srcs/includes -MMD -MP
+CC			= c++
+CFLAGS		= -Wall -Werror -Wextra -std=c++98 -g -I./srcs/includes -MMD -MP
 RM			= rm -rf
 AR			= ar rcs
 SAN			= -fsanitize=address
@@ -61,7 +51,7 @@ $(NAME):	$(OBJS)
 			@echo " " 
 			@echo "$(RED)$(NAME) compiled !$(DEF_COLOR)"
 
-$(OBJ_DIR)%.o:	 $(SRC_DIR)%.c 
+$(OBJ_DIR)%.o:	 $(SRC_DIR)%.cpp
 			@$(CC) $(CFLAGS) $(ADDFLAGS) -c -o $@ $< 
 			@$(eval LOAD=$(shell echo $$(($(LOAD)+1))))
 			@$(eval SPACE=$(shell echo $$(($(SPACE)-1)))) 
@@ -87,7 +77,7 @@ $(NAME_BONUS): $(OBJS_BONUS)
 			@$(CC) $(CFLAGS) $(ADDFLAGS) $^ -o $(NAME_BONUS) $(LIB)
 			@echo "$(RED)$(NAME_BONUS) BONUS compiled !$(CYAN)"
 
-$(OBJ_DIR)%.o:	 $(BONUS_DIR)%.c 
+$(OBJ_DIR)%.o:	 $(BONUS_DIR)%.cpp
 			@mkdir -p $(OBJ_DIR)
 			@$(CC) $(CFLAGS) -c -o $@ $< 
 			@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(RED)[Done]$(NOC)"
@@ -96,7 +86,6 @@ $(OBJ_DIR)%.o:	 $(BONUS_DIR)%.c
 obj:
 			@mkdir -p $(OBJ_DIR)
 			@echo test
-			#@mkdir -p $(SUBDIR)
 
 clean:
 			@$(RM) $(OBJ_DIR) $(DEPS_DIR)
