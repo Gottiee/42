@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:31:24 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/27 18:08:23 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/28 17:19:12 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	sleep2(int philo_th)
 
 	philo = get_struct();
 	pthread_mutex_lock(&(philo->m_stop));
-	if (philo->stop)
+	if (philo->stop && philo->time_to_sleep < philo->time_to_die - philo->time_to_eat)
 	{
 		pthread_mutex_unlock(&(philo->m_stop));
 		pthread_mutex_lock(&(philo->print));
@@ -55,6 +55,18 @@ void	sleep2(int philo_th)
 get_mili() - philo->f_t, philo_th + 1);
 		pthread_mutex_unlock(&(philo->print));
 		usleep(philo->time_to_sleep * 1000);
+	}
+	else if (philo->time_to_sleep >= philo->time_to_die - philo->time_to_eat)
+	{
+		pthread_mutex_unlock(&(philo->m_stop));
+		usleep((philo->time_to_die - philo->time_to_eat) * 1000);
+		pthread_mutex_lock(&(philo->print));
+		if (tchek_print(DEAD))
+			printf("%lld %d died\n", get_mili() - philo->f_t, philo_th + 1);
+		pthread_mutex_lock(philo->m_dead + philo_th);
+		philo->dead[philo_th] = 0;
+		pthread_mutex_unlock(philo->m_dead + philo_th);
+		pthread_mutex_unlock(&(philo->print));
 	}
 	else
 		pthread_mutex_unlock(&(philo->m_stop));

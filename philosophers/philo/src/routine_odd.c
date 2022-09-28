@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:45:13 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/28 11:05:19 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/28 17:29:27 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	odd_thread(int philo_th, long long *getime)
 		return (end_unlock_next_previous_forks(philo_th));
 	if (odd_expend2(philo_th, getime) == -1)
 		return (end_unlock_next_previous_forks(philo_th));
-	*getime = get_mili() + (long long)philo->time_to_die + 1;
+	*getime = get_mili() + (long long)philo->time_to_die + 10;
 	usleep(philo->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->fork + philo_th);
 	pthread_mutex_unlock(philo->fork + philo_th - 1);
