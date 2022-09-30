@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:52:44 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/28 17:32:50 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/30 13:00:35 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	reduce_while(void)
 	t_philo	*philo;
 
 	philo = get_struct();
-	if (philo->count_eat == philo->nbr_philo)
+	if (philo->count_eat >= philo->nbr_philo)
 		return (1);
 	return (0);
 }
