@@ -6,15 +6,19 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:51:09 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/28 15:23:42 by eedy             ###   ########.fr       */
+/*   Updated: 2022/09/30 15:24:41 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
 
+void test(vector<int> a)
+{
+	
+}
+
 int main()
 {
-	long long tailleTableau(9223372036854775807);   //La taille du tableau
-	double anglesIcosagone[tailleTableau];
-	(void)anglesIcosagone;
+	vector<int> a(2);
+	test
 	return (0);
 }
