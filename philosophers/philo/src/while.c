@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:31:24 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/29 19:18:24 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/03 18:06:55 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	sleep3(int philo_th, long long *getime)
 			printf("%lld %d is thinking\n", \
 get_mili() - philo->f_t, philo_th + 1);
 		pthread_mutex_unlock(&(philo->print));
+		think_expended();
 	}
 	else
 	{

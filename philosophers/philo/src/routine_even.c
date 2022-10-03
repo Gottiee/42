@@ -56,6 +56,7 @@ int	even_none_egual_zero(int philo_th, long long getime)
 	pthread_mutex_lock(&(philo->m_stop));
 	if (!philo->stop || get_mili() >= getime)
 	{
+			printf("philo %d arrive ici philo->stop = %d\n", philo_th, philo->stop);
 		pthread_mutex_unlock(&(philo->m_stop));
 		return (end_unlock_next_previous_forks(philo_th));
 	}
@@ -105,6 +106,8 @@ int	even_thread(int philo_th, long long *getime)
 	if (tchek_print(0))
 		printf("%lld %d has taken a fork\n", \
 get_mili() - philo->f_t, philo_th + 1);
+	else
+		printf("wtf\n");
 	pthread_mutex_unlock(&(philo->print));
 	if (philo_th != 0)
 		if (even_none_egual_zero(philo_th, *getime) == -1)

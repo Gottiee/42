@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:45:13 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/30 13:38:53 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/03 18:35:43 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	odd_expend(int philo_th, long long *getime)
 
 	philo = get_struct();
 	pthread_mutex_lock(philo->fork + philo_th - 1);
-	pthread_mutex_lock(&(philo->m_stop));
+	/*pthread_mutex_lock(&(philo->m_stop));
 	if (!philo->stop || get_mili() >= *getime)
 	{
 		pthread_mutex_unlock(&(philo->m_stop));
 		return (end_unlock_previous_fork(philo_th));
 	}
-	pthread_mutex_unlock(&(philo->m_stop));
+	pthread_mutex_unlock(&(philo->m_stop));*/
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(0))
 		printf("%lld %d has taken a fork\n", \
@@ -74,6 +74,8 @@ get_mili() - philo->f_t, philo_th + 1);
 		return (-1);
 	}
 	pthread_mutex_unlock(&(philo->m_stop));
+	if (philo->time_to_eat > philo->time_to_die)
+		return (eat_death(philo_th, 0));
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(0))
 		printf("%lld %d is eating\n", get_mili() - philo->f_t, philo_th + 1);

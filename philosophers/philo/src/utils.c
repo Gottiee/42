@@ -6,11 +6,22 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 18:08:01 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/27 16:45:09 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/03 18:07:57 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosopher.h"
+
+void	think_expended(void)
+{
+	t_philo	*philo;
+
+	philo = get_struct();
+	if ((philo->time_to_die - \
+	(philo->time_to_eat + philo->time_to_sleep) - 100) * 1000 > 0)
+		usleep((philo->time_to_die - \
+	(philo->time_to_eat + philo->time_to_sleep) - 100) * 1000);
+}
 
 int	free_philo(void)
 {

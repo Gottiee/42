@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= megaphone
+NAME		= phone_book
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -12,7 +12,7 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= megaphone
+SRC_FILES 		= phone_book
 SRC_FILES_BONUS	=
 
 # SOURCES SET UP
