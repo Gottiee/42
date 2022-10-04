@@ -12,7 +12,9 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= phone_book
+SRC_FILES 		= phone_book \
+class
+
 SRC_FILES_BONUS	=
 
 # SOURCES SET UP
@@ -46,7 +48,6 @@ all:		 obj $(NAME)
 			
 
 $(NAME):	$(OBJS)
-			@echo "             "
 			@$(CC) $(CFLAGS) $^ -o $@ $(ADDFLAGS) 
 			@echo "\e[1A\e[K$(FONT_BOLD)FILES LOADED ! $(FONT_RESET)    $(COUNT)/($(COUNT))"
 			@echo " " 
