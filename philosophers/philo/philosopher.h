@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/03 19:08:36 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/04 10:59:07 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int			sleep3(int philo_th, long long *getime);
 /*Fichier: routine_even2.c*/
 int			end_unlock_both(int philo_th);
 int			reset_time(int philo_th, long long *getime);
+void		eat_death2(int philo_th);
 
 /*Fichier: routine_odd.c*/
 int			odd_thread(int philo_th, long long *getime);

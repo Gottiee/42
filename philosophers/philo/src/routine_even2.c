@@ -6,11 +6,21 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:20:56 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/28 17:29:16 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/04 10:58:28 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosopher.h"
+
+void	eat_death2(int philo_th)
+{
+	t_philo	*philo;
+
+	philo = get_struct();
+	pthread_mutex_lock(philo->m_dead + philo_th);
+	philo->dead[philo_th] = 0;
+	pthread_mutex_unlock(philo->m_dead + philo_th);
+}
 
 int	end_unlock_both(int philo_th)
 {

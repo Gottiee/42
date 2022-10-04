@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:33:03 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/03 19:28:10 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/04 10:59:33 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,11 @@ int	eat_death(int philo_th, int bolo)
 	t_philo	*philo;
 
 	philo = get_struct();
-	usleep(100);
+	usleep((philo->time_to_die) * 1000);
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(DEAD))
 	{
 		pthread_mutex_unlock(&(philo->print));
-		usleep((philo->time_to_die) * 1000);
 		pthread_mutex_lock(&(philo->print));
 		printf("%lld %d died\n", get_mili() - philo->f_t, philo_th + 1);
 		pthread_mutex_unlock(&(philo->print));
@@ -95,11 +94,9 @@ int	eat_death(int philo_th, int bolo)
 		if (philo_th != 0)
 			pthread_mutex_unlock(philo->fork + philo_th - 1);
 		else
-		pthread_mutex_unlock(philo->fork + philo->nbr_philo - 1);
+			pthread_mutex_unlock(philo->fork + philo->nbr_philo - 1);
 	}
-	pthread_mutex_lock(philo->m_dead + philo_th);
-	philo->dead[philo_th] = 0;
-	pthread_mutex_unlock(philo->m_dead + philo_th);
+	eat_death2(philo_th);
 	return (-1);
 }
 
@@ -108,11 +105,9 @@ int	even_thread2(int philo_th, long long *getime)
 	t_philo	*philo;
 
 	philo = get_struct();
-	
 	if (get_mili() > *getime || !philo->stop)
 		return (end_unlock_both(philo_th));
 	pthread_mutex_unlock(&(philo->m_stop));
-	
 	if (philo->time_to_eat <= philo->time_to_die)
 	{
 		if (reset_time(philo_th, getime) == -1)
