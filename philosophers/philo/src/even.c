@@ -77,7 +77,7 @@ int	eat_death(int philo_th, int bolo)
 	t_philo	*philo;
 
 	philo = get_struct();
-	usleep((philo->time_to_die) * 1000);
+	ft_usleep((philo->time_to_die) * 1000, NULL, philo_th);
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(DEAD))
 	{

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:31:24 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/03 18:06:55 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/05 14:16:10 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	sleep3(int philo_th, long long *getime)
 			printf("%lld %d is thinking\n", \
 get_mili() - philo->f_t, philo_th + 1);
 		pthread_mutex_unlock(&(philo->print));
-		think_expended();
+		think_expended(getime, philo_th);
 	}
 	else
 	{
@@ -47,7 +47,7 @@ void	sleep_extension(int philo_th)
 
 	philo = get_struct();
 	pthread_mutex_unlock(&(philo->m_stop));
-	usleep((philo->time_to_die - philo->time_to_eat) * 1000);
+	ft_usleep((philo->time_to_die - philo->time_to_eat) * 1000, NULL, philo_th);
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(DEAD))
 		printf("%lld %d died\n", get_mili() - philo->f_t, philo_th + 1);
@@ -57,7 +57,7 @@ void	sleep_extension(int philo_th)
 	pthread_mutex_unlock(&(philo->print));
 }
 
-void	sleep2(int philo_th)
+void	sleep2(int philo_th, long long *getime)
 {
 	t_philo	*philo;
 
@@ -72,7 +72,7 @@ void	sleep2(int philo_th)
 			printf("%lld %d is sleeping\n", \
 get_mili() - philo->f_t, philo_th + 1);
 		pthread_mutex_unlock(&(philo->print));
-		usleep(philo->time_to_sleep * 1000);
+		ft_usleep(philo->time_to_sleep * 1000, getime, philo_th);
 	}
 	else if (philo->time_to_sleep >= philo->time_to_die - philo->time_to_eat)
 		sleep_extension(philo_th);

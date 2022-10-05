@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:52:44 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/30 13:00:35 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/05 17:16:04 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	init_manage(void)
 	philo->f_t = get_mili();
 	if (philo->nbr_philo == 1)
 	{
+		printf("%lld %d has taken a fork\n", get_mili() - philo->f_t, 1);
 		usleep(philo->time_to_die * 1000);
 		printf("%lld %d died\n", get_mili() - philo->f_t, 1);
 		return (-1);

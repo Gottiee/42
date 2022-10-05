@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:46 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/27 16:43:22 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/05 17:13:45 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,30 @@ t_philo	*get_struct(void)
 	static t_philo	philo;	
 
 	return (&philo);
+}
+
+void	ft_usleep(long long time, long long *getime, int philo_th)
+{
+	long long	stop;
+	t_philo		*philo;
+
+	time /= 1000;
+	philo = get_struct();
+	stop = get_mili() + time;
+	while (get_mili() < stop)
+	{
+		pthread_mutex_lock(&(philo->m_stop));
+		if (getime && get_mili() >= *getime)
+		{
+			sleep_dead(philo_th);
+			return ;
+		}
+		if (!philo->stop)
+		{
+			pthread_mutex_unlock(&(philo->m_stop));
+			return ;
+		}
+		pthread_mutex_unlock(&(philo->m_stop));
+		usleep(500);
+	}
 }

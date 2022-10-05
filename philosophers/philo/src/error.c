@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:59:24 by eedy              #+#    #+#             */
-/*   Updated: 2022/07/28 17:04:54 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/05 16:48:48 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,19 @@ void	error(int err)
 		free(philo->dead);
 		exit(1);
 	}
+}
+
+void	sleep_dead(int philo_th)
+{
+	t_philo	*philo;
+
+	philo = get_struct();
+	pthread_mutex_unlock(&(philo->m_stop));
+	pthread_mutex_lock(&(philo->print));
+	if (tchek_print(DEAD))
+		printf("%lld %d died\n", get_mili() - philo->f_t, philo_th + 1);
+	pthread_mutex_unlock(&(philo->print));
+	pthread_mutex_lock(philo->m_dead + philo_th);
+	philo->dead[philo_th] = 0;
+	pthread_mutex_unlock(philo->m_dead + philo_th);
 }

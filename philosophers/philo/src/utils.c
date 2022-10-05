@@ -12,15 +12,13 @@
 
 #include "../philosopher.h"
 
-void	think_expended(void)
+void	think_expended(long long *getime, int philo_th)
 {
 	t_philo	*philo;
 
 	philo = get_struct();
-	if ((philo->time_to_die - \
-	(philo->time_to_eat + philo->time_to_sleep) - 100) * 1000 > 0)
-		usleep((philo->time_to_die - \
-	(philo->time_to_eat + philo->time_to_sleep) - 100) * 1000);
+		ft_usleep((philo->time_to_eat - \
+philo->time_to_sleep) * 1000, getime, philo_th -1);
 }
 
 int	free_philo(void)

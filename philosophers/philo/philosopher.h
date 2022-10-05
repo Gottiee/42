@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/04 10:59:07 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/05 15:20:21 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <string.h>
+# include <limits.h>
 
 # define ARG_PRB 1
 # define ATOY 2
@@ -66,6 +67,7 @@ int			init_manage(void);
 
 /*Fichier: error.c*/
 void		error(int err);
+void		sleep_dead(int philo_th);
 
 /*          --- Fonctions utils---     */
 
@@ -74,7 +76,7 @@ long		ft_atoi(const char *str);
 long long	get_mili(void);
 void		ft_bzero(int *s, int n);	
 int			free_philo(void);
-void		think_expended(void);
+void		think_expended(long long *getime, int philo_th);
 
 /*          --- Fonctions qui gere les structures ---     */
 
@@ -82,6 +84,7 @@ void		think_expended(void);
 void		destroy_mutex(t_philo *philo);
 void		init_struc(char **argv);	
 t_philo		*get_struct(void);
+void		ft_usleep(long long time, long long *getime, int philo_th);
 
 /*          --- Fonctions qui gere la routine des threads---     */
 
@@ -101,7 +104,7 @@ int			eat_death(int philo_th, int bolo);
 /*Fichier: while.c*/
 int			stop_philo(void);
 void		count_eat(int j, int *bolo2);
-void		sleep2(int philo_th);
+void		sleep2(int philo_th, long long *getime);
 int			sleep3(int philo_th, long long *getime);
 
 /*Fichier: routine_even2.c*/

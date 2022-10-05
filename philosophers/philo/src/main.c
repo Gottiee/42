@@ -108,6 +108,8 @@ void	*routine(void *arg)
 	philo_th = *(int *)arg;
 	philo = get_struct();
 	getime = get_mili() + (long long)philo->time_to_die;
+	if (philo_th % 2 != 0)
+		usleep(100);
 	while (1)
 	{
 		if (expend_routine(philo_th, &getime) == -1)

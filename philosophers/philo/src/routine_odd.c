@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:45:13 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/04 10:56:01 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/05 17:14:13 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	odd_expend(int philo_th, long long *getime)
 		pthread_mutex_unlock(&(philo->m_stop));
 		return (end_unlock_previous_fork(philo_th));
 	}
-	pthread_mutex_unlock(&(philo->m_stop));
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(0))
 		printf("%lld %d has taken a fork\n", \
@@ -94,8 +93,8 @@ int	odd_thread(int philo_th, long long *getime)
 		return (end_unlock_next_previous_forks(philo_th));
 	if (odd_expend2(philo_th, getime) == -1)
 		return (end_unlock_next_previous_forks(philo_th));
-	*getime = get_mili() + (long long)philo->time_to_die + 10;
-	usleep(philo->time_to_eat * 1000);
+	*getime = get_mili() + (long long)philo->time_to_die;
+	ft_usleep(philo->time_to_eat * 1000, getime, philo_th);
 	pthread_mutex_unlock(philo->fork + philo_th);
 	pthread_mutex_unlock(philo->fork + philo_th - 1);
 	pthread_mutex_lock(philo->mutex_eat + philo_th);
