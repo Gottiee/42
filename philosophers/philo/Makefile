@@ -43,6 +43,7 @@ CFLAGS		= -Wall -Werror -Wextra -g -I./srcs/includes -MMD -MP
 RM			= rm -rf
 AR			= ar rcs
 SAN			= -fsanitize=address
+THREAD		= -fsanitize=thread
 
 #	LOAD BAR
 

@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:51:47 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/05 15:20:21 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/06 12:42:29 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		init_while(void);
 /*Fichier: manage_philo.c*/
 int			reduce_while(void);
 int			main2(void);
-int			init_manage(void);
+int			init_manage(int i);
 
 /*          --- Fonctions qui gere les erreurs ---     */
 

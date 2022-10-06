@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:20:56 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/05 15:21:11 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/06 12:43:17 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	reset_time(int philo_th, long long *getime)
 	pthread_mutex_lock(philo->mutex_eat + philo_th);
 	philo->eat[philo_th] += 1;
 	pthread_mutex_unlock(philo->mutex_eat + philo_th);
-	*getime = get_mili() + (long long)philo->time_to_die /*+ 10*/;
+	*getime = get_mili() + (long long)philo->time_to_die;
 	ft_usleep(philo->time_to_eat * 1000, getime, philo_th);
 	pthread_mutex_unlock(philo->fork + philo_th);
 	if (philo_th != 0)

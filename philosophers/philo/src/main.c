@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:44:26 by eedy              #+#    #+#             */
-/*   Updated: 2022/09/30 13:12:35 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/06 13:35:33 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,11 @@ void	manage_philo(void)
 {
 	t_philo	*philo;
 	int		i;
+	int		j;
 
+	j = -1;
 	philo = get_struct();
-	if (init_manage() == -1)
+	if (init_manage(j) == -1)
 		return ;
 	init_while();
 	if (philo->nbr_philo > 5000)
@@ -109,7 +111,7 @@ void	*routine(void *arg)
 	philo = get_struct();
 	getime = get_mili() + (long long)philo->time_to_die;
 	if (philo_th % 2 != 0)
-		usleep(100);
+		usleep(1000);
 	while (1)
 	{
 		if (expend_routine(philo_th, &getime) == -1)

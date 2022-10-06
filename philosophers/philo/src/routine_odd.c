@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:45:13 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/05 17:14:13 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/06 13:16:56 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ int	odd_expend(int philo_th, long long *getime)
 
 	philo = get_struct();
 	pthread_mutex_lock(philo->fork + philo_th - 1);
-	if (!philo->stop || get_mili() >= *getime)
-	{
-		pthread_mutex_unlock(&(philo->m_stop));
-		return (end_unlock_previous_fork(philo_th));
-	}
 	pthread_mutex_lock(&(philo->print));
 	if (tchek_print(0))
 		printf("%lld %d has taken a fork\n", \

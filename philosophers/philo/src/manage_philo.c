@@ -6,7 +6,7 @@
 /*   By: eedy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:52:44 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/05 17:16:04 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/06 12:41:55 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ int	main2(void)
 	return (0);
 }
 
-int	init_manage(void)
+int	init_manage(int i)
 {
 	t_philo	*philo;
-	int		i;
 	int		*index;
 
 	philo = get_struct();

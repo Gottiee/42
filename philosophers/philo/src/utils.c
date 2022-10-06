@@ -6,7 +6,7 @@
 /*   By: eedy <eliot.edy@icloud.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 18:08:01 by eedy              #+#    #+#             */
-/*   Updated: 2022/10/04 16:40:20 by eedy             ###   ########.fr       */
+/*   Updated: 2022/10/06 13:39:29 by eedy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,21 @@
 void	think_expended(long long *getime, int philo_th)
 {
 	t_philo	*philo;
+	int		time_sleep;
+	int		else_time;
 
 	philo = get_struct();
+	else_time = philo->time_to_die - \
+philo->time_to_eat - philo->time_to_sleep - 100;
+	time_sleep = philo->time_to_eat - philo->time_to_sleep;
+	if (time_sleep <= 0)
+	{
+		if (else_time > 0)
+			ft_usleep(else_time * 1000, getime, philo_th);
+	}
+	else
 		ft_usleep((philo->time_to_eat - \
-philo->time_to_sleep) * 1000, getime, philo_th -1);
+philo->time_to_sleep) * 1000 - 10, getime, philo_th);
 }
 
 int	free_philo(void)
