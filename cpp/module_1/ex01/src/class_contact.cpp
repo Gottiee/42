@@ -15,7 +15,11 @@ void	Contact::print_contact(int index)
 	std::cout << "| " << index << "          |";
 
 	//print lastname (verif si c'est plus grand que 9 si non pprint puis comleter de la taille, si oui print que 9 et ecrire point)
-	if (this->)
+	std::cout << "| ";
+	if (this->last_name.size < 10)
+	{
+		std::cout << 
+	}
 }
 
 /*ajouter un contacte*/

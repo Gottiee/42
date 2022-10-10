@@ -16,11 +16,11 @@ void	PhoneBook::search_contact(void)
 		std::cout << std::endl << " > Vous avez aucun contact, \"ADD\" first !" << std::endl << std::endl;
 		return ;
 	}
-	//print l'entete avec les indications
+	//print l'entete avec les indications (index, first name, last, nick);
 	// print le haut du tableau ---
 	while (++i < this->nbr_of_contact)
 	{
-		this->contact[i].print_contact(void);
+		this->contact[i].print_contact(i);
 		//print la ligne du dessous a chaque fois
 	}
 }
