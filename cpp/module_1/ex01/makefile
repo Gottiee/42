@@ -13,7 +13,8 @@ ADDFLAGS	=
 # SOURCES
 
 SRC_FILES 		= phone_book \
-class
+class_contact \
+class_phone_book
 
 SRC_FILES_BONUS	=
 
