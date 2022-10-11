@@ -6,20 +6,35 @@ Contact::Contact()
 	
 }
 
+/*prends la string et la print selon la norme du tableau*/
+void	print_this_str(std::string str)
+{
+	int size;
+
+	size = str.size();
+	std::cout << " ";
+	if (size < 10)
+	{
+		std::cout << str;
+		while (size <= 11)
+		{
+			std::cout << " ";
+			size ++;
+		}
+		std::cout << "|";
+	}
+	else 
+		std::cout << str.substr(0, 9) << ". |";
+}
+
 /*print le tableau du contact[x]*/
 void	Contact::print_contact(int index)
 {
-	int i = -1;
-
-	//print index
 	std::cout << "| " << index << "          |";
-
-	//print lastname (verif si c'est plus grand que 9 si non pprint puis comleter de la taille, si oui print que 9 et ecrire point)
-	std::cout << "| ";
-	if (this->last_name.size < 10)
-	{
-		std::cout << 
-	}
+	print_this_str(this->first_name);
+	print_this_str(this->last_name);
+	print_this_str(this->nick_name);
+	std::cout << std::endl;
 }
 
 /*ajouter un contacte*/

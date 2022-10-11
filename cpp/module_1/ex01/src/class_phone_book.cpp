@@ -6,6 +6,23 @@ PhoneBook::PhoneBook(): nbr_of_contact(0)
 
 }
 
+/*print l'entete du tableau de SEARCH*/
+void	print_entete(void)
+{
+	int i = -1;
+	int k = -1;
+	//print le haut du tab
+	while (++ k < 4)
+	{
+		std::cout << "|";
+		while (++i < 12)
+			std::cout << " ";
+		i = -1;
+	}
+	std::cout << std::endl;
+	std::cout << "| INDEX";
+}
+
 /*afficher les contactes*/
 void	PhoneBook::search_contact(void)
 {
@@ -16,8 +33,7 @@ void	PhoneBook::search_contact(void)
 		std::cout << std::endl << " > Vous avez aucun contact, \"ADD\" first !" << std::endl << std::endl;
 		return ;
 	}
-	//print l'entete avec les indications (index, first name, last, nick);
-	// print le haut du tableau ---
+	print_entete();
 	while (++i < this->nbr_of_contact)
 	{
 		this->contact[i].print_contact(i);
