@@ -26,6 +26,11 @@ int main(void)
 			phoneBook.add_conctact();
 		if (cin == search)
 			phoneBook.search_contact();
+		if (std::cin.eof())
+		{
+			std::cout << std::endl << "> Ctrl-d close the program !" << std::endl;
+			return (1);
+		}
 	}
 	return (0);
 }

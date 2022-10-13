@@ -4,14 +4,16 @@
 # include <iostream>
 # include <iomanip>
 # include <string>
+# include <cstdlib>
 
 class Contact
 {
 	public:
 
 	Contact();
-	void	add(void);
+	int		add(void);
 	void	print_contact(int index);
+	void	print_search_contact(void);
 
 	private:
 	std::string	first_name;
