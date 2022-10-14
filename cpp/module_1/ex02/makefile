@@ -31,7 +31,7 @@ DEPS_BONUS		=	$(OBJS_BONUS:.o=.d)
 
 # FLAGS & UTILS
 CC			= c++
-CFLAGS		= -std=c++98 -g -I./srcs/includes -MMD -MP
+CFLAGS		= -Wall -Werror -Wextra -std=c++98 -g -I./srcs/includes -MMD -MP
 RM			= rm -rf
 AR			= ar rcs
 SAN			= -fsanitize=address
