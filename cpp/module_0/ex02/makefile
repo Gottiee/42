@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= zombie
+NAME		= banque
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -12,10 +12,8 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= Zombie \
-main \
-newZombie \
-randomChump
+SRC_FILES 		= tests \
+class_account
 
 SRC_FILES_BONUS	=
 

@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= banque
+NAME		= str
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -12,8 +12,7 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= tests \
-class_account
+SRC_FILES 		= main
 
 SRC_FILES_BONUS	=
 

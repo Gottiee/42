@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= zombie
+NAME		= megaphone
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -12,11 +12,7 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= Zombie \
-main \
-newZombie \
-randomChump
-
+SRC_FILES 		= megaphone
 SRC_FILES_BONUS	=
 
 # SOURCES SET UP
@@ -50,6 +46,7 @@ all:		 obj $(NAME)
 			
 
 $(NAME):	$(OBJS)
+			@echo "             "
 			@$(CC) $(CFLAGS) $^ -o $@ $(ADDFLAGS) 
 			@echo "\e[1A\e[K$(FONT_BOLD)FILES LOADED ! $(FONT_RESET)    $(COUNT)/($(COUNT))"
 			@echo " " 

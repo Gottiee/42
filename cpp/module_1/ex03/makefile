@@ -12,10 +12,11 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= Zombie \
-main \
-newZombie \
-randomChump
+SRC_FILES 		= main \
+HumanA \
+HumanB \
+Weapon
+
 
 SRC_FILES_BONUS	=
 

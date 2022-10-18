@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= phone_book
+NAME		= zombie
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -12,9 +12,9 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= phone_book \
-class_contact \
-class_phone_book
+SRC_FILES 		= Zombie \
+main \
+ZombieHorde
 
 SRC_FILES_BONUS	=
 
