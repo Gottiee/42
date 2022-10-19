@@ -1,10 +1,6 @@
 # VARIABLES
 
-<<<<<<< HEAD
-NAME		= phone_book
-=======
 NAME		= zombie
->>>>>>> 09bbc861c534f874c8cad55d1fc4a28e49486ff5
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -16,16 +12,11 @@ ADDFLAGS	=
 
 # SOURCES
 
-<<<<<<< HEAD
-SRC_FILES 		= phone_book \
-class_contact \
-class_phone_book
-=======
-SRC_FILES 		= Zombie \
-main \
-newZombie \
-randomChump
->>>>>>> 09bbc861c534f874c8cad55d1fc4a28e49486ff5
+SRC_FILES 		= main \
+HumanA \
+HumanB \
+Weapon
+
 
 SRC_FILES_BONUS	=
 
