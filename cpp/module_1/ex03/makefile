@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= zombie
+NAME		= ward
 NAME_BONUS	= 
 
 SRC_DIR		= src/
