@@ -14,7 +14,7 @@ class HumanA
 	private:
 
 	std::string	name;
-	Weapon weapon;
+	Weapon &weapon;
 };
 
 #endif

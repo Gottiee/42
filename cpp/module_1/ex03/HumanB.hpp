@@ -9,14 +9,14 @@ class HumanB
 	public:
 	
 	HumanB(std::string newName);
-	HumanB(std::string newName, Weapon newWeapon);
+	HumanB(std::string newName, Weapon &newWeapon);
 	void	attack(void);
-	void	setWeapon(Weapon newWeapon);
+	void	setWeapon(Weapon &newWeapon);
 
 	private:
 
 	std::string	name;
-	Weapon weapon;
+	Weapon *weapon;
 };
 
 #endif
