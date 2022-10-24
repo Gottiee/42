@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= zombie
+NAME		= harl
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -12,10 +12,9 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= Zombie \
-main \
-newZombie \
-randomChump
+SRC_FILES 		= main \
+Harl
+
 
 SRC_FILES_BONUS	=
 
