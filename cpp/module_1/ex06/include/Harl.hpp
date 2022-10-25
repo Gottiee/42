@@ -7,8 +7,8 @@ enum cmd {
 	DEBUG,
 	INFO,
 	WARNING,
-	ERROR
-	END
+	ERROR,
+	DEFAULT
 };
 
 class Harl

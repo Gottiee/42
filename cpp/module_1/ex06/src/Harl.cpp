@@ -7,22 +7,29 @@ Harl::Harl(void)
 
 void	Harl::debug(void)
 {
-	std::cout << "I like Potato" << std::endl;
+	std::cout << "[ DEBUG ]" << std::endl;
+	std::cout << "I like Potato" << std::endl << std::endl;
+	this->info();
 }
 
 void	Harl::info(void)
 {
-	std::cout << "i want Potato" << std::endl;
+	std::cout << "[ INFO ]" << std::endl;
+	std::cout << "i want Potato" << std::endl << std::endl;
+	this->warning();
 }
 
 void	Harl::warning(void)
 {
-	std::cout << "You puted to much oil in the Potato..." << std::endl;
+	std::cout << "[ WARNING ]" << std::endl;
+	std::cout << "You puted to much oil in the Potato..." << std::endl << std::endl;
+	this->error();
 }
 
 void	Harl::error(void)
 {
-	std::cout << "YOU BURN THE POTATO !!!" << std::endl;
+	std::cout << "[ ERROR ]" << std::endl;
+	std::cout << "YOU BURN THE POTATO !!!" << std::endl << std::endl;
 }
 
 cmd resolveOption(std::string level)
@@ -40,8 +47,6 @@ cmd resolveOption(std::string level)
 
 void	Harl::complain(std::string level)
 {
-	
-
 	cmd resolveOption(std::string level);
 	switch (resolveOption(level))
 	{

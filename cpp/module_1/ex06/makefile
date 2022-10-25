@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= harl
+NAME		= HarlFilter
 NAME_BONUS	= 
 
 SRC_DIR		= src/
