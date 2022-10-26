@@ -12,19 +12,19 @@ class Fixed
 	Fixed(int const n);
 	Fixed(float const n);
 	~Fixed();
-	int				getRawBits(void) const;
-	void			setRawBits(int const raw);
-	float			toFloat(void) const;
-	int				toInt(void) const;
-	Fixed			&operator=(Fixed const &src);
-	Fixed			&operator++(void);
-	Fixed			operator++(int);
-	Fixed			&operator--(void);
-	Fixed			operator--(int);
-	static int		min(int const &ref1, int const &ref2);
-	static int		min(int &ref1, int &ref2);
-	static int		max(int const &ref1, int const &ref2);
-	static int		max(int &ref1, int &ref2);
+	int					getRawBits(void) const;
+	void				setRawBits(int const raw);
+	float				toFloat(void) const;
+	int					toInt(void) const;
+	Fixed				&operator=(Fixed const &src);
+	Fixed				&operator++(void);
+	Fixed				operator++(int);
+	Fixed				&operator--(void);
+	Fixed				operator--(int);
+	static const Fixed	&min(Fixed const &ref1, Fixed const &ref2);
+	static Fixed		&min(Fixed &ref1, Fixed &ref2);
+	static const Fixed	&max(Fixed const &ref1, Fixed const &ref2);
+	static Fixed		&max(Fixed &ref1, Fixed &ref2);
 
 	private:
 	int			_n;

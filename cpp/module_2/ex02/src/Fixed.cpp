@@ -83,34 +83,33 @@ Fixed	Fixed::operator--(int)
 	return (tmp);
 }
 
-int	Fixed::min(int const &ref1, int const &ref2)
+const Fixed	&Fixed::min(Fixed const &ref1, Fixed const &ref2)
 {
 	if (ref1 < ref2)	
 		return ref1;
 	return ref2;
 }
 
-int	min(int &ref1, int &ref2)
+Fixed	&Fixed::min(Fixed &ref1, Fixed &ref2)
 {
 	if (ref1 < ref2)	
 		return ref1;
 	return ref2;
 }
 
-int	Fixed::max(int const &ref1, int const &ref2)
+const Fixed	&Fixed::max(Fixed const &ref1, Fixed const &ref2)
 {
 	if (ref1 >= ref2)	
 		return ref1;
 	return ref2;
 }
 
-int	max(int &ref1, int &ref2)
+Fixed	&Fixed::max(Fixed &ref1, Fixed &ref2)
 {
 	if (ref1 >= ref2)	
 		return ref1;
 	return ref2;
 }
-
 
 /*return 1 si srcA et plus grande que srcB*/
 int	operator>(Fixed const &srcA, Fixed const &srcB)
@@ -157,20 +156,20 @@ int	operator!=(Fixed const &srcA, Fixed const &srcB)
 
 Fixed	operator+(Fixed const &srcA, Fixed const &srcB)
 {
-	return Fixed(srcA.getRawBits() + srcB.getRawBits());
+	return Fixed(srcA.toFloat() + srcB.toFloat());
 }
 
 Fixed	operator-(Fixed const &srcA, Fixed const &srcB)
 {
-	return Fixed(srcA.getRawBits() - srcB.getRawBits());
+	return Fixed(srcA.toFloat() - srcB.toFloat());
 }
 
 Fixed	operator*(Fixed const &srcA, Fixed const &srcB)
 {
-	return Fixed(srcA.getRawBits() * srcB.getRawBits());
+	return Fixed(srcA.toFloat() * srcB.toFloat());
 }
 
 Fixed	operator/(Fixed const &srcA, Fixed const &srcB)
 {
-	return Fixed(srcA.getRawBits() / srcB.getRawBits());
+	return Fixed(srcA.toFloat() / srcB.toFloat());
 }
