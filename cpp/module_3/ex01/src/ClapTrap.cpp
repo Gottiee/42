@@ -2,17 +2,18 @@
 
 ClapTrap::ClapTrap()
 {
-	std::cout << this->_name << " constructed" << std::endl;
+	std::cout << this->_name << " constructed from ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const &src)
 {
+	std::cout << this->_name << " constructed from ClapTrap" << std::endl;
 	*this = src;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << this->_name << " destructed" << std::endl;
+	std::cout << this->_name << " destructed from ClapTrap" << std::endl;
 }
 
 ClapTrap	&ClapTrap::operator=(ClapTrap const &src)
@@ -26,7 +27,7 @@ ClapTrap	&ClapTrap::operator=(ClapTrap const &src)
 
 ClapTrap::ClapTrap(std::string name): _name(name), _hit(10), _energy(10), _damageAttack(0)
 {
-	std::cout << this->_name << " constructed" << std::endl;
+	std::cout << this->_name << " constructed from ClapTrap" << std::endl;
 }
 
 int	ClapTrap::getHit(void) const
