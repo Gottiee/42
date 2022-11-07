@@ -5,7 +5,7 @@ WrongCat::WrongCat()
 	std::cout << "Default constructor call for WrongCat" << std::endl;
 }
 
-WrongCat::WrongCat(WrongCat const &src)
+WrongCat::WrongCat(WrongCat const &src): WrongAnimal()
 {
 	std::cout << "Copy constructor call for WrongCat" << std::endl;
 	*this = src;

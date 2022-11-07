@@ -12,7 +12,7 @@ ScavTrap::ScavTrap()
 	std::cout << this->_name << " default constructor from ScavTrap" << std::endl;
 }
 
-ScavTrap::ScavTrap(ScavTrap const &src)
+ScavTrap::ScavTrap(ScavTrap const &src): ClapTrap()
 {
 	std::cout << this->_name << " constructed from ScavTrap" << std::endl;
 	*this = src;

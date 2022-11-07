@@ -5,7 +5,7 @@ FragTrap::FragTrap()
 	std::cout << this->_name << " constructed from FragTrap" << std::endl;
 }
 
-FragTrap::FragTrap(FragTrap const &src)
+FragTrap::FragTrap(FragTrap const &src): ClapTrap()
 {
 	std::cout << this->_name << " constructed from FragTrap" << std::endl;
 	*this = src;

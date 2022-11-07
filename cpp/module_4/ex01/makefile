@@ -16,8 +16,7 @@ SRC_FILES 		= main \
 Animal \
 Cat \
 Dog \
-WrongCat \
-WrongAnimal
+Brain
 
 
 SRC_FILES_BONUS	=

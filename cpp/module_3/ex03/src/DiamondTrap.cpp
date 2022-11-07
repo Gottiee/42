@@ -5,7 +5,7 @@ DiamondTrap::DiamondTrap()
 	std::cout << this->_name << " default constructor from DiamondTrap" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap const &src)
+DiamondTrap::DiamondTrap(DiamondTrap const &src):ClapTrap(), FragTrap(), ScavTrap()
 {
 	std::cout << this->_name << " copy constructor from DiamondTrap" << std::endl;
 	*this = src;
