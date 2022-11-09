@@ -22,10 +22,33 @@ Dog::~Dog()
 Dog	&Dog::operator=(Dog const &src)
 {
 	this->type = src.getType();
+	this->_brain = src.copyBrain(src.getStringBrain());
 	return *this;
 }
 
 void	Dog::makeSound(void) const
 {
 	std::cout << "WAOUFF" << std::endl;
+}
+
+void	Dog::setIdea(std::string idea)
+{
+	this->_brain->setIdeas(idea);
+}
+
+void	Dog::printIdea(void)
+{
+	this->_brain->printIdea();
+}
+
+std::string	*Dog::getStringBrain(void) const
+{
+	return this->_brain->getStringBrain();
+}
+
+Brain	*Dog::copyBrain(std::string	idea[100]) const
+{
+	Brain *brain = new Brain;
+	brain->setFullIdeas(idea);
+	return brain;
 }
