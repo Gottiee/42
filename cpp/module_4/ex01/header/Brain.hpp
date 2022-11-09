@@ -15,7 +15,11 @@ class Brain
 	Brain();
 	Brain(Brain const &src);
 	~Brain();
-	Brain	&operator=(Brain const &src);
+	Brain		&operator=(Brain const &src);
+	void		setIdeas(std::string idea);
+	void		printIdea(void);
+	std::string	*getStringBrain();
+	void		setFullIdeas(std::string idea[100]);
 
 	private:
 	std::string ideas[100];

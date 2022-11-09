@@ -10,8 +10,12 @@ class Cat: public Animal
 	Cat();
 	Cat(Cat const &);
 	~Cat();
-	Cat		&operator=(Cat const &);
-	void	makeSound(void) const;
+	Cat			&operator=(Cat const &);
+	void		makeSound(void) const;
+	void		setIdea(std::string idea);
+	void		printIdea(void);
+	Brain		*copyBrain(std::string	idea[100]) const;
+	std::string	*getStringBrain(void) const;
 
 	private:
 	Brain	*_brain;
