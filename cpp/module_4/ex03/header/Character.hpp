@@ -18,6 +18,9 @@ class Character: public ICharacter
 	~Character();
 	Character	&operator=(Character const &src);
 
+	std::string const	&getName(void) const;
+	void
+
 	private:
 
 };

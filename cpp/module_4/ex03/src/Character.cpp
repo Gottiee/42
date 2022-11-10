@@ -5,7 +5,7 @@ Character::Character()
 	std::cout << "Default constructor call for Character" << std::endl;
 }
 
-Character::Character(Character const &src)
+Character::Character(Character const &src) 
 {
 	*this = src;
 	std::cout << "Copy constructor call for Character" << std::endl;
@@ -22,3 +22,5 @@ Character	&Character::operator=(Character const &src)
 	return *this;
 
 }
+
+
