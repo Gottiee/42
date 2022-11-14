@@ -32,7 +32,7 @@ DiamondTrap::DiamondTrap(std::string name)
 	ClapTrap::_name = name + "_clap_name";
 	this->_gateKeeper = false;
 	this->_name = name;
-	this->_hit =  FragTrap::hitPointsInit;
+	this->_hit = FragTrap::hitPointsInit;
 	this->_energy = ScavTrap::energyPointsInit;
 	this->_damageAttack = FragTrap::attackDamageInit;
 	std::cout << this->_name << " name constructor from DiamondTrap" << std::endl;

@@ -35,3 +35,8 @@ void	Ice::setType(std::string type)
 {
 	this->_type	= type;
 }
+
+void	Ice::use(ICharacter &target)
+{
+	std::cout << "*shoots an ice bolt at " << target.getName() << " *" << std::endl;
+}

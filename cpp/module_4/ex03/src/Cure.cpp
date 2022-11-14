@@ -36,3 +36,8 @@ void	Cure::setType(std::string type)
 {
 	this->_type	= type;
 }
+
+void	Cure::use(ICharacter &target)
+{
+	std::cout << "*heals " << target.getName() << "'s wounds *" << std::endl;
+}

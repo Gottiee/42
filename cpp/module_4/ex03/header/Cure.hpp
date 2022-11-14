@@ -19,6 +19,7 @@ class Cure: public AMateria
 	Cure		&operator=(Cure const &src);
 	AMateria	*clone() const;
 	void		setType(std::string type);
+	void		use(ICharacter &target);
 
 	private:
 
