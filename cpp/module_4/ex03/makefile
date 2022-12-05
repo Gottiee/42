@@ -17,6 +17,7 @@ AMateria \
 Cure \
 Ice \
 Character \
+MateriaSource \
 
 SRC_FILES_BONUS	=
 

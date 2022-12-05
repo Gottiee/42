@@ -26,7 +26,7 @@ class AMateria
 	virtual void		setType(std::string type) = 0;
 
 	protected:
-	std::string _type;
+	std::string	_type;
 
 };
 
