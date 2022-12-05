@@ -1,7 +1,11 @@
 #include "../header/Character.hpp"
 
-Character::Character():_inventaire[0](NULL), _inventaire[1](NULL), _inventaire[2](NULL), _inventaire[3](NULL), _tmp(NULL), name("Noname")
+Character::Character():_tmp(NULL), _name("Noname")
 {
+	this->_inventaire[0] = NULL;
+	this->_inventaire[1] = NULL;
+	this->_inventaire[2] = NULL;
+	this->_inventaire[3] = NULL;
 	std::cout << "Default constructor call for Character" << std::endl;
 }
 
@@ -19,6 +23,7 @@ Character::~Character()
 Character	&Character::operator=(Character const &src)
 {
 	std::cout << "Default assignement constructor call for Character" << std::endl;
+	(void)src;
 	return *this;
 }
 
@@ -42,11 +47,12 @@ void	Character::unequip(int idx)
 		return ;
 	if (this->_tmp)
 		delete this->_tmp;
-	this->tmp = this->_inventaire[idx];
+	this->_tmp = this->_inventaire[idx];
 	this->_inventaire[idx] = NULL;
 }
 
-void	Character::use(int idx, ICharacter &target)
+void	Character::use(int i, ICharacter &target)
 {
-	
+	if (this->_inventaire[i])
+		this->_inventaire[i]->use(target);
 }

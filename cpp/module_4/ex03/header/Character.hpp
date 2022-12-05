@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <string>
-#include "ICharacter"
+#include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 class Character: public ICharacter
 {

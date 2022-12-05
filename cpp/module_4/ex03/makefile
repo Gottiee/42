@@ -16,9 +16,7 @@ SRC_FILES 		= main \
 AMateria \
 Cure \
 Ice \
-#ICharacter \
-
-
+Character \
 
 SRC_FILES_BONUS	=
 
