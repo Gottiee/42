@@ -56,12 +56,12 @@ AMateria	*MateriaSource::createMateria(std::string const &type)
 	int			 i = -1;
 	AMateria	 *new_ma = NULL;
 
-	while (++i < 4 && this->_inv[i]->getType() != type);
+	while (this->_inv[++i] && (i < 4 && this->_inv[i]->getType() != type));
 	if (i == 4)
 		return (NULL);
-	if (this->_inv[i]->getType() == "cure")
+	if (this->_inv[i] && this->_inv[i]->getType() == "cure")
 		new_ma = new Cure;
-	else if (this->_inv[i]->getType() == "ice")
+	else if (this->_inv[i] && this->_inv[i]->getType() == "ice")
 		new_ma = new Ice;
 	return (new_ma);
 }

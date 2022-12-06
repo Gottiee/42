@@ -22,6 +22,13 @@ Character::Character(std::string name):_tmp(NULL), _name(name)
 
 Character::Character(Character const &src) 
 {
+	for (int i = 0; i < 4; i ++)
+	{
+		if (this->_inventaire[i])
+			delete this->_inventaire[i];
+	}
+	if (this->_tmp)
+		delete this->_tmp;
 	*this = src;
 	std::cout << "Copy constructor call for Character" << std::endl;
 }
@@ -31,7 +38,10 @@ Character::~Character()
 	for (int i = 0; i < 4; i ++)
 	{
 		if (this->_inventaire[i])
+		{
 			delete this->_inventaire[i];
+			this->_inventaire[i] = NULL;
+		}
 	}
 	if (this->_tmp)
 		delete this->_tmp;
@@ -41,18 +51,32 @@ Character::~Character()
 Character	&Character::operator=(Character const &src)
 {
 	AMateria	*new_ma[4];
+	for (int i = 0; i < 4; i ++)
+		new_ma[i] = NULL;
 
 	std::cout << "Default assignement constructor call for Character" << std::endl;
+	for (int i = 0; i < 4; i ++)
+	{
+		if (this->_inventaire[i])
+		{
+			delete this->_inventaire[i];
+			this->_inventaire[i] = NULL;
+		}
+	}
+	if (this->_tmp)
+		delete this->_tmp;
 	this->_name = src.getName();
 	this->_tmp = src.getTmp();
 	for (int j = 0; j < 4; j++)
 	{
-		if (src._inventaire[j]->getType() == "cure")
+		if (src._inventaire[j] && src._inventaire[j]->getType() == "cure")
 			new_ma[j] = new Cure;
-		else if (src._inventaire[j]->getType() == "ice")
+		else if (src._inventaire[j] && src._inventaire[j]->getType() == "ice")
 			new_ma[j] = new Ice;
-		this->_inventaire[j] = new_ma[j];
-		delete src._inventaire[j];
+		if (new_ma[j]) 
+			this->_inventaire[j] = new_ma[j];
+		else
+			this->_inventaire[j] = NULL;
 	}
 	return *this;
 }
