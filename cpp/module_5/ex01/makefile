@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= 
+NAME		= bureau
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -13,6 +13,7 @@ ADDFLAGS	=
 # SOURCES
 
 SRC_FILES 		= main \
+Bureaucrat
 
 
 SRC_FILES_BONUS	=
