@@ -13,7 +13,8 @@ ADDFLAGS	=
 # SOURCES
 
 SRC_FILES 		= main \
-Bureaucrat
+Bureaucrat \
+Form
 
 
 SRC_FILES_BONUS	=

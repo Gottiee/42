@@ -75,3 +75,24 @@ void	Bureaucrat::operator++(int)
 	if (this->_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 }
+
+void	Bureaucrat::signForm(Form &form)
+{
+	try
+	{
+		if (form.getSign())
+			throw std::exception();
+		form.beSigned(*this);
+		std::cout << this->_name << "sign " << form.getName()
+		<< "." << std::endl;
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << this->_name << " couldn't sign " << form.getName()
+		<< "because he is already sign." << std::endl;
+	}
+}
