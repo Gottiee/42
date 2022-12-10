@@ -19,7 +19,7 @@ class Form
 	Form(Form const &src);
 	~Form();
 	Form		&operator=(Form const &src);
-	int			beSigned(Bureaucrat &bur);
+	virtual int	beSigned(Bureaucrat &bur) = 0;
 	int			getGrade(void) const;
 	int			getGradeExec(void) const;
 	std::string	getName(void) const;
