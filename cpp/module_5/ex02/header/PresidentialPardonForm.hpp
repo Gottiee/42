@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <string>
+#include "Form.hpp"
 
-class PresidentialPardonForm
+class PresidentialPardonForm: public Form
 {
 
 	/*******************/
@@ -12,12 +13,13 @@ class PresidentialPardonForm
 	/*******************/
 
 	public:
-	PresidentialPardonForm();
+	PresidentialPardonForm(std::string target);
 	PresidentialPardonForm(PresidentialPardonForm const &src);
 	~PresidentialPardonForm();
 	PresidentialPardonForm	&operator=(PresidentialPardonForm const &src);
 
 	private:
+	PresidentialPardonForm();
 
 };
 

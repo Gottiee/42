@@ -15,15 +15,22 @@ class Form
 	/*******************/
 
 	public:
+	Form();
 	Form(std::string name, int sign, int exec);
 	Form(Form const &src);
-	~Form();
-	Form		&operator=(Form const &src);
-	virtual int	beSigned(Bureaucrat &bur) = 0;
-	int			getGrade(void) const;
-	int			getGradeExec(void) const;
-	std::string	getName(void) const;
-	bool		getSign(void) const;
+	virtual			~Form();
+	Form			&operator=(Form const &src);
+	int				beSigned(Bureaucrat &bur);
+	int				getGrade(void) const;
+	int				getGradeExec(void) const;
+	std::string		getName(void) const;
+	bool			getSign(void) const;
+	void			setName(std::string);
+	void			setGradeSign(int);
+	void			setGradeExec(int);
+	void			setSign(bool);
+	//virtual void	action() = 0;
+	virtual void	execute(Bureaucrat const &executor) const;
 
 	class GradeTooHighException : public std::exception
 	{
@@ -36,8 +43,10 @@ class Form
 		virtual const char* what() const throw();
 	};
 
+	protected:
+	std::string _target;
+
 	private:
-	Form();
 	std::string _name;
 	int			_gradeSign;
 	int			_gradeExec;

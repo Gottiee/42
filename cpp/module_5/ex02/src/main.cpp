@@ -1,8 +1,22 @@
 #include "../header/Bureaucrat.hpp"
+#include "../header/PresidentialPardonForm.hpp"
 
 int main(void)
 {
-	std::cout << "---Form Grade too low--" << std::endl << std::endl;
+	try
+	{
+		PresidentialPardonForm pres("ok");
+		std::cout << pres << std::endl;
+	}
+	catch (Form::GradeTooHighException &e)
+	{
+        std::cerr << e.what() << std::endl;
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+   		std::cerr << e.what() << std::endl;
+	}
+/*std::cout << "---Form Grade too low--" << std::endl << std::endl;
 	try
 	{
 		Form	bob("33A", 171, 15);
@@ -90,5 +104,5 @@ int main(void)
 	catch (Bureaucrat::GradeTooLowException &e)
 	{
    		std::cerr << e.what() << std::endl;
-	}
+	}*/	
 }
