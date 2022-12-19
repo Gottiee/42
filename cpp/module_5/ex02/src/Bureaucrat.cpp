@@ -96,3 +96,19 @@ void	Bureaucrat::signForm(Form &form)
 		<< "because he is already sign." << std::endl;
 	}
 }
+
+void	Bureaucrat::executeForm(Form const &form)
+{
+	try
+	{
+		form.execute(*this);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+        std::cerr << e.what() << std::endl;
+	}
+	catch (Form::FormNotSignedException &e)
+	{
+        std::cerr << e.what() << std::endl;
+	}
+}

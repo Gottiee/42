@@ -27,3 +27,8 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm
 	(void)src;
 	return *this;
 }
+
+void	PresidentialPardonForm::action(std::string target) const
+{
+	std::cout << target << " has been forgiven by the Zaphod Beeblebrox." << std::endl;
+}

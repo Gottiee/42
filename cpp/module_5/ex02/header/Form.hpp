@@ -29,8 +29,8 @@ class Form
 	void			setGradeSign(int);
 	void			setGradeExec(int);
 	void			setSign(bool);
-	//virtual void	action() = 0;
-	virtual void	execute(Bureaucrat const &executor) const;
+	virtual void	action(std::string target) const = 0;
+	void			execute(Bureaucrat const &executor) const;
 
 	class GradeTooHighException : public std::exception
 	{
@@ -38,6 +38,11 @@ class Form
 		virtual const char* what() const throw();
 	};
 	class GradeTooLowException : public std::exception
+	{
+		public:
+		virtual const char* what() const throw();
+	};
+	class FormNotSignedException : public std::exception
 	{
 		public:
 		virtual const char* what() const throw();

@@ -3,16 +3,19 @@
 
 int main(void)
 {
+	std::cout << "---Form isnt signed--" << std::endl << std::endl;
 	try
 	{
+		Bureaucrat roger("roger", 15);
 		PresidentialPardonForm pres("ok");
+		roger.executeForm(pres);
 		std::cout << pres << std::endl;
 	}
-	catch (Form::GradeTooHighException &e)
+	catch (Bureaucrat::GradeTooHighException &e)
 	{
         std::cerr << e.what() << std::endl;
 	}
-	catch (Form::GradeTooLowException &e)
+	catch (Bureaucrat::GradeTooLowException &e)
 	{
    		std::cerr << e.what() << std::endl;
 	}
