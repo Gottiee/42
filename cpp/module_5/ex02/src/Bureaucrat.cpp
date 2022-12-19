@@ -83,7 +83,7 @@ void	Bureaucrat::signForm(Form &form)
 		if (form.getSign())
 			throw std::exception();
 		form.beSigned(*this);
-		std::cout << this->_name << "sign " << form.getName()
+		std::cout << this->_name << " sign " << form.getName()
 		<< "." << std::endl;
 	}
 	catch (Form::GradeTooLowException &e)
@@ -102,6 +102,9 @@ void	Bureaucrat::executeForm(Form const &form)
 	try
 	{
 		form.execute(*this);
+		std::cout << this->_name << " executed " << form.getName()
+		<< "." << std::endl;
+
 	}
 	catch (Form::GradeTooLowException &e)
 	{

@@ -15,7 +15,8 @@ ADDFLAGS	=
 SRC_FILES 		= main \
 Bureaucrat \
 Form \
-PresidentialPardonForm
+PresidentialPardonForm \
+RobotomyRequestForm
 
 
 SRC_FILES_BONUS	=

@@ -24,10 +24,11 @@ class Form
 	int				getGrade(void) const;
 	int				getGradeExec(void) const;
 	std::string		getName(void) const;
+	std::string		getTarget(void) const;
 	bool			getSign(void) const;
 	void			setName(std::string);
 	void			setGradeSign(int);
-	void			setGradeExec(int);
+	void			setGradeExec(int grade);
 	void			setSign(bool);
 	virtual void	action(std::string target) const = 0;
 	void			execute(Bureaucrat const &executor) const;

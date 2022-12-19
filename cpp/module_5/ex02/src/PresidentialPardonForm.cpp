@@ -2,6 +2,7 @@
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target): Form("PresidentialPardonForm", 25, 5)
 {
+	std::cout << "Target constructor call for PresidentialPardonForm" << std::endl;
 	this->_target = target;
 }
 
@@ -24,7 +25,11 @@ PresidentialPardonForm::~PresidentialPardonForm()
 PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm const &src)
 {
 	std::cout << "Default assignement constructor call for PresidentialPardonForm" << std::endl;
-	(void)src;
+	this->_target = src.getTarget();
+	setName(src.getName());
+	setGradeSign(src.getGrade());
+	setGradeExec(src.getGradeExec());
+	setSign(src.getSign());
 	return *this;
 }
 

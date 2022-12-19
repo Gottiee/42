@@ -96,3 +96,28 @@ void	Form::execute(Bureaucrat const &executor) const
 		throw Form::GradeTooLowException();
 	action(this->_target);
 }
+
+std::string	Form::getTarget(void) const
+{
+	return (this->_target);
+}
+
+void	Form::setName(std::string name)
+{
+	this->_name = name;
+}
+
+void	Form::setGradeSign(int grade)
+{
+	this->_gradeSign = grade;
+}
+
+void	Form::setGradeExec(int grade)
+{
+	this->_gradeExec = grade;
+}
+
+void	Form::setSign(bool grade)
+{
+	this->_sign = grade;
+}
