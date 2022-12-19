@@ -45,9 +45,7 @@ void	RobotomyRequestForm::action(std::string target) const
 
 bool	RobotomyRequestForm::randomBool(void) const
 {
-	int a;
+	std::srand(std::time(NULL));
 
-	a = rand() ;
-	std::cout << "a =" << a << std::endl;
-	return a;
+	return rand() % 2;
 }

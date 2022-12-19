@@ -3,8 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include "Form.hpp"
+#include <fstream>
 
-class ShrubberyCreationForm
+class ShrubberyCreationForm: public Form
 {
 
 	/*******************/
@@ -12,12 +14,14 @@ class ShrubberyCreationForm
 	/*******************/
 
 	public:
-	ShrubberyCreationForm();
+	ShrubberyCreationForm(std::string target);
 	ShrubberyCreationForm(ShrubberyCreationForm const &src);
 	~ShrubberyCreationForm();
 	ShrubberyCreationForm	&operator=(ShrubberyCreationForm const &src);
+	virtual void	action(std::string target) const;
 
 	private:
+	ShrubberyCreationForm();
 
 };
 

@@ -1,6 +1,7 @@
 #include "../header/Bureaucrat.hpp"
 #include "../header/PresidentialPardonForm.hpp"
 #include "../header/RobotomyRequestForm.hpp"
+#include "../header/ShrubberyCreationForm.hpp"
 
 int main(void)
 {
@@ -76,8 +77,21 @@ int main(void)
 		RobotomyRequestForm pres("The bunny");
 		roger.signForm(pres);
 		roger.executeForm(pres);
-		roger.executeForm(pres);
-		roger.executeForm(pres);
+	}
+	catch (Bureaucrat::GradeTooHighException &e)
+	{
+        std::cerr << e.what() << std::endl;
+	}
+	catch (Bureaucrat::GradeTooLowException &e)
+	{
+   		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl << "---Test for tree--" << std::endl << std::endl;
+	try
+	{
+		Bureaucrat roger("roger", 4);
+		ShrubberyCreationForm pres("The_Christmas_tree");
+		roger.signForm(pres);
 		roger.executeForm(pres);
 	}
 	catch (Bureaucrat::GradeTooHighException &e)

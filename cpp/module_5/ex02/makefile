@@ -16,7 +16,8 @@ SRC_FILES 		= main \
 Bureaucrat \
 Form \
 PresidentialPardonForm \
-RobotomyRequestForm
+RobotomyRequestForm \
+ShrubberyCreationForm
 
 
 SRC_FILES_BONUS	=
