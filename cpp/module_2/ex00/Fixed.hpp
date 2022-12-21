@@ -14,8 +14,8 @@ class Fixed
 
 	Fixed	&operator=(Fixed const &src);
 	private:
-	int			_n;
-	static int	_bits;
+	int					_n;
+	static const int	_bits;
 };
 
 #endif

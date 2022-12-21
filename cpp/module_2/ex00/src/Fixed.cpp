@@ -29,4 +29,4 @@ Fixed	&Fixed::operator=(Fixed const &src)
 	return *this;
 }
 
-int Fixed::_bits = 8;
+const int Fixed::_bits = 8;
