@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <limits>
 
 class Convert
 {
@@ -17,6 +18,7 @@ class Convert
 	Convert(Convert const &src);
 	~Convert();
 	Convert	&operator=(Convert const &src);
+	bool	is_pse(std::string);
 	void	shine(void);
 
 	class Empty: public std::exception

@@ -24,6 +24,11 @@ Convert::Convert(std::string type)
 			throw Convert::NoneChar();
 		return ;
 	}
+	else
+	{
+		if (is_pse(type))
+			return ;
+	}
 }
 
 Convert::Convert(Convert const &src)
@@ -49,4 +54,42 @@ const char *Convert::Empty::what() const throw()
 const char *Convert::NoneChar::what() const throw()
 {
 	return ("This char isn't printable");
+}
+
+bool	Convert::is_pse(std::string type)
+{
+	if (type == "-inf")
+	{
+		this->_double = std::numeric_limits<double>::infinity();
+		this->_double *= -1;
+		return true;
+	}
+	if (type == "+inf")
+	{
+		this->_double = std::numeric_limits<double>::infinity();
+		return true;
+	}
+	if (type == "nan")
+	{
+		this->_double = std::numeric_limits<double>::quiet_NaN();
+		return true;
+	}
+	if (type == "-inff")
+	{
+		this->_float = std::numeric_limits<double>::infinity();
+		this->_float *= -1;
+		return true;
+	}
+	if (type == "+inff")
+	{
+		this->_float = std::numeric_limits<double>::infinity();
+		std::cout << this->_float << std::endl;
+		return true;
+	}
+	if (type == "nanf")
+	{
+		this->_float = std::numeric_limits<double>::quiet_NaN();
+		return true;
+	}
+	return false;
 }
