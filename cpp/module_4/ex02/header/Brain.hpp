@@ -20,6 +20,7 @@ class Brain
 	void		printIdea(void);
 	std::string	*getStringBrain();
 	void		setFullIdeas(std::string idea[100]);
+	std::string	getString(int i) const;
 
 	private:
 	std::string ideas[100];

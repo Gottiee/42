@@ -23,7 +23,6 @@ Animal	&Animal::operator=(Animal const &src)
 	return *this;
 }
 
-
 std::string	Animal::getType(void) const
 {
 	return (this->type);

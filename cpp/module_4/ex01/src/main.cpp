@@ -52,4 +52,16 @@ int main(void)
 		cat.printIdea();
 		std::cout << std::endl;	
 	}
+	std::cout << "-------Copy constructor for brain test-------" << std::endl << std::endl;
+	{
+		Brain	cat;
+		std::cout << std::endl;
+		cat.setIdeas("Wow");
+		cat.setIdeas("Huge");
+		std::cout << "Brain idea" << std::endl;
+		cat.printIdea();
+		std::cout << std::endl;
+		Brain	cp = cat;
+		cp.printIdea();
+	}
 }

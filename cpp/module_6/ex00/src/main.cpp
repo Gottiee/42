@@ -21,4 +21,12 @@ int main(int argc, char **argv)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+	catch (Convert::IntPro &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	catch (Convert::DoublePro &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 }

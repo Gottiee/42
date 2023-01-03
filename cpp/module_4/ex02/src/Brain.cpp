@@ -18,8 +18,9 @@ Brain::~Brain()
 
 Brain	&Brain::operator=(Brain const &src)
 {
-	(void)src;
 	std::cout << "Default assignement call for Brain" << std::endl;
+	for (int i = 0; i < 100; i ++)
+		this->ideas[i] = src.getString(i);
 	return *this;
 }
 
@@ -51,4 +52,9 @@ void	Brain::setFullIdeas(std::string idea[100])
 	int i = -1;
 	while (i < 100 && !idea[++i].empty())
 		this->ideas[i] = idea[i];
+}
+
+std::string	Brain::getString(int i) const
+{
+	return this->ideas[i];
 }
