@@ -5,6 +5,7 @@
 #include <string>
 #include <cstdlib>
 #include <limits>
+#include <climits>
 
 class Convert
 {
