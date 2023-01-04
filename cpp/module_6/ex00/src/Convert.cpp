@@ -210,9 +210,14 @@ const char *Convert::FloatPro::what() const throw()
 
 void	Convert::convert_int(int _int)
 {
+	std::cout << "char: ";
 	if (_int < 32 || _int > 126)
-
-	std::cout << "int = " << _int << std::endl;
+		std::cout << "Non displayable\n";
+	else
+		std::cout << static_cast<char>(_int) << std::endl;
+	std::cout << "int: " << _int << std::endl;
+	std::cout << "float: " << static_cast<float>(_int) << "f" << std::endl;
+	std::cout << "double: " << static_cast<double>(_int) << std::endl;
 }
 
 void	Convert::convert_double(double _double)
