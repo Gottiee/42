@@ -62,6 +62,7 @@ class Convert
 	double		_double;
 	float		_float;
 	char		_char;
+	int			_wtf;
 };
 
 #endif
