@@ -6,22 +6,27 @@ Convert::Convert()
 
 bool	Convert::is_pse(std::string type)
 {
+
+	_wtf = 0;
 	if (type == "-inf")
 	{
 		this->_double = std::numeric_limits<double>::infinity();
 		this->_double *= -1;
+		_wtf = 1;
 		convert_double(this->_double);
 		return true;
 	}
 	if (type == "+inf")
 	{
 		this->_double = std::numeric_limits<double>::infinity();
+		_wtf = 1;
 		convert_double(this->_double);
 		return true;
 	}
 	if (type == "nan")
 	{
 		this->_double = std::numeric_limits<double>::quiet_NaN();
+		_wtf = 1;
 		convert_double(this->_double);
 		return true;
 	}
@@ -29,19 +34,22 @@ bool	Convert::is_pse(std::string type)
 	{
 		this->_float = std::numeric_limits<double>::infinity();
 		this->_float *= -1;
-		convert_double(this->_double);
+		_wtf = 1;
+		convert_float(this->_float);
 		return true;
 	}
 	if (type == "+inff")
 	{
 		this->_float = std::numeric_limits<double>::infinity();
-		convert_double(this->_double);
+		convert_float(this->_float);
+		_wtf = 1;
 		return true;
 	}
 	if (type == "nanf")
 	{
 		this->_float = std::numeric_limits<double>::quiet_NaN();
-		convert_double(this->_double);
+		_wtf = 1;
+		convert_float(this->_float);
 		return true;
 	}
 	return false;
@@ -125,7 +133,6 @@ bool	Convert::is_float(std::string type)
 
 Convert::Convert(std::string type)
 {
-	_wtf = 0;
 	try
 	{
 		if (type.empty())	
@@ -147,10 +154,7 @@ Convert::Convert(std::string type)
 			return ;
 		}
 		else if (is_pse(type))
-		{
-			std::cout << "je passe par la " << std::endl;
 			return ;
-		}
 		else if (is_int(type))
 			return ;
 		else if (is_double(type))
@@ -218,7 +222,7 @@ void	Convert::convert_int(int _int)
 	if (_int < 32 || _int > 126)
 		std::cout << "Non displayable\n";
 	else
-		std::cout << static_cast<char>(_int) << std::endl;
+		std::cout << "'" << static_cast<char>(_int) << "'" << std::endl;
 	std::cout << "int: " << _int << std::endl;
 	std::cout << "float: " << static_cast<float>(_int) << ".0f" << std::endl;
 	std::cout << "double: " << static_cast<double>(_int) << ".0" << std::endl;
@@ -229,13 +233,16 @@ void	Convert::convert_double(double _double)
 	double tmp = _double - static_cast<int>(_double);
 
 	std::cout << "char: ";
-	if (_double < 32 || _double > 126)
-		std::cout << "Non displayable\n";
-	else if (_wtf)
+	if (_wtf)
 		std::cout << "impossible\n";
+	else if (_double < 32 || _double > 126)
+		std::cout << "Non displayable\n";
 	else
-		std::cout << static_cast<char>(_double) << std::endl;
-	std::cout << "int: " << static_cast<int>(_double) << std::endl;
+		std::cout << "'" << static_cast<char>(_double) << "'" << std::endl;
+	if (_wtf)
+		std::cout << "int: impossible\n";
+	else 
+		std::cout << "int: " << static_cast<int>(_double) << std::endl;
 	std::cout << "float: " << static_cast<float>(_double);
 	if (!tmp)
 		std::cout << ".0";
@@ -248,10 +255,33 @@ void	Convert::convert_double(double _double)
 
 void	Convert::convert_char(char _char)
 {
-	std::cout << "char = " << _char << std::endl;
+	std::cout << "char: "  << "'" << _char << "'" << std::endl;
+	std::cout << "int: " << static_cast<int>(_char) << std::endl;
+	std::cout << "float: " << static_cast<float>(_char) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<double>(_char) << ".0" << std::endl;
 }
 
 void	Convert::convert_float(float _float)
 {
-	std::cout << "float = " << _float << std::endl;
+	float tmp = _float - static_cast<int>(_float);
+
+	std::cout << "char: ";
+	if (_wtf)
+		std::cout << "impossible\n";
+	else if (_float < 32 || _float > 126)
+		std::cout << "Non displayable\n";
+	else
+		std::cout << "'" << static_cast<char>(_float) << "'" << std::endl;
+	if (_wtf)
+		std::cout << "int: impossible\n";
+	else 
+		std::cout << "int: " << static_cast<int>(_float) << std::endl;
+	std::cout << "float: " << _float;
+	if (!tmp)
+		std::cout << ".0";
+	std::cout << "f" << std::endl;
+	std::cout << "double: " << static_cast<float>(_float);
+	if (!tmp)
+		std::cout << ".0";
+	std::cout << std::endl;
 }
