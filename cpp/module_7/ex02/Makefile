@@ -1,10 +1,6 @@
 # VARIABLES
 
-<<<<<<< HEAD
-NAME		= template
-=======
 NAME		= convert
->>>>>>> b3b4ae10b108e8047062610949682df2a25323f7
 NAME_BONUS	= 
 
 SRC_DIR		= src/

@@ -41,8 +41,8 @@ bool	Convert::is_pse(std::string type)
 	if (type == "+inff")
 	{
 		this->_float = std::numeric_limits<double>::infinity();
-		convert_float(this->_float);
 		_wtf = 1;
+		convert_float(this->_float);
 		return true;
 	}
 	if (type == "nanf")
