@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= easy
+NAME		= span
 NAME_BONUS	= 
 
 SRC_DIR		= src/
