@@ -7,10 +7,7 @@
 class sizePro: public std::exception
 {
 	public:
-	virtual const char* what() const throw()
-	{
-		return ("The array is smaller than the unsigned int you enter");
-	}
+	virtual const char* what() const throw();
 };
 
 template < typename T >

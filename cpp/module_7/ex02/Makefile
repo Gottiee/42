@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= convert
+NAME		= template
 NAME_BONUS	= 
 
 SRC_DIR		= src/

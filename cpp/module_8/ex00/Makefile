@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= template
+NAME		= easy
 NAME_BONUS	= 
 
 SRC_DIR		= src/

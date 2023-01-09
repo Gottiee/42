@@ -1,6 +1,11 @@
 #include "../header/Array.hpp"
 #include <iostream>
 
+const char *sizePro::what() const throw()
+{
+	return ("The array is smaller than the unsigned int you enter");
+}
+
 int main(void)
 {
 	Array<int> test(4);
