@@ -12,7 +12,8 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= main 
+SRC_FILES 		= main \
+Span
 
 
 SRC_FILES_BONUS	=
