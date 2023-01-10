@@ -79,7 +79,11 @@ int	Span::longestSpan() const
 
 void	Span::addNumberRang()
 {
-	int i = 0;
+	std::vector<int>::iterator	it;
+	std::vector<int>::iterator	ite = _vec.end();
 
-	std::for_each(_vec.begin(), _vec.end(), [](int &n){ n = rando(i ++);});
+	for (it = _vec.begin(); it != ite; it++)
+	{
+		*it = rando();
+	}
 }

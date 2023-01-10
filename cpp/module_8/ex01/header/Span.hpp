@@ -49,6 +49,6 @@ class Span
 
 };
 
-int	rando(unsigned int nb);
+int	rando(void);
 
 #endif

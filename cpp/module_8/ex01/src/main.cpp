@@ -2,33 +2,27 @@
 #include <climits>
 #include <ctime>
 
-int	rando(unsigned int nb)
+int	rando(void)
 {
-	int	res;
-	if (nb == 0)
-		nb = rando(nb + 1);
-	std::srand(std::time(NULL));
-	for (unsigned int i = 0; i < nb; i++)
-		res = rand() % (nb * 10);
+	int res;
+	res =rand() % 10000;
 	std::cout << res << std::endl;
 	return res;
 }
 
 int main(void)
 {
+	std::srand(time(0));
+
 	Span	span(10);
-	int		numb;
+	Span	test(10);
 
 	std::cout << "---Short Vector Test---\n\n";
 	
-	for (int i = 0; i < 10; i ++)
-	{
-		numb = rando(i);
-		span.addNumber(numb);
-	}
+	span.addNumberRang();
 	std::cout << "span.shortestSpan()= " << span.shortestSpan() << std::endl;
 	std::cout << "span.longestSpan()= " << span.longestSpan() << std::endl;
 
 	std::cout << "\n---Short Vector Test---\n\n";
-	span.addNumberRang();
+	test.addNumberRang();
 }
