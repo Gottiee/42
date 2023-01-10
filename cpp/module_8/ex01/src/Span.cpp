@@ -45,6 +45,7 @@ void	Span::addNumber(int n)
 		_vec[_n_of_num] = n;
 	else
 		throw Span::TooMuchNumb();
+	std::cout << "Add number: " << n << std::endl;
 	_n_of_num ++;
 }
 
@@ -52,7 +53,7 @@ int	Span::shortestSpan() const
 {
 	std::vector<int>::const_iterator	it;
 
-	if (_n_of_num != 0 || _n != 1)	
+	if (_n_of_num != 0 && _n != 1)	
 	{
 		it = min_element(_vec.begin(), _vec.end());
 		if (it != _vec.end())
@@ -85,5 +86,6 @@ void	Span::addNumberRang()
 	for (it = _vec.begin(); it != ite; it++)
 	{
 		*it = rando();
+		_n_of_num ++;
 	}
 }
