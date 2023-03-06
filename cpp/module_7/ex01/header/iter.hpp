@@ -5,7 +5,7 @@
 #include <string>
 
 template <typename C>
-void	print(C c)
+void	print(C const c)
 {
 	std::cout << c << std::endl;
 }

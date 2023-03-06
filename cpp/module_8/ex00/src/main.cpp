@@ -17,7 +17,7 @@ int main(void)
 	int arr[] = { 10, 20, 30 };
     int n = sizeof(arr) / sizeof(arr[0]);
     
-	std::list<int> 					li(arr, arr + n);
+	std::list<int> 				li(arr, arr + n);
 	std::list<int>::iterator	it_l;	
 
 	it_l = easyfind<std::list<int> >(li, 20);

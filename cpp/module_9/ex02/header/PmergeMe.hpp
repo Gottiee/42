@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <iomanip>
+#include <time.h>
 
 typedef std::vector<unsigned int> u_vec;
 
@@ -22,12 +24,18 @@ class PmergeMe
 	PmergeMe(PmergeMe const &src);
 	~PmergeMe();
 	PmergeMe	&operator=(PmergeMe const &src);
-	void		sort(u_vec, int p, int r);
-	void		merge(u_vec, int p, int q, int r);
+	void		sort(int, int);
+	void		print_vec(std::string);
+	void		merge(int, int, int);
+	void		insert_sort(int, int);
+	void		print_time();
+	static int	K;
 
 	private:
 	PmergeMe();
-	u_vec	_numb;
+	u_vec		_numb;
+	float		_time_other;
+	clock_t		result;
 };
 
 unsigned int	pars_numb(std::string num);
