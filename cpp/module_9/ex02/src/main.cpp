@@ -3,6 +3,7 @@
 int main(int argc, char **argv)
 {
 	std::vector<unsigned int> vec;
+	std::deque<unsigned int> de;
 
 	if (argc < 2)
 	{
@@ -13,8 +14,11 @@ int main(int argc, char **argv)
 	{
 		int i = 0;
 		while(argv[++i])
+		{
 			vec.push_back(pars_numb(argv[i]));
-		PmergeMe sort(vec);
+			de.push_back(pars_numb(argv[i]));
+		}
+		PmergeMe sort(vec, de);
 	}
 	catch (std::exception &e) 
 	{

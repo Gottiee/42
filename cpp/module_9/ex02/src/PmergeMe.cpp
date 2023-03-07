@@ -2,13 +2,17 @@
 
 int	PmergeMe::K = 5;
 
-PmergeMe::PmergeMe(std::vector<unsigned int> numbers):_numb(numbers), _time_other(0)
+PmergeMe::PmergeMe(std::vector<unsigned int> numbers, u_de deque):_numb(numbers), _que(deque)
 {
 	try
 	{
 		print_vec("Before:");
 		result = clock();
 		sort(0, _numb.size() - 1);
+		_time_vec = (float)(clock() - result) / CLOCKS_PER_SEC * 1000;
+		result = clock();
+		sort_de(0, _que.size() - 1);
+		_time_other = (float)(clock() - result) / CLOCKS_PER_SEC * 1000;
 		print_vec("After: ");
 		print_time();
 	}
@@ -32,8 +36,10 @@ PmergeMe::~PmergeMe()
 
 PmergeMe	&PmergeMe::operator=(PmergeMe const &src)
 {
-	//remplir ici
 	_numb = src._numb;
+	_que = src._que;
+	_time_vec = src._time_vec;
+	_time_other = src._time_other;
 	return *this;
 }
 
@@ -140,6 +146,75 @@ void PmergeMe::print_vec(std::string str)
 void PmergeMe::print_time()
 {
 	std::cout << std::fixed;
-	std::cout << "Time to process a range of " << _numb.size() << " elements with std::vector : " << std::setprecision(5) << (float) (clock() - result) / CLOCKS_PER_SEC * 1000 << " us\n";
-	std::cout << "Time to process a range of " << _numb.size() << " elements with std::? : " << std::setprecision(5) << _time_other << " us\n";
+	std::cout << "Time to process a range of " << _numb.size() << " elements with std::vector : " << std::setprecision(5) << _time_vec << " us\n";
+	std::cout << "Time to process a range of " << _numb.size() << " elements with std::deque : " << std::setprecision(5) << _time_other << " us\n";
+}
+
+void	PmergeMe::insert_sort_de(int low, int high)
+{
+	unsigned int	key;
+	int 			k;
+	for (int i = low; i < high; i ++)	
+	{
+		key = _que[i + 1];
+		k = i + 1;
+		while (k > low && _que[k - 1] > key)
+		{
+			_que[k] = _que[k - 1];
+			k--;
+		}
+		_que[k] = key;
+	}
+}
+
+void	PmergeMe::sort_de(int low, int high)
+{
+	if (high - low > K)
+	{
+		int mid = (low + high) / 2;
+		sort_de(low, mid);
+		sort_de(mid + 1, high);
+		merge_de(low, high, mid);
+    }
+	else
+		insert_sort_de(low, high);
+}
+
+void	PmergeMe::merge_de(int low, int high, int mid)
+{
+	int 	n1 = mid - low + 1;
+	int 	n2 = high - mid;
+	u_vec	LA(_que.begin() + low, _que.begin() + mid + 1);
+	u_vec	MA(_que.begin() + mid + 1, _que.begin() + high + 1);
+	int 	i, j, k;
+
+	i = 0;
+	j = 0;
+	k = low;
+	while (i < n1 && j < n2)
+	{
+		if (LA[i] <= MA[j])
+		{
+			_que[k] = LA[i];
+			i ++;
+		}
+		else
+		{
+			_que[k] = MA[j];
+			j ++;
+		}
+		k ++;
+	}
+	while (i < n1)
+	{
+		_que[k] = LA[i];
+		i ++;
+		k ++;
+	}
+	while (j < n2)
+	{
+		_que[k] = MA[j];
+		j ++;
+		k ++;
+	}
 }
