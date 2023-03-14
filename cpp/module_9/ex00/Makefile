@@ -1,6 +1,6 @@
 # VARIABLES
 
-NAME		= easy
+NAME		= btc
 NAME_BONUS	= 
 
 SRC_DIR		= src/
@@ -12,7 +12,8 @@ ADDFLAGS	=
 
 # SOURCES
 
-SRC_FILES 		= main 
+SRC_FILES 		= main \
+BitcoinExchange
 
 
 SRC_FILES_BONUS	=
