@@ -5,6 +5,7 @@
 #include <string>
 #include <exception>
 #include <stack>
+#include <stdlib.h>
 
 #define plus 1
 #define min 2

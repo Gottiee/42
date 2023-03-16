@@ -69,7 +69,14 @@ void RPN::calcul(std::string str)
 			stack.pop();
 			b = stack.top();
 			stack.pop();
-			stack.push(do_operator(opera, a, b));
+			try
+			{
+				stack.push(do_operator(opera, a, b));
+			}
+			catch (std::exception &e)
+			{
+				throw;
+			}
 			i ++;
 			if (str[i] && str[i] != ' ')
 			{
@@ -95,7 +102,14 @@ int	RPN::do_operator(int opera, int a, int b)
 	if (opera == min)
 		return b - a;
 	if (opera == div)
+	{
+		if (a == 0)
+		{
+			std::cerr << "cant divide per 0\n";
+			throw std::exception();
+		}
 		return b / a;
+	}
 	if (opera == mult)
 		return b * a;
 	return 0;

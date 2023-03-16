@@ -9,10 +9,10 @@ PmergeMe::PmergeMe(std::vector<unsigned int> numbers, u_de deque):_numb(numbers)
 		print_vec("Before:");
 		result = clock();
 		sort(0, _numb.size() - 1);
-		_time_vec = (float)(clock() - result) / CLOCKS_PER_SEC * 1000;
+		_time_vec = (float)(clock() - result) / CLOCKS_PER_SEC;
 		result = clock();
 		sort_de(0, _que.size() - 1);
-		_time_other = (float)(clock() - result) / CLOCKS_PER_SEC * 1000;
+		_time_other = (float)(clock() - result) / CLOCKS_PER_SEC;
 		print_vec("After: ");
 		print_time();
 	}
@@ -146,8 +146,8 @@ void PmergeMe::print_vec(std::string str)
 void PmergeMe::print_time()
 {
 	std::cout << std::fixed;
-	std::cout << "Time to process a range of " << _numb.size() << " elements with std::vector : " << std::setprecision(5) << _time_vec << " us\n";
-	std::cout << "Time to process a range of " << _numb.size() << " elements with std::deque : " << std::setprecision(5) << _time_other << " us\n";
+	std::cout << "Time to process a range of " << _numb.size() << " elements with std::vector : " << std::setprecision(5) << _time_vec << " seconds\n";
+	std::cout << "Time to process a range of " << _numb.size() << " elements with std::deque : " << std::setprecision(5) << _time_other << " seconds\n";
 }
 
 void	PmergeMe::insert_sort_de(int low, int high)

@@ -83,6 +83,19 @@ bool	fill_arg(std::string str, BitcoinExchange *bit)
 	std::string left(str.begin(), str.begin() + space);
 	std::string	right(str.begin() + end + 1, str.end());
 	res = std::atof(right.c_str());
+	if (right.size() == 0)
+	{
+		std::cerr << "Error: no value.\n";
+		return false;
+	}
+	for (int i = 0; right[i]; i ++)
+	{
+		if (!std::isdigit(right[i]))
+		{
+			std::cerr << "Error: not a digit.\n";
+			return false;
+		}
+	}
 	if (res < 0)
 	{
 	
